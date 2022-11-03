@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,600&family=Rajdhani:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+@import "bootstrap/dist/css/bootstrap.css";
+
+
+* {
+  font-family: "Rajdhani", sans-serif;
+}
+.navbar {
+  height:5rem;
+  background:none ;
+}
+.navbar-brand{
+  font-size: 3rem;
+}
+.navbar-brand>span{
+  color: rgb(193, 106, 0);
+}
+/* .img_container{
+  position: relative;
+  width:100%;
+  height:100%;
+} */
+.homeImg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  /* filter: blur(3px); */
+  border-bottom-right-radius: 50% 10%;
+  border-bottom-left-radius: 50% 10%;
+}
+.home_desc{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  width:50%;
+  height:auto;
+  transform: translateX(100%);
+  top: 100px;
+}
+.home-desc-main{
+  top:100px;
+  color:#ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 5rem;
+}
+.home-desc-main>span{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  color:rgb(193, 106, 0);
+}
+.play-btn{
+  margin-top: 50px;
+}
+a span {
+  padding: 15px;
+  transition: .5s;
+  position: relative;
+}
+a span:nth-child(1) {
+  color: #fff;
+  background: #262626;
+}
+a span:nth-child(2) {
+  color: #fff;
+  background: rgb(193, 106, 0);
+}
+a span:nth-child(1):before {
+  content: attr(data-attr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(193, 106, 0);
+  padding: 15px;
+  transition: 0.5S;
+  transform-origin: top;
+  transform: rotateX(90deg) translateY(-50%);
+}
+a:hover span:nth-child(1):before {
+  transform: rotateX(0deg) translateY(0%);
+} 
+a span:nth-child(2):before {
+  content: attr(data-attr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #262626;
+  padding: 15px;
+  transition: 0.5S;
+  transform-origin: bottom;
+  transform: rotateX(90deg) translateY(50%);
+}
+a:hover span:nth-child(2):before {
+  transform: rotateX(0deg) translateY(0%);
+} 
+a  span:nth-child(1):after {
+content: attr(data-attr);
+padding: 15px;
+position: absolute;
+top: 0;
+left: 0;
+background: #262626;
+transform-origin: bottom;
+transform: rotateX(0deg) translateY(0%);
+transition: 0.5s;
+}
+a:hover span:nth-child(1):after {
+transform: rotateX(90deg) translateY(50%);
+}
+a span:nth-child(2):after {
+  content: attr(data-attr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(193, 106, 0);
+  padding: 15px;
+  transition: 0.5S;
+  transform-origin: top;
+  transform: rotateX(0deg) translateY(0%);
+}
+a:hover span:nth-child(2):after {
+  transform: rotateX(90deg) translateY(-50%);
+} 
