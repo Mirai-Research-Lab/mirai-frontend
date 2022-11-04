@@ -9,16 +9,24 @@ export default function navabr() {
     <Navbar className= "navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Container className='navbar-container'>
       <div>
-      <Navbar.Brand href="#home" className='navbar-brand'>MIRAI <span>Plays</span></Navbar.Brand>
+      <Navbar.Brand href="#home" className='navbar-brand'>MIRAI</Navbar.Brand>
       </div>
       <div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-        <Nav.Link href="#features">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">MarketPlace</Nav.Link>
-          <Nav.Link href="#pricing">Leaderboard</Nav.Link>
+        <Nav.Link href="#home" className='link'>Home</Nav.Link>
+          <Nav.Link href="#marketplace" className='link'>MarketPlace</Nav.Link>
+          <Nav.Link href="#leaderboard" className='link'>Leaderboard</Nav.Link>
+          <NavDropdown title="Profile" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action4">
+                Go to profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">
+                 LogOut
+              </NavDropdown.Item>
+            </NavDropdown>
         </Nav>
       </Navbar.Collapse>
       </div>

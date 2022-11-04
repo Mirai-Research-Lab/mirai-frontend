@@ -10,7 +10,7 @@ function Main() {
         <div className='home_desc'>
           <div className='home-desc-main'>
             If you <span>WANT</span>  it,<br/>
-            Let's <span>SHOOT</span>
+            Let's <span>SHOOT</span>!
           </div>
           <div className='play-btn'>
           <a href="#" ><span data-attr="Play">Play</span><span data-attr="Now">Now</span></a>
