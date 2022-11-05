@@ -13,7 +13,7 @@ export default function profiles({ Leaderboard }) {
 function Item(data){
     return (
 
-        <>
+        <div className={styles.profiles}>
             {
                 data.map((value, index) => (
                     <div className={styles.flex} key={index}>
@@ -21,18 +21,19 @@ function Item(data){
                             <img src={value.img} alt="" />
             
                             <div className={styles.info}>
-                                <h3 className='name text-dark'>{value.name}</h3>    
-                                <span>{value.location}</span>
+                                <h3 className={styles.textdark}>{value.name}</h3>
+                                <span>position : {index+1}</span>    
+                                <span>address : {value.location}</span>
                             </div>                
                         </div>
                         <div className={styles.item}>
                             <span>{value.score}</span>
                         </div>
                     </div>
-                    )
+                )
                 )
             }
-        </>
+        </div>
 
         
     )

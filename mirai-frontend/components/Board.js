@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Profiles from './profiles';
 import { Leaderboard } from './database';
 import styles from "../styles/leaderboard.module.css"
+import TOP3 from "./top3.js";
 
 export default function Board() {
 
@@ -14,15 +15,17 @@ export default function Board() {
 
   return (
     <div className={styles.board}>
-        <h1 className='leaderboard'>Leaderboard</h1>
+        
+        <h1 className={styles.leaderboard}>Leaderboard</h1>
 
         <div className={styles.duration}>
             <button onClick={handleClick} data-id='7'>7 Days</button>
             <button onClick={handleClick} data-id='30'>30 Days</button>
             <button onClick={handleClick} data-id='0'>All-Time</button>
         </div>
-
+        <TOP3 Leaderboard={between(Leaderboard, period)}/>
         <Profiles Leaderboard={between(Leaderboard, period)}></Profiles>
+        <div className={styles.blob5}></div>
 
     </div>
   )
