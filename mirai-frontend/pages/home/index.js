@@ -1,5 +1,5 @@
 import MainPage from "../../Components/Main.js"
-import Features from "../../Components/Features.js"
+import Features from "../../Components/Option.js"
 
 function index() {
   return (

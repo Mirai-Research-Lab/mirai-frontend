@@ -15,11 +15,11 @@ export default function navabr() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-        <Nav.Link href="#home" className='link'>Home</Nav.Link>
-          <Nav.Link href="#marketplace" className='link'>MarketPlace</Nav.Link>
-          <Nav.Link href="#leaderboard" className='link'>Leaderboard</Nav.Link>
+        <Nav.Link href="/home" className='link'>Home</Nav.Link>
+          <Nav.Link href="/marketplace" className='link'>MarketPlace</Nav.Link>
+          <Nav.Link href="/leaderboard" className='link'>Leaderboard</Nav.Link>
           <NavDropdown title="Profile" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action4">
+              <NavDropdown.Item href="/profile">
                 Go to profile
               </NavDropdown.Item>
               <NavDropdown.Divider />

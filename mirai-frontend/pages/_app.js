@@ -3,8 +3,8 @@ import Navbar from '../Components/nav'
 
 function MyApp({ Component, pageProps }) {
   return(
-  <>
-  <Navbar> </Navbar>
+   <>
+    <Navbar> </Navbar>
     <Component {...pageProps} />
     </>
     )
