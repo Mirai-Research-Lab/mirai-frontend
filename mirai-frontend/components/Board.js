@@ -21,7 +21,7 @@ export default function Board() {
         <div className={styles.duration}>
             <button onClick={handleClick} data-id='7'>7 Days</button>
             <button onClick={handleClick} data-id='30'>30 Days</button>
-            <button onClick={handleClick} data-id='0'>All-Time</button>
+            <button onClick={handleClick} data-id='0'>Today</button>
         </div>
         <TOP3 Leaderboard={between(Leaderboard, period)}/>
         <Profiles Leaderboard={between(Leaderboard, period)}></Profiles>
