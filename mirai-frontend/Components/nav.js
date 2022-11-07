@@ -19,7 +19,7 @@ export default function navabr() {
           <Nav.Link href="/marketplace" className='link'>MarketPlace</Nav.Link>
           <Nav.Link href="/leaderboard" className='link'>Leaderboard</Nav.Link>
           <NavDropdown title="Profile" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="/profile">
+              <NavDropdown.Item href="/Profile">
                 Go to profile
               </NavDropdown.Item>
               <NavDropdown.Divider />

@@ -23,6 +23,8 @@
 .navbar {
   height:5rem;
   background:none ;
+  position: fixed;
+  width:100%;
 }
 .navbar-brand{
   font-size: 3rem;
@@ -37,13 +39,16 @@
 .me-auto{
   padding-right: 30px;
 }
-/* .img_container{
-  overflow-y:hidden;
-} */
+.img_container{
+  /* position:fixed; */
+  padding-top: 80px;
+  width:100%;
+}
 .homeImg {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
   /* position: absolute; */
 }
 .home_desc{
@@ -153,19 +158,23 @@ a:hover span:nth-child(2):after {
   background: #252525;
   height:auto;
   top:0;
-  padding-top:5rem;
+  padding-top:117px;
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.myCard-container
+{
+  margin-left: 30%;
+}
 .marketplace-heading{
   color:white;
   width:100%;
   text-align: center;
   margin-bottom: 20px;
-  text-shadow: 0 0 20px #fff, 0 0 10px #c16a00, 0 0 40px #c16a00, 0 0 50px #c16a00, 0 0 60px #c16a00, 0 0 70px #c16a00, 0 0 80px #c16a00;
+  text-shadow: 0 0 15px #fff, 0 0 10px #079bc9, 0 0 30px #008594, 0 0 30px #00fffb, 0 0 40px #07e7f3, 0 0 50px #37b2ef, 0 0 60px #0081c1;
 }
 .marketplace-heading>span{
   text-shadow: none;
@@ -177,10 +186,14 @@ a:hover span:nth-child(2):after {
   display: flex;
   flex-direction: row;
   justify-content:flex-start;
+  align-items: center;
   margin:10px;
   flex-wrap: wrap;
   color:white;
   /* width:80vw; */
+}
+.my-cards-div{
+  padding-left: 100px;
 }
 .nft-card{
   margin:10px;
@@ -215,10 +228,9 @@ a:hover span:nth-child(2):after {
   justify-content: space-around;
   align-items: flex-start;
   color:white;
-  padding:80px 40px 40px 40px;
+  padding:150px 40px 40px 40px;
   background-color: #252525;
   height:100vh;
-  
 }
 .card-details>div{
   display: flex;
@@ -240,4 +252,130 @@ a:hover span:nth-child(2):after {
   font-family:Poppins;
   font-weight: 400;
   width:800px
+}
+
+/*Profile*/
+.profile{
+  background-color: #252525;
+  height:100%;
+  color:white;
+  position: fixed;
+  width:30%;  
+  margin-top: 80px;
+}
+.profile-name{
+  font-family:Poppins;
+  font-weight: 400;
+  width:800px;
+}
+.profile-name>h5{
+  color:white;
+}
+.card{
+	background-color: #252525;
+	width: 280px;
+	border-radius: 33px;
+	box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
+	padding: 2rem !important;
+}
+.top-container{
+	display: flex;
+	align-items: center;
+}
+.profile-image{
+	border-radius: 10px;
+	border: 2px solid #5957f9;
+}
+.name{
+	font-size: 15px;
+	font-weight: bold;
+	color: #272727;
+	position: relative;
+	top: 8px;
+}
+.mail{
+	font-size: 14px;
+	color: grey;
+	position: relative;
+	top: 2px;
+}
+.middle-container{
+	background-color: #eee;
+	border-radius: 12px;
+
+}
+.middle-container:hover {
+	border: 1px solid #5957f9;
+}
+.dollar-div{
+	background-color: #5957f9;
+	padding: 12px;
+	border-radius: 10px;
+}
+.round-div{
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.dollar{
+	font-size: 16px !important;
+	color: #5957f9 !important;
+	font-weight: bold !important;
+}
+
+
+.current-balance{
+	font-size: 15px;
+	color: #272727;
+	font-weight: bold;
+}
+.amount{
+	color: #5957f9;
+	font-size: 16px;
+	font-weight: bold;
+}
+.dollar-sign{
+	font-size: 16px;
+	color: #272727;
+	font-weight: bold;
+}
+
+.recent-border{
+	border-left: 2px solid #5957f9;
+	display: flex;
+	align-items: center;
+
+}
+.recent-border:hover {
+	border-bottom: 1px solid #dee2e6!important;
+}
+
+.recent-orders{
+	font-size: 16px;
+	font-weight: 700;
+	color: #5957f9;
+	margin-left: 2px;
+}
+
+.wishlist{
+	font-size: 16px;
+	font-weight: 700;
+	color: #272727;
+
+}
+.wishlist-border:hover{
+	border-bottom: 1px solid #dee2e6!important;
+}
+.fashion-studio{
+	font-size: 16px;
+	font-weight: 700;
+	color: #272727;
+}
+.fashion-studio-border:hover {
+	border-bottom: 1px solid #dee2e6!important;
 }

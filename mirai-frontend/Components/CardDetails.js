@@ -23,9 +23,14 @@ function CardDetails() {
         <div className="card-details__info__price">
           <h2>Price: 0.1 ETH</h2>
         </div>
-        <div className='play-btn'>
-          <a href="#" ><span data-attr="Buy">Buy</span><span data-attr="Now">Now</span></a>
+        <div className="play">
+          <div className='play-btn'>
+            <a href="#" ><span data-attr="Buy">Buy</span><span data-attr="Now">Now</span></a>
           </div>
+          <div className='play-btn'>
+            <a href="#" ><span data-attr="Now">Now</span><span data-attr="Sell">Now</span></a>
+          </div>
+        </div>
       </div>
     </div>
   )

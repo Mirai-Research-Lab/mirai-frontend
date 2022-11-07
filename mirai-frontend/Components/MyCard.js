@@ -4,16 +4,16 @@ import nft2 from "../public/nft2.jpg"
 import nft3 from "../public/nft3.jpg"
 import nft4 from "../public/nft4.webp"
 
-export default function Marketplace() {
+export default function CardDetails() {
   return (
     <>
-    <div className="marketplace-container ">
-      <div className="marketplace-heading">
-                <h1>MARKETPLACE</h1> 
-                <span>Buy and sell NFTs</span>
+    <div className="marketplace-container myCard-container">
+      <div className="marketplace-heading ">
+                <h1>MY Cards</h1> 
+                <span>Following are the cards you own </span>
       </div>
 
-      <div className="nft-cards">
+      <div className="nft-cards my-cards-div">
         <div className="nft-card">
           <Image src={nft} className="nft-image"/>
           <div className="nft-card-info">
