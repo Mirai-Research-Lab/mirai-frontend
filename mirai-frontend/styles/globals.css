@@ -377,16 +377,4 @@ a:hover span:nth-child(2):after {
 	font-size: 16px;
 	font-weight: 700;
 	color: #272727;
-
-}
-.wishlist-border:hover{
-	border-bottom: 1px solid #dee2e6!important;
-}
-.fashion-studio{
-	font-size: 16px;
-	font-weight: 700;
-	color: #272727;
-}
-.fashion-studio-border:hover {
-	border-bottom: 1px solid #dee2e6!important;
 }

@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-face {
+    font-family: Imported;
+    src: url(../assets/SPACE\ MISSION.otf);
+}
+
+#Lboard{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba(5,77,142,1) 100%); */
+        background-image: url("../assets/bg4.jpg");
+        width: 100%;
+
+}
+.board:hover{
+    animation:borderanimate 0.5s linear;
+    box-shadow: 0 7px 7px 0 #5bc3e2, 0 6px 20px 0 #4c84fe;
+}
+@keyframes borderanimate {
+    0%{
+        box-shadow:none;
+    }
+    100%{
+        box-shadow: 0 7px 7px 0 #5bc3e2, 0 6px 20px 0 #4c84fe;
+    }
+}
+
+.blob5 {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-left: -150px;
+    background: linear-gradient(180deg, rgba(3, 58, 86, 0.42) 31.77%,
+            #437bc4 100%);
+    border-radius: 100%;
+    filter: blur(23px);
+    animation: bouncess 18s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes bouncess {
+    from {
+        transform: translate(0px, 0px) rotate(-270deg);
+    }
+
+    to {
+        transform: translate(-10px, -250px) rotate(-140deg);
+    }
+}
+
+
+.board {
+    text-align: center;
+    margin-top: 100px;
+    background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.board .leaderboard{
+    margin-bottom: 1em;
+    color: #6bdcfe;
+    font-family: Imported;
+    letter-spacing: 2px;
+}
+
+.board .duration{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+.board .duration > button{
+    border: 1px solid var(--color-light);
+    padding: .5em 2em;
+    border-radius: 50px;
+    background-color: transparent;
+    cursor: pointer;
+    color: white;
+    font-family:"poppins" ;
+
+}
+
+.board .duration > button:hover{
+    color: #6bdcfe;
+    text-shadow: 0 0 20px #4c84fe;
+}
+
+.active{
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+#profile{
+    /* display: flex; */
+
+    margin-top: 3em;
+}
+
+#profile .flex{
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    text-align: left;
+    margin-bottom: 2em;
+}
+
+#profile .flex .item{
+    display: flex;
+    align-items: center;
+}
+
+#profile .flex img{
+    width: 15%;
+    border-radius: 50%;
+}
+
+#profile .flex .info{
+   padding: 1em;
+}
+
+.textdark{
+    color: var(--color-dark);
+}
+.profiles{
+    margin-top:380px ;
+    color: white;
+    font-family:"poppins" ;
+
+}
+.top3{
+    margin-top: 80px;
+}
+.winnerpic{
+    width: 20%;
+    border-radius: 50%;
+}
+.topthreedetails{
+    float: left;
+    display: inline;
+    color: white;
+    font-family:"poppins" ;
+
+}
+
+.topthreedetails> img{
+    width: 50%;
+    border-radius: 100%;
+}
+.topthreedetails>h3{
+    margin-bottom: -12px;
+}
+.topthreedetails>h5{
+    margin-bottom: 3px;
+}
+.info>span{
+    padding-right: 50px;
+}
