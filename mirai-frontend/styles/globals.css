@@ -24,3 +24,13 @@ body {
   padding: 0;
   margin: 0;
 }
+::-webkit-scrollbar{
+  width: 8px;
+}
+::-webkit-scrollbar-track{
+  background: #2c9ec1;
+}
+::-webkit-scrollbar-thumb{
+  background-image: linear-gradient(#2c9ec1,#88e3ff);
+  border-radius: 8px;
+}

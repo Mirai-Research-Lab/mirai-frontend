@@ -69,7 +69,7 @@
     position: absolute;
     width: 110px;
     height: 100%;
-    /* background: linear-gradient(to right, #f8bf8c, rgb(255, 170, 0)); */
+    background: linear-gradient(to right,  #5bc3e2, #4c84fe);
     border-radius: 30px;
     transition: .5s;
     color: white;
@@ -99,6 +99,7 @@
     border-left: 0;
     border-top: 0;
     border-right: 0;
+    color: white;
     border-bottom: 1px solid #999;
     outline: none;
     background: transparent;
