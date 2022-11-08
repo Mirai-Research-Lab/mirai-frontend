@@ -20,6 +20,17 @@
 * {
   font-family: gaming-font;
 }
+::-webkit-scrollbar{
+  width: 8px;
+}
+::-webkit-scrollbar-track{
+  /* background: #2c9ec1; */
+  background: #252525;
+}
+::-webkit-scrollbar-thumb{
+  background-image: linear-gradient(#2c9ec1,#88e3ff);
+  border-radius: 8px;
+}
 .navbar {
   height:5rem;
   background:none ;
