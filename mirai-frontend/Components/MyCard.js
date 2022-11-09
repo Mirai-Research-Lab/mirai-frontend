@@ -20,6 +20,11 @@ export default function CardDetails() {
             <div className="nft-card-info-heading">
               <h1>Card Name</h1>
               <span>Card Description</span>
+              <div>
+              <button>
+                Sell
+              </button>
+              </div>
               </div>
               </div>
         </div>

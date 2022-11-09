@@ -42,11 +42,15 @@
   font-size: 3rem;
 }
 .navbar-brand>span{
-  color: rgb(193, 106, 0);
+  color: #c16a00;
 }
 .link{
   margin-right:40px;
   font-size: 1.2rem;
+}
+.link:hover{
+  color:white;
+  background: linear-gradient(45deg, transparent 5%, #c16a00 5%);
 }
 .me-auto{
   padding-right: 30px;
@@ -224,10 +228,14 @@ a:hover span:nth-child(2):after {
   overflow: hidden;
   text-align: center;
 }
+nft-card-info{
+  display: flex;
+  flex-direction: column;
+}
 .nft-card-info-heading{
   margin:20px
 }
-.nft-card-info-heading>span , .nft-card-info-heading>h1{
+.nft-card-info-heading>span , .nft-card-info-heading>h1,nft-card-info>button{
   font-family:Poppins;
   font-weight: 400;
   font-size: 20px;
