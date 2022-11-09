@@ -3,6 +3,7 @@ import nft from "../public/nft.jpg"
 import nft2 from "../public/nft2.jpg"
 import nft3 from "../public/nft3.jpg"
 import nft4 from "../public/nft4.webp"
+import { marketplace } from "./database";
 
 export default function Marketplace() {
   return (
@@ -15,59 +16,23 @@ export default function Marketplace() {
         </div>
 
         <div className="nft-cards">
-          <div className="nft-card">
-            <Image src={nft} className="nft-image" />
-            <div className="nft-card-info">
+        <div className="nft-card">
+            {
+              marketplace.map((value, index) => {
+                return (
+                  <div>
+                  <Image src={nft} alt="nft" className="nft-image" />
+                  <div className="nft-card-info">
               <div className="nft-card-info-heading">
                 <h1>Card Name</h1>
                 <span>Card Description</span>
               </div>
             </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft3} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft2} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft4} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft2} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft3} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
+                    </div>
+                )
+              }
+              )
+            }
           </div>
         </div>
       </div>

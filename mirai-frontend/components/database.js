@@ -1,4 +1,5 @@
-export const Leaderboard = [
+import nft from '../public/nft.jpg'
+const Leaderboard = [
     {
         name: "player 1",
         location: "India",
@@ -42,3 +43,13 @@ export const Leaderboard = [
         dt: "2022-01-21"
     }
 ]
+const marketplace= [
+    {
+        name:"Anshu Joshk",
+        desc:"Hey this is Ashu Joshi nft",
+        img:nft
+    },
+
+]
+
+export {Leaderboard,marketplace};
