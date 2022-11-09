@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
 import styles from "../styles/auth.module.css"
-
+import {Link, useNavigate} from 'react-router-dom';
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import swal from 'sweetalert2';
 function Auth() {
+    const router = useRouter()
+    const validateEmail=(email)=> {
+        const re =
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+      }
+      
+      // function to validate password
+     const validatePassword=(str)=>{
+        var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        return re.test(str);
+      }
     const [loginn,isLoginn]=useState(styles.login);
     const [registerr,isregister]=useState(styles.register);
     const[btn,isbtn]=useState(styles.btn);
     // var loginn;
     // var registerr;
     // var btn;
+    // const navigate = useNavigate();
 
     const register = () => {
         // loginn.style.left = "-400px";
@@ -25,7 +41,100 @@ function Auth() {
         isregister(styles.registerloginregister);
         isbtn(styles.registerloginbtn);
       };
+      const [username , setUsername] = useState("");
+      const [email, setEmail]= useState("");
+      const [password,setPassword]= useState("");
+      const [repassword,setRePassword]= useState("");
       
+      const handleClickSignUp = async (e) =>{
+        console.log("clicked");
+        e.preventDefault();
+        console.log(e)
+        if(password!==repassword){
+            swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Password and Confirm Password do not match!',
+            })
+        }
+        else{
+            const credentials =
+            {
+                username:username,
+                email:email,
+                password:password,
+            }
+            if (!validateEmail(email)) {
+                swal.fire({
+                    icon: "error",
+                    title: "Invalid Email...",
+                    text: "Please enter a valid email!",
+                })
+            }
+            else
+            try{
+                const res = await fetch(
+               "http://192.168.68.156:3000/api/auth/signup",
+              {
+                  method: "POST",
+                  body: JSON.stringify(credentials),
+                  withCredentials: false,
+                  headers:{
+                      "Content-Type": "application/json",
+                      Accept: "application/json",
+                      // Access-Control-Allow-Origin:
+                    }
+                });
+                // navigate('/home');
+                console.log(res);
+                router.push('/home');
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        }
+      const handleClickLogIn = async (e) =>{    
+        console.log("clicked");
+        e.preventDefault();
+        const credentials =
+        {
+            email:email,
+            password:password,
+        }
+        if (!validateEmail(email)||!validatePassword(password)) {
+            swal.fire({
+                icon: "error",
+                title: "Invalid Credentials...",
+                text: "Please enter valid details!",
+              })
+        }
+        else
+        try{
+          const res = await axios({
+            method: "POST",
+            url: "http://192.168.68.156:3000/api/auth/signin",
+            body: JSON.stringify(credentials),
+            withCredentials: false,
+            headers:{
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                // Access-Control-Allow-Origin:
+            }
+            });
+            if(res.status===200)
+            router.push('/home');
+            else
+            swal.fire({
+                icon: "error",
+                title: "Invalid Credentials...",
+                text: "Please enter valid details!",
+              })
+        }
+        catch(err){
+          console.log(err);
+        }
+      }
     return (
         <div className={styles.auth}>
             <div className={styles.authbox}>
@@ -35,25 +144,27 @@ function Auth() {
                             <div className={styles.buttonbox}>
                                 <div id={btn}></div>
                                 <button type="button" className={styles.togglebtn} onClick={login}>
-                                    Log In
+                                    Sign In
                                 </button>
                                 <button type="button" className={styles.togglebtn} onClick={register}>
-                                    Register
+                                    Sign Up
                                 </button>
                             </div>
                             <form id={loginn} className={styles.inputgroup}>
                                 <input
                                     type="email"
                                     className={styles.inputfield}
-                                    placeholder="Email Id"
+                                    placeholder=" Email Id"
                                     id={styles.loginemail}
+                                    onChange={(e)=> setEmail(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="password"
                                     className={styles.inputfield}
-                                    placeholder="Enter Password"
+                                    placeholder=" Enter Password"
                                     id={styles.loginpass}
+                                    onChange={(e)=> setPassword(e.target.value)}
                                     required
                                 />
                                 <div><br /></div>
@@ -61,6 +172,7 @@ function Auth() {
                                     type="button"
                                     className={styles.submitbtnloginbtn}
                                     id={styles.loginbtn}
+                                    onClick={handleClickLogIn}
                                 >
                                     Log In
                                 </button>
@@ -69,44 +181,47 @@ function Auth() {
                                 <input
                                     type="text"
                                     className={styles.inputfield}
-                                    placeholder="First name"
-                                    name="fname"
-                                    id={styles.registerfname}
-                                    required
-                                />
-                                <input
-                                    type="text"
-                                    className={styles.inputfield}
-                                    placeholder="Last name"
+                                    placeholder=" Username"
                                     name="lname"
                                     id={styles.registerlname}
+                                    onChange={(e)=> setUsername(e.target.value)}
                                     required
                                 />
                                 <input
                                     type="email"
                                     className={styles.inputfield}
-                                    placeholder="Email Id"
+                                    placeholder=" Email Id"
                                     name="email"
                                     id={styles.registeremail}
+                                    onChange={(e)=> setEmail(e.target.value)}
                                     required
                                 />
-                                <textarea
+                                {/* <textarea
                                     name="about"
                                     cols="35"
                                     rows="4"
                                     placeholder="Write about your interests..."
                                     id={styles.registerdesc}
-                                ></textarea>
-                                <p className={styles.filechoose}>Choose your profile pic</p>
-                                <input type="file" name="item" id={styles.registerimg} />
+                                ></textarea> */}
+                                {/* <p className={styles.filechoose}>Choose your profile pic</p> */}
+                                {/* <input type="file" name="item" id={styles.registerimg} /> */}
                                 <input
                                     className={styles.inputfield}
-                                    placeholder="Enter Password"
+                                    placeholder=" Enter Password"
                                     name="password"
                                     id={styles.registerpass}
+                                    onChange={(e)=> setPassword(e.target.value)}
                                     required
                                 />
-                                <button type="button" className={styles.submitbtn_1} >
+                                <input
+                                    className={styles.inputfield}
+                                    placeholder="Confirm Password"
+                                    name="password"
+                                    id={styles.registerpass}
+                                    onChange={(e)=> setRePassword(e.target.value)}
+                                    required
+                                />
+                                <button type="button" onClick={handleClickSignUp} className={styles.submitbtn_1} >
                                     Register
                                 </button>
                             </form>

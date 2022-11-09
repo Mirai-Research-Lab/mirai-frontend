@@ -36,6 +36,7 @@
   background:none ;
   position: fixed;
   width:100%;
+  z-index: 100;
 }
 .navbar-brand{
   font-size: 3rem;
@@ -296,19 +297,24 @@ a:hover span:nth-child(2):after {
 .profile-image{
 	border-radius: 10px;
 	border: 2px solid #5957f9;
+  /* padding-left: 10px; */
 }
 .name{
 	font-size: 15px;
 	font-weight: bold;
+  font-family: Poppins;
 	color: #272727;
 	position: relative;
 	top: 8px;
+  margin-left: 7px;
 }
 .mail{
 	font-size: 14px;
 	color: grey;
+  font-family: Poppins;
 	position: relative;
 	top: 2px;
+  margin-left: 7px;
 }
 .middle-container{
 	background-color: #eee;
@@ -343,15 +349,18 @@ a:hover span:nth-child(2):after {
 .current-balance{
 	font-size: 15px;
 	color: #272727;
+  font-family: Poppins;
 	font-weight: bold;
 }
 .amount{
 	color: #5957f9;
 	font-size: 16px;
 	font-weight: bold;
+  font-family: Poppins;
 }
 .dollar-sign{
 	font-size: 16px;
+  font-family: Poppins;
 	color: #272727;
 	font-weight: bold;
 }
@@ -371,10 +380,40 @@ a:hover span:nth-child(2):after {
 	font-weight: 700;
 	color: #5957f9;
 	margin-left: 2px;
+  font-family: Poppins;
 }
 
 .wishlist{
-	font-size: 16px;
-	font-weight: 700;
-	color: #272727;
+  font-family: Poppins;
+}
+.fashion-studio{
+  font-family: Poppins;
+}
+
+/* button, button::after {
+  width: 100px;
+  height: 40px;
+  font-size: 10px;
+  font-family: 'Bebas Neue', cursive;
+  background: linear-gradient(45deg, transparent 5%, #08abdd 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 88px;
+  outline: transparent;
+  position: relative;
+} */
+.mint-nfts{
+  background-color: #5957f9;
+  border-radius: 10px;
+  padding: 10px;
+  color:white;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

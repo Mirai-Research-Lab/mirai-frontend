@@ -12,7 +12,7 @@
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba(5,77,142,1) 100%); */
         background-image: url("../assets/bg4.jpg");
         width: 100%;
-
+        font-family: 'Poppins', sans-serif;
 }
 .board:hover{
     animation:borderanimate 0.5s linear;
@@ -125,7 +125,10 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
 #profile .flex .info{
    padding: 1em;
 }
-
+.info>h3 ,.info>span{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+} 
 .textdark{
     color: var(--color-dark);
 }

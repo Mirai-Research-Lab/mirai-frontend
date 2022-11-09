@@ -37,10 +37,13 @@ function Profile() {
             <span class="recent-orders">Recent orders</span>
           </div>
           <div class="wishlist-border pt-2">
-            <span class="wishlist">Wishlist</span>
+            <span class="wishlist"></span>
           </div>
           <div class="fashion-studio-border pt-2">
-            <span class="fashion-studio">Fashion studio</span>
+            <span class="fashion-studio">
+              <button className="mint-nfts">
+              Mint NFTs</button>
+              </span>
           </div>
         </div>
       </div>

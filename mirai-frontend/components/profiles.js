@@ -22,8 +22,8 @@ function Item(data){
             
                             <div className={styles.info}>
                                 <h3 className={styles.textdark}>{value.name}</h3>
-                                <span>position : {index+1}</span>    
-                                <span>address : {value.location}</span>
+                                <span>Position : {index+1}</span>    
+                                <span>Address : {value.location}</span>
                             </div>                
                         </div>
                         <div className={styles.item}>
