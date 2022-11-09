@@ -131,6 +131,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
 } 
 .textdark{
     color: var(--color-dark);
+    font-family: Poppins;
 }
 .profiles{
     margin-top:380px ;
@@ -152,7 +153,13 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
     font-family:"poppins" ;
 
 }
-
+.topthreedetails>h5{
+    margin-top: 30px;
+}
+.topthreedetails>h5 , .topthreedetails>span{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
 .topthreedetails> img{
     width: 50%;
     border-radius: 100%;
