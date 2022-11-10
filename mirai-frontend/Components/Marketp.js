@@ -34,6 +34,7 @@ export default function Marketplace() {
               )
             }
           </div>
+
         </div>
       </div>
     </>
