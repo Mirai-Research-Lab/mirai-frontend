@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-// import { ConnectButton } from "web3uikit"
+import { ConnectButton } from "@web3uikit/web3"
 
 export default function navabr() {
   return (
@@ -28,10 +28,10 @@ export default function navabr() {
               </NavDropdown.Item>
             </NavDropdown>
           <Nav.Link href="/Leaderboard" className='link'>  
-          {/* <ConnectButton moralisAuth={false}/> */}
-</Nav.Link>
+        </Nav.Link>
         </Nav>
-      </Navbar.Collapse>
+    <ConnectButton /> 
+      </Navbar.Collapse>   
       </div>
     </Container>
   </Navbar>
