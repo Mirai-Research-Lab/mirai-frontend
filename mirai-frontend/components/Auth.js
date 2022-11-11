@@ -14,7 +14,7 @@ function Auth() {
       
       // function to validate password
      const validatePassword=(str)=>{
-        var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{4,}$/;
         return re.test(str);
       }
     const [loginn,isLoginn]=useState(styles.login);
@@ -50,20 +50,18 @@ function Auth() {
         console.log("clicked");
         e.preventDefault();
         console.log(e)
-        if(password!==repassword){
-            swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Password and Confirm Password do not match!',
-            })
-        }
-        else{
-            const credentials =
+          const credentials =
             {
                 username:username,
                 email:email,
                 password:password,
             }
+            if(!username||!email||!password)
+            swal.fire({
+                icon: "error",
+                title: "Empty Field(s).",
+                text: "Please fill all fields!",
+            })
             if (!validateEmail(email)) {
                 swal.fire({
                     icon: "error",
@@ -74,7 +72,7 @@ function Auth() {
             else
             try{
                 const res = await fetch(
-               "http://192.168.68.156:3000/api/auth/signup",
+               "http://localhost:3001/api/auth/signup",
               {
                   method: "POST",
                   body: JSON.stringify(credentials),
@@ -92,7 +90,7 @@ function Auth() {
             catch(err){
                 console.log(err);
             }
-        }
+        
         }
       const handleClickLogIn = async (e) =>{    
         console.log("clicked");
@@ -102,18 +100,18 @@ function Auth() {
             email:email,
             password:password,
         }
-        if (!validateEmail(email)||!validatePassword(password)) {
+        /* if (!validateEmail(email)) {
             swal.fire({
                 icon: "error",
                 title: "Invalid Credentials...",
                 text: "Please enter valid details!",
               })
         }
-        else
+        else */
         try{
           const res = await axios({
             method: "POST",
-            url: "http://192.168.68.156:3000/api/auth/signin",
+            url: "http://localhost:3001/api/auth/signin",
             body: JSON.stringify(credentials),
             withCredentials: false,
             headers:{
