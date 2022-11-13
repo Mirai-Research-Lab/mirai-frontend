@@ -19,7 +19,10 @@ function MyApp({ Component, pageProps, currentUser }) {
 }
 
 MyApp.getInitialProps = async (appContext) => {
-  const { data } = await axios.get("http://localhost:3001/api/currentuser");
+  const { data } = await axios("http://localhost:3001/api/auth/currentuser", {
+    headers: appContext.ctx.req.headers,
+    method: "GET",
+  });
 
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
