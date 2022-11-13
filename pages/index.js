@@ -1,17 +1,15 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import { useEffect } from "react";
 import { useMoralis } from "react-moralis";
+import Router from "next/router";
 // import "../styles/leaderboard.css";
 
-const supportedChains = ["31337", "5"];
+export default function Home({ currentuser }) {
+  useEffect(() => {
+    if (!currentuser) {
+      Router.push("/auth");
+    } else Router.push("/home");
+  }, [currentuser]);
 
-export default function Home() {
 
-  const { isWeb3Enabled, chainId } = useMoralis();
-
-  return (
-    <div >
-      Hey this is my index page
-    </div>
-  )
+  return <></>;
 }
