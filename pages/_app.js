@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import { NotificationProvider } from "@web3uikit/core";
 import { SSRProvider } from "react-bootstrap";
+import axios from "axios";
 
 function MyApp({ Component, pageProps, currentUser }) {
   return (
@@ -18,15 +19,13 @@ function MyApp({ Component, pageProps, currentUser }) {
 }
 
 MyApp.getInitialProps = async (appContext) => {
-  const client = buildClient(appContext.ctx);
-  const { data } = await client.get("http://localhost:3001/api/currentuser");
+  const { data } = await axios.get("http://localhost:3001/api/currentuser");
 
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
       appContext.ctx,
-      client,
-      data.currentUser
+      data.currentuser
     );
   }
 
