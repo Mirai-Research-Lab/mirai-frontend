@@ -6,14 +6,16 @@ import { ConnectButton } from "@web3uikit/web3"
 import { useMoralis } from 'react-moralis';
 import { useEffect, useState } from 'react';
 import Link  from 'next/link';
+import axios from 'axios';
 
 export default function navabr() {
   const [previousaccount,setpreviousaccount]=useState('');
   const { account } = useMoralis()
   useEffect(()=>{
     if(account && account!=previousaccount )
-    { alert(account);
-     setpreviousaccount[account];
+    { 
+      const body={address:account}
+      checkWalletAddress(body);
     }
   }, [account]);
 //   const [userAddress, setAddress] = useState("0");
@@ -23,6 +25,33 @@ export default function navabr() {
 //             console.log(`user address:  ${userAddress}`)
 //         }
 //     }, [isAuthenticated, chainId])
+const checkWalletAddress=async(body)=>{
+  const check =await axios.post("http://localhost:3001/api/wallet/checkWalletAddress",
+  body,
+  {
+    withCredentials: true,
+  })
+  if(check.status==201)
+  {
+
+  }
+  else
+  {
+    if(check.data.includes("other"))
+    {
+      swal.fire({
+        icon: "error",
+        title: "Wallet Already Connected",
+        text: "please connect to a new wallet which is not already in use",
+      });
+    }
+    else
+    {
+      
+    }
+  }
+  console.log(check.status);
+}
   return (
     <Navbar className= "navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Container className='navbar-container'>

@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps, currentuser }) {
       <SSRProvider>
         <MoralisProvider initializeOnMount={false}>
           <NotificationProvider>
-            <Component {...pageProps} currentuser={currentuser[0]} />
+            <Component {...pageProps} currentuser={(currentuser)?currentuser[0]:""} />
           </NotificationProvider>
         </MoralisProvider>
       </SSRProvider>
