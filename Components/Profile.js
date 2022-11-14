@@ -1,5 +1,6 @@
 import Image from "next/image";
 import nft from '../public/nft.jpg'
+import {useState, useEffect} from "react";
 
 function Profile({email, username}) {
   return (
