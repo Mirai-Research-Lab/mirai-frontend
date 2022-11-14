@@ -2,9 +2,27 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import { ConnectButton } from "@web3uikit/web3"
+import { useMoralis } from 'react-moralis';
+import { useEffect, useState } from 'react';
+import Link  from 'next/link';
 
 export default function navabr() {
+  const [previousaccount,setpreviousaccount]=useState('');
+  const { account } = useMoralis()
+  useEffect(()=>{
+    if(account && account!=previousaccount )
+    { alert(account);
+     setpreviousaccount[account];
+    }
+  }, [account]);
+//   const [userAddress, setAddress] = useState("0");
+// useEffect(() => {
+//         if (isAuthenticated) {
+//             setAddress(user!.get("ethAddress").toLowerCase())
+//             console.log(`user address:  ${userAddress}`)
+//         }
+//     }, [isAuthenticated, chainId])
   return (
     <Navbar className= "navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Container className='navbar-container'>
@@ -16,8 +34,8 @@ export default function navabr() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
         <Nav.Link href="/home" className='link'>Home</Nav.Link>
-          <Nav.Link href="/marketplace/buy" className='link'>MarketPlace</Nav.Link>
-          <Nav.Link href="/Leaderboard" className='link'>Leaderboard</Nav.Link>
+          <Link href="/marketplace/buy" >MarketPlace</Link>
+          <Link href="/Leaderboard" className='link'>Leaderboard</Link>
           <NavDropdown title="Profile" id="navbarScrollingDropdown" >
               <NavDropdown.Item href="/Profile">
                 Go to profile
@@ -27,8 +45,11 @@ export default function navabr() {
                  LogOut
               </NavDropdown.Item>
             </NavDropdown>
+          <Nav.Link href="/Leaderboard" className='link'>  
+        </Nav.Link>
         </Nav>
-      </Navbar.Collapse>
+    <ConnectButton /> 
+      </Navbar.Collapse>   
       </div>
     </Container>
   </Navbar>
