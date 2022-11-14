@@ -52,4 +52,12 @@ const marketplace= [
 
 ]
 
-export {Leaderboard,marketplace};
+const sell =[
+    {
+        name:"Prasun",
+        desc:"prasun nft",
+        img:nft
+    },
+]
+
+export {Leaderboard,marketplace,sell};
