@@ -9,6 +9,8 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Web3 from "web3";
+import Moralis from "moralis";
+import Router from "next/router";
 export default function navabr() {
   const swal = Swal;
   const { account } = useMoralis();
@@ -51,16 +53,16 @@ export default function navabr() {
       }
       console.log(check.status);
     } catch (e) {
-      swal.fire({
-        icon: "error",
-        title: "Wallet Already Connected",
-        text: "please connect to a new wallet which is not already in use",
-      });
-      console.log(e);
-      window.web3 = await new window.Moralis.Web3.enable({
-        provider: "walletconnect",
-      });
-      await window.web3.eth.currentProvider.disconnect();
+      swal
+        .fire({
+          icon: "error",
+          title: "Wallet Already Connected",
+          text: "please connect to a new wallet which is not already in use",
+        })
+        .then(() => {
+          localStorage.clear();
+          Router.reload();
+        });
     }
   };
   return (
