@@ -13,7 +13,7 @@ function index({currentuser}) {
         title: "Cannot access page before signing in",
         text: "Redirecting to Auth page",
       });
-      Router.push("/auth");
+      const myTimeout = setTimeout(()=>{Router.push("/auth");}, 3000);
     }
   },)
   return (

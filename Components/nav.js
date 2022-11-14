@@ -95,7 +95,23 @@ export default function navabr() {
                   Go to profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">LogOut</NavDropdown.Item>
+                <NavDropdown.Item
+                  href="#action5"
+                  onClick={async () => {
+                    console.log("cccc");
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    const res=await axios.post(
+                      "http://localhost:3001/api/auth/signout",
+                      {},
+                      { withCredentials: true }
+                    );
+                    console.log(res);
+                    Router.push("/auth");
+                  }}
+                >
+                  LogOut
+                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="/leaderboard" className="link"></Nav.Link>
             </Nav>

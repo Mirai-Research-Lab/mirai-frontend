@@ -3,11 +3,19 @@ import Navbar from "../../Components/nav.js";
 import GET_ACTIVE_ITEMS_QUERY from "../../queries/active-items-query.js";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-
-function index() {
+import Router from "next/router.js";
+import swal from "sweetalert2";
+function index({ currentuser }) {
   const [activeNfts, setActiveNfts] = useState([]);
-
   useEffect(() => {
+    if (!currentuser) {
+      swal.fire({
+        icon: "error",
+        title: "Cannot access page before signing in",
+        text: "Redirecting to Auth page",
+      });
+      Router.push("/auth");
+    }
     const { data } = useQuery(GET_ACTIVE_ITEMS_QUERY);
     setActiveNfts(data);
   }, []);
