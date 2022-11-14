@@ -10,6 +10,5 @@ export default function Home({ currentuser }) {
     } else Router.push("/home");
   }, [currentuser]);
 
-
   return <></>;
 }
