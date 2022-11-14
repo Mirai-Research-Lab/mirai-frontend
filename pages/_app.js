@@ -4,13 +4,13 @@ import { NotificationProvider } from "@web3uikit/core";
 import { SSRProvider } from "react-bootstrap";
 import axios from "axios";
 
-function MyApp({ Component, pageProps, currentUser }) {
+function MyApp({ Component, pageProps, currentuser }) {
   return (
     <>
       <SSRProvider>
         <MoralisProvider initializeOnMount={false}>
           <NotificationProvider>
-            <Component {...pageProps} currentUser={currentUser} />
+            <Component {...pageProps} currentuser={currentuser[0]} />
           </NotificationProvider>
         </MoralisProvider>
       </SSRProvider>
@@ -24,12 +24,11 @@ MyApp.getInitialProps = async (appContext) => {
     method: "GET",
     withCredentials: true,
   });
-
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
       appContext.ctx,
-      data.currentuser
+      data.currentuser[0]
     );
   }
 
