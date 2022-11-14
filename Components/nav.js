@@ -35,9 +35,9 @@ export default function navabr() {
         <Nav className="me-auto">
         <Nav.Link href="/home" className='link'>Home</Nav.Link>
           <Link href="/marketplace/buy" >MarketPlace</Link>
-          <Link href="/Leaderboard" className='link'>Leaderboard</Link>
-          <NavDropdown title="Profile" id="navbarScrollingDropdown" >
-              <NavDropdown.Item href="/Profile">
+          <Link href="/leaderboard" className='link'>Leaderboard</Link>
+          <NavDropdown title="profile" id="navbarScrollingDropdown" >
+              <NavDropdown.Item href="/profile">
                 Go to profile
               </NavDropdown.Item>
               <NavDropdown.Divider />
@@ -45,7 +45,7 @@ export default function navabr() {
                  LogOut
               </NavDropdown.Item>
             </NavDropdown>
-          <Nav.Link href="/Leaderboard" className='link'>  
+          <Nav.Link href="/leaderboard" className='link'>  
         </Nav.Link>
         </Nav>
     <ConnectButton /> 
