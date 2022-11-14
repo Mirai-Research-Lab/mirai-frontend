@@ -1,7 +1,7 @@
 import Image from "next/image";
 import nft from '../public/nft.jpg'
 
-function Profile() {
+function Profile({email, username}) {
   return (
     <div className="profile">
       <div class="container d-flex justify-content-center mt-5">
@@ -14,8 +14,8 @@ function Profile() {
             />
 
             <div class="ml-3 profile-name">
-              <h5 class="name">Clarke Jeffery</h5>
-              <p class="mail">clark@zmail.com</p>
+              <h5 class="name">{username}</h5>
+              <p class="mail">{email}</p>
             </div>
           </div>
 
