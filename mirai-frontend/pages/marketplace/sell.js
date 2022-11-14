@@ -5,10 +5,13 @@ import Navbar from '../../Components/nav.js';
 
 
 function index() {
+  let person={
+    name: 'Lin Lanying', imageId: '1bX5QH6'
+  }
   return (
     <div>
       <Navbar/>
-        <Sell/>
+        <Sell person={person}/>
     </div>
   )
 }
