@@ -101,10 +101,14 @@ function Auth() {
             withCredentials: true,
           }
         );
-        // navigate('/home');
         console.log(res);
         router.push("/home");
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Email already in use",
+          text: "Please enter a unique email id..",
+        });
         console.log(err);
       }
     }
@@ -151,6 +155,11 @@ function Auth() {
           //   console.log(res);
         }
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Invalid Credentials",
+          text: "Please enter valid details!",
+        });
         console.log(err);
       }
   };
