@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import axios from "axios";
 import swal from "sweetalert2";
+import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
@@ -93,16 +94,13 @@ function Auth() {
       });
     } else {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/signup", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          withCredentials: false,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            // Access-Control-Allow-Origin:
-          },
-        });
+        const res = await axios.post(
+          "http://localhost:3001/api/auth/signup",
+          credentials,
+          {
+            withCredentials: true,
+          }
+        );
         // navigate('/home');
         console.log(res);
         router.push("/home");
@@ -132,18 +130,17 @@ function Auth() {
       });
     } else
       try {
-        const res = await fetch("http://localhost:3001/api/auth/signin", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          withCredentials: false,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            // Access-Control-Allow-Origin:
-          },
-        });
-        if (res.status === 200) router.push("/home");
-        else {
+        const res = await axios.post(
+          "http://localhost:3001/api/auth/signin",
+          credentials,
+          {
+            withCredentials: true,
+          }
+        );
+        if (res.status === 200) {
+          console.log(res);
+          router.push("/home");
+        } else {
           const message = await res.json();
           console.log(message);
           swal.fire({
