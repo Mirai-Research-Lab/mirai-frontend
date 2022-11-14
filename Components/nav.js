@@ -10,7 +10,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Web3 from "web3";
 export default function navabr() {
-  const swal=Swal;
+  const swal = Swal;
   const { account } = useMoralis();
   useEffect(() => {
     if (account) {
@@ -29,14 +29,17 @@ export default function navabr() {
         }
       );
       if (check.status == 201) {
+        if (check.data.includes("exists")) {
+          return;
+        }
         console.log("adding new wallet to email address");
-          const setEmail = await axios.put(
-            "http://localhost:3001/api/player/updateAddress",
-            body,
-            {
-              withCredentials: true,
-            }
-          );
+        const setEmail = await axios.put(
+          "http://localhost:3001/api/player/updateAddress",
+          body,
+          {
+            withCredentials: true,
+          }
+        );
         const setWallet = await axios.put(
           "http://localhost:3001/api/player/addWalletAddress",
           body,
@@ -54,7 +57,9 @@ export default function navabr() {
         text: "please connect to a new wallet which is not already in use",
       });
       console.log(e);
-      window.web3 = await new window.Moralis.Web3.enable({ provider: "walletconnect" });
+      window.web3 = await new window.Moralis.Web3.enable({
+        provider: "walletconnect",
+      });
       await window.web3.eth.currentProvider.disconnect();
     }
   };
