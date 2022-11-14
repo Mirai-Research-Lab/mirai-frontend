@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "@web3uikit/core": "^0.2.10",
     "@web3uikit/icons": "^0.2.6",
     "@web3uikit/web3": "^0.2.2",
