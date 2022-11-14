@@ -5,17 +5,12 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 function index() {
-  const [activeNfts, setActiveNfts] = useState([]);
-
-  useEffect(() => {
-    const { data } = useQuery(GET_ACTIVE_ITEMS_QUERY);
-    setActiveNfts(data);
-  }, []);
-
+  const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
+  console.log(addNfts);
   return (
     <div>
       <Navbar />
-      <Marketplace activeNfts={activeNfts} />
+      <Marketplace activeNfts={addNfts} />
     </div>
   );
 }
