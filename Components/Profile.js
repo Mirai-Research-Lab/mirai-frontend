@@ -8,7 +8,11 @@ function Profile({ email, username }) {
       <div class="container d-flex justify-content-center mt-5">
         <div class="card">
           <div class="top-container">
-            <Image src={nft} class="img-fluid profile-image" width="70" />
+            <Image
+              src={nft}
+              class="img-fluid profile-image"
+              width="70"
+            />
 
             <div class="ml-3 profile-name">
               <h5 class="name">{username}</h5>
