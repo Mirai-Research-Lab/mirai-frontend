@@ -3,13 +3,16 @@ import Navbar from "../../Components/nav.js";
 import GET_ACTIVE_ITEMS_QUERY from "../../queries/active-items-query.js";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-
+import { useMoralis } from "react-moralis";
 import Router from "next/router.js";
 import swal from "sweetalert2";
+import style from "../../styles/web3.module.css";
+
 function index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
+  const { isWeb3Enabled } = useMoralis();
   console.log(addNfts);
-  const [activeNfts, setActiveNfts] = useState([]);
+
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -19,14 +22,21 @@ function index({ currentuser }) {
       });
       Router.push("/auth");
     }
-    const { data } = useQuery(GET_ACTIVE_ITEMS_QUERY);
-    setActiveNfts(data);
   }, []);
+
   return (
-    <div>
+    <>
       <Navbar />
-      <Marketplace activeNfts={addNfts} />
-    </div>
+      {isWeb3Enabled ? (
+        <div>
+          <Marketplace activeNfts={addNfts} />
+        </div>
+      ) : (
+        <div className={style.web3NotEnabled}>
+          Please Enable Connect Your Wallet
+        </div>
+      )}
+    </>
   );
 }
 
