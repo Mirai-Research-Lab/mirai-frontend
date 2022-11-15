@@ -66,59 +66,34 @@ export default function navabr() {
     }
   };
   return (
-    <Navbar
-      className="navbar"
-      collapseOnSelect
-      expand="lg"
-      bg="dark"
-      variant="dark"
-    >
-      <Container className="navbar-container">
-        <div>
-          <Navbar.Brand href="#home" className="navbar-brand">
-            MIRAI
-          </Navbar.Brand>
-        </div>
-        <div>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/home" className="link">
-                Home
-              </Nav.Link>
-              <Link href="/marketplace/buy">MarketPlace</Link>
-              <Link href="/leaderboard" className="link">
-                Leaderboard
-              </Link>
-              <NavDropdown title="profile" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="/profile">
-                  Go to profile
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  href="#action5"
-                  onClick={async () => {
-                    console.log("cccc");
-                    localStorage.clear();
-                    sessionStorage.clear();
-                    const res=await axios.post(
-                      "http://localhost:3001/api/auth/signout",
-                      {},
-                      { withCredentials: true }
-                    );
-                    console.log(res);
-                    Router.push("/auth");
-                  }}
-                >
-                  LogOut
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="/leaderboard" className="link"></Nav.Link>
-            </Nav>
-            <ConnectButton />
-          </Navbar.Collapse>
-        </div>
-      </Container>
-    </Navbar>
-  );
+    <Navbar className= "navbar" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Container className='navbar-container'>
+      <div>
+      <Navbar.Brand href="#home" className='navbar-brand'>MIRAI</Navbar.Brand>
+      </div>
+      <div>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+        <Nav.Link href="/home" className='link'>Home</Nav.Link>
+          <Link href="/marketplace/buy" >MarketPlace</Link>
+          <Link href="/leaderboard" className='link'>Leaderboard</Link>
+          <NavDropdown title="profile" id="navbarScrollingDropdown" >
+              <NavDropdown.Item href="/profile">
+                Go to profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">
+                 LogOut
+              </NavDropdown.Item>
+            </NavDropdown>
+          <Nav.Link href="/leaderboard" className='link'>  
+        </Nav.Link>
+        </Nav>
+    <ConnectButton /> 
+      </Navbar.Collapse>   
+      </div>
+    </Container>
+  </Navbar>
+  )
 }
