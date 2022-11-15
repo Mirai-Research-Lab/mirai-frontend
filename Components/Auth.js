@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
@@ -6,6 +6,18 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
+  useEffect(() => {
+    const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
+    document.addEventListener("keydown", function(e) { 
+      if (e.keyCode == 9) e.preventDefault(); 
+    });
+
+    // clean up
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
+
   const router = useRouter();
   const validateEmail = (email) => {
     const re =
@@ -22,7 +34,7 @@ function Auth() {
   const [registerr, isregister] = useState(styles.register);
   const [btn, isbtn] = useState(styles.btn);
   // var loginn;
-  // var registerr;
+  // var registerr;-----
   // var btn;
   // const navigate = useNavigate();
 

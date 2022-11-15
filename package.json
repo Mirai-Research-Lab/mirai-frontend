@@ -24,6 +24,7 @@
     "react": "18.0.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.0.0",
+    "react-modal": "^3.16.1",
     "react-moralis": "^1.4.0",
     "react-native-leaderboard": "^1.0.6",
     "react-router-dom": "^6.4.3",

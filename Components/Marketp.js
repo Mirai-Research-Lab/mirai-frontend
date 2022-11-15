@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import Image from "next/image";
 import nft from "../public/nft.jpg"
 import nft2 from "../public/nft2.jpg"
@@ -6,9 +7,14 @@ import nft4 from "../public/nft4.webp"
 import { marketplace } from "./database";
 
 export default function Marketplace() {
+
+  const handlesell = ()=>{
+    Router.push('/marketplace/sell')
+  }
+
   return (
     <>
-    <button className="Sellsection" o>Sell</button>
+    <button className="Sellsection" onClick={handlesell}>Sell</button>
       <div className="marketplace-container ">
         <div className="marketplace-heading">
           <h1>MARKETPLACE</h1>
