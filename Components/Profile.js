@@ -20,9 +20,8 @@ const customStyles = {
 };
 function Profile({ email, username }) {
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
-    alert('clicked');
     setIsOpen(true);
   }
 
@@ -45,7 +44,7 @@ function Profile({ email, username }) {
            <Image src={pencil} className="pencilIcon" width="30px" height="30px" />
            <Modal isOpen={modalIsOpen} style={customStyles}>
                     <h2>Update your profile pic</h2>
-                    <input placeholder="" type={file}></input>
+                    <input type="file" accept="image/*,.pdf" />
                     <button>Update</button>   
                     <button onClick={closeModal}>Close</button>
                   </Modal>

@@ -343,6 +343,8 @@ nft-card-info > button {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  background: none;
+  border:none;
 }
 .name {
   font-size: 15px;
@@ -453,7 +455,7 @@ nft-card-info > button {
   color: white;
   font-family: Poppins;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 10px;
   width: 200px;
   height: 85px;
   border: none;
