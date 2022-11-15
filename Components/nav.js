@@ -62,9 +62,9 @@ const checkWalletAddress=async(body)=>{
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-        <Nav.Link href="/home" className='link'>Home</Nav.Link>
-          <Link href="/marketplace/buy" >MarketPlace</Link>
-          <Link href="/leaderboard" className='link'>Leaderboard</Link>
+        <Link href="/home" className='nav-link'>Home</Link>
+          <Link href="/marketplace/buy" className='nav-link'>MarketPlace</Link>
+          <Link href="/leaderboard" className='nav-link'>Leaderboard</Link>
           <NavDropdown title="profile" id="navbarScrollingDropdown" >
               <NavDropdown.Item href="/profile">
                 Go to profile
