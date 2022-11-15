@@ -1,8 +1,34 @@
 import Image from "next/image";
 import nft from "../public/nft.jpg";
 import { useState, useEffect } from "react";
+import pencil from '../public/pencil.png'
+import Modal from "react-modal";
 
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    borderRadius: "10%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 function Profile({ email, username }) {
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  function openModal() {
+    alert('clicked');
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <div className="profile">
       <div class="container d-flex justify-content-center mt-5">
@@ -15,6 +41,15 @@ function Profile({ email, username }) {
               height="300px"
             />
           </div>
+          <button className="pencil-img" onClick={openModal}>
+           <Image src={pencil} className="pencilIcon" width="30px" height="30px" />
+           <Modal isOpen={modalIsOpen} style={customStyles}>
+                    <h2>Update your profile pic</h2>
+                    <input placeholder="" type={file}></input>
+                    <button>Update</button>   
+                    <button onClick={closeModal}>Close</button>
+                  </Modal>
+          </button>
             <div class="ml-3 profile-name">
               <h5 class="name">{username}</h5>
               <p class="mail">{email}</p>

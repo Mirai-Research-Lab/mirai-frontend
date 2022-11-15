@@ -329,9 +329,20 @@ nft-card-info > button {
 .profile-image{
 	border-radius: 10px;
 	border: 2px solid #5957f9;
-  height:20px;
-  width:30px;
-  /* padding-left: 10px; */
+  position: absolute;
+}
+.pencilIcon{
+  position:absolute;
+  background-color: white;
+  border-radius: 50%; 
+  object-fit:fill;
+}
+.pencil-img{
+  transform: translate(0px, -20px);
+  cursor:pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 .name {
   font-size: 15px;
@@ -420,6 +431,7 @@ nft-card-info > button {
 .fashion-studio {
   font-family: Poppins;
 }
+
 
 /* button, button::after {
   width: 100px;
