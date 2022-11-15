@@ -11,28 +11,14 @@ function Profile({ email, username }) {
             <Image
               src={nft}
               class="img-fluid profile-image"
-              width="70"
+              width="300px"
+              height="300px"
             />
-
+          </div>
             <div class="ml-3 profile-name">
               <h5 class="name">{username}</h5>
               <p class="mail">{email}</p>
             </div>
-          </div>
-
-          <div class="middle-container d-flex justify-content-between align-items-center mt-3 p-2">
-            <div class="dollar-div px-3">
-              <div class="round-div">
-                <i class="fa fa-dollar dollar"></i>
-              </div>
-            </div>
-            <div class="d-flex flex-column text-right mr-2">
-              <span class="current-balance">Current Balance</span>
-              <span class="amount">
-                <span class="dollar-sign">$</span>1476
-              </span>
-            </div>
-          </div>
           <div class="wishlist-border pt-2">
             <span class="wishlist"></span>
           </div>

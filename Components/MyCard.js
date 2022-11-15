@@ -58,7 +58,7 @@ export default function CardDetails() {
           <span>Following are the cards you own </span>
         </div>
 
-        <div className="nft-cards my-cards-div">
+        {/* <div className="nft-cards my-cards-div"> */}
           <div className="nft-card">
             <Image src={nft} className="nft-image" />
             <div className="nft-card-info">
@@ -77,62 +77,8 @@ export default function CardDetails() {
               </div>
             </div>
           </div>
-          <div className="nft-card">
-            <Image src={nft3} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-                <div>
-                  <button onClick={openModal}>Sell</button>
-                  <Modal isOpen={modalIsOpen} style={customStyles}>
-                    <h2>List at Eth</h2>
-                    <input placeholder="Eth Amount"></input>
-                    <button onClick={closeModaleth}>List</button>
-                    <button onClick={closeModal}>Close</button>
-                  </Modal>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft2} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft4} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft2} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
-          <div className="nft-card">
-            <Image src={nft3} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

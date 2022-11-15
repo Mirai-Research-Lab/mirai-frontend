@@ -93,7 +93,7 @@ export default function navabr() {
               <NavDropdown title="profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item>Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
+                <NavDropdown.Item 
                   href="#action5"
                   onClick={async () => {
                     console.log("cccc");
