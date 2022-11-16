@@ -101,7 +101,7 @@ function Auth() {
             withCredentials: true,
           }
         );
-        console.log(res);
+        console.log(res.headers);
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -142,7 +142,7 @@ function Auth() {
           }
         );
         if (res.status === 200) {
-          console.log(res);
+          console.log(res.data);
           router.push("/home");
         } else {
           const message = await res.json();
