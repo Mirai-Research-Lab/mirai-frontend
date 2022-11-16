@@ -8,11 +8,11 @@ import swal from "sweetalert2";
 import Router from "next/router";
 import Moralis from "moralis";
 
-function index({ currentuser }) {
+function Index({ currentuser }) {
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [funding_address, setfunding_address] = useState('');
+  const [funding_address, setfunding_address] = useState("");
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -29,7 +29,11 @@ function index({ currentuser }) {
   return (
     <div>
       <Navbar />
-      <Profile email={email} username={username} funding_address={funding_address} />
+      <Profile
+        email={email}
+        username={username}
+        funding_address={funding_address}
+      />
       {isWeb3Enabled ? (
         <>
           <MyCards />
@@ -43,4 +47,4 @@ function index({ currentuser }) {
   );
 }
 
-export default index;
+export default Index;

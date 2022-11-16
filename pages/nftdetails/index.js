@@ -2,7 +2,7 @@ import CardDetails from "../../Components/CardDetails.js";
 import Navbar from "../../Components/nav.js";
 import swal from "sweetalert2";
 import Router from "next/router.js";
-function index({ currentuser }) {
+function Index({ currentuser }) {
   if (!currentuser) {
     swal.fire({
       icon: "error",
@@ -19,4 +19,4 @@ function index({ currentuser }) {
   );
 }
 
-export default index;
+export default Index;

@@ -30,15 +30,18 @@ export default function Marketplace({ activeNfts }) {
           <div className="nft-card">
             {marketplace.map((value, index) => {
               return (
-                <div>
-                  <Image src={nft} alt="nft" className="nft-image" />
-                  <div className="nft-card-info">
-                    <div className="nft-card-info-heading">
-                      <h1>Card Name</h1>
-                      <span>Card Description</span>
+                <>
+                  <div>
+                    key={index}
+                    <Image src={nft} alt="nft" className="nft-image" />
+                    <div className="nft-card-info">
+                      <div className="nft-card-info-heading">
+                        <h1>Card Name</h1>
+                        <span>Card Description</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </>
               );
             })}
           </div>

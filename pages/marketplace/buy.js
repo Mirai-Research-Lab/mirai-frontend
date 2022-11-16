@@ -8,7 +8,7 @@ import Router from "next/router.js";
 import swal from "sweetalert2";
 import style from "../../styles/web3.module.css";
 
-function index({ currentuser }) {
+function Index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
   const { isWeb3Enabled } = useMoralis();
   console.log(addNfts);
@@ -40,4 +40,4 @@ function index({ currentuser }) {
   );
 }
 
-export default index;
+export default Index;

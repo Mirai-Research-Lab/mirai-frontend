@@ -1,9 +1,10 @@
-import Auth from "../../components/Auth.js"
-import Navbar from '../../Components/nav.js';
+import Auth from "../../components/Auth.js";
+import Navbar from "../../Components/nav.js";
 
-export default function navabr() {
-    return (
-        <div>
-<Auth></Auth></div>
-    );
+export default function Nav() {
+  return (
+    <div>
+      <Auth></Auth>
+    </div>
+  );
 }

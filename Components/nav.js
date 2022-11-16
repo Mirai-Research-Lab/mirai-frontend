@@ -9,7 +9,7 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
-export default function navabr() {
+export default function Navabr() {
   const swal = Swal;
   const { account } = useMoralis();
   useEffect(() => {
