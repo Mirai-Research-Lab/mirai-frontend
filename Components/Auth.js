@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import axios from "axios";
 import swal from "sweetalert2";
+import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
+  useEffect(() => {
+    const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode == 9) e.preventDefault();
+    });
+
+    // clean up
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
+  }, []);
+
   const router = useRouter();
   const validateEmail = (email) => {
     const re =
@@ -21,7 +34,7 @@ function Auth() {
   const [registerr, isregister] = useState(styles.register);
   const [btn, isbtn] = useState(styles.btn);
   // var loginn;
-  // var registerr;
+  // var registerr;-----
   // var btn;
   // const navigate = useNavigate();
 
@@ -81,20 +94,21 @@ function Auth() {
       });
     } else {
       try {
-        const res = await fetch("http://localhost:3001/api/auth/signup", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          withCredentials: false,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            // Access-Control-Allow-Origin:
-          },
-        });
-        // navigate('/home');
+        const res = await axios.post(
+          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
+          credentials,
+          {
+            withCredentials: true,
+          }
+        );
         console.log(res);
         router.push("/home");
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Email already in use",
+          text: "Please enter a unique email id..",
+        });
         console.log(err);
       }
     }
@@ -120,18 +134,17 @@ function Auth() {
       });
     } else
       try {
-        const res = await fetch("http://localhost:3001/api/auth/signin", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          withCredentials: false,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            // Access-Control-Allow-Origin:
-          },
-        });
-        if (res.status === 200) router.push("/home");
-        else {
+        const res = await axios.post(
+          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
+          credentials,
+          {
+            withCredentials: true,
+          }
+        );
+        if (res.status === 200) {
+          console.log(res);
+          router.push("/home");
+        } else {
           const message = await res.json();
           console.log(message);
           swal.fire({
@@ -142,6 +155,11 @@ function Auth() {
           //   console.log(res);
         }
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Invalid Credentials",
+          text: "Please enter valid details!",
+        });
         console.log(err);
       }
   };

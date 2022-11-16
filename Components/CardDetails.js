@@ -1,5 +1,6 @@
 import nft1 from '../public/nft.jpg'; 
 import Image from 'next/image';
+// import globalStyles from '../styles/global.js';
 
 function CardDetails() {
   return (

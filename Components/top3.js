@@ -1,74 +1,51 @@
-import styles from "../styles/leaderboard.module.css"
-function abc(index, value) {
-    if (index == 0) {
-        return (
-            <div className={styles.topthreedetails}>
-                <img src={value.img} alt="" />
-                <h3 className={styles.textdark}>{value.name}</h3>
-                <h5>1st position</h5>
-                <span>Highest score : {value.score}</span>
-
-            </div >
-            
-        )
-    }
-    if (index == 1) {
-        return (
-            <div className={styles.topthreedetails}>
-                <img src={value.img} alt="" />
-                <h3 className={styles.textdark}>{value.name}</h3>
-                <h5>2nd position</h5>
-                <span>Highest score : {value.score}</span>
-
-
-            </div >
-        )
-    }
-    if (index == 2) {
-        return (
-            <div className={styles.topthreedetails}>
-                <img src={value.img} alt="" />
-                <h3 className={styles.textdark}>{value.name}</h3>
-                <h5>3rd position</h5>
-                <span>Highest score : {value.score}</span>
-
-
-            </div >
-        )
-    }
-
-}
-
-
-function topthree(data) {
+import styles from "../styles/leaderboard.module.css";
+function abc(index, player) {
+  if (index == 0) {
     return (
-
-        <span className={styles.topthreesection}>
-            {
-                data.map((value, index) => (
-                    <>
-                        {abc(index, value)}
-                    </>
-                )
-                )
-            }
-        </span>
-
-
-    )
-}
-
-
-
-
-function top3({ Leaderboard }) {
+      <div className={styles.topthreedetails}>
+        {/* <img src={value.img} alt="" /> */}
+        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
+        <h5>1st position</h5>
+        <span>Highest score : {player.high_score || 99999}</span>
+      </div>
+    );
+  }
+  if (index == 1) {
     return (
-        <div className={styles.top3}>
-            {topthree(Leaderboard)}
-        </div>
-    )
+      <div className={styles.topthreedetails}>
+        {/* <img src={value.img} alt="" /> */}
+        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
+        <h5>2nd position</h5>
+        <span>Highest score : {player.high_score || 99999}</span>
+      </div>
+    );
+  }
+  if (index == 2) {
+    return (
+      <div className={styles.topthreedetails}>
+        {/* <img src={value.img} alt="" /> */}
+        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
+        <h5>3rd position</h5>
+        <span>Highest score : {player.high_score || 99999}</span>
+      </div>
+    );
+  }
 }
 
+function topthree({ players }) {
+  return (
+    <span className={styles.topthreesection}>
+      {players.map((player, index) => (
+        <>{abc(index, player)}</>
+      ))}
+    </span>
+  );
+}
 
+function top3({ Leaderboard, players }) {
+  return (
+    <div className={styles.top3}>{topthree({ Leaderboard, players })}</div>
+  );
+}
 
-export default top3
+export default top3;
