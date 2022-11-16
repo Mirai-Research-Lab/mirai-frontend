@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Web3 from "web3";
-import Moralis from "moralis";
 import Router from "next/router";
 export default function navabr() {
   const swal = Swal;
@@ -34,7 +32,7 @@ export default function navabr() {
         if (check.data.includes("exists")) {
           return;
         }
-        console.log("adding new wallet to email address");
+        else{
         const setEmail = await axios.put(
           "http://localhost:3001/api/player/updateAddress",
           body,
@@ -49,20 +47,22 @@ export default function navabr() {
             withCredentials: true,
           }
         );
-        console.log("setWallet.status is ", setWallet.status);
+        console.log("setWallet.status is ", setWallet.status); 
+        }
       }
       console.log(check.status);
     } catch (e) {
-      swal
-        .fire({
-          icon: "error",
-          title: "Wallet Already Connected",
-          text: "please connect to a new wallet which is not already in use",
-        })
-        .then(() => {
-          localStorage.clear();
-          Router.reload();
-        });
+      //('ma chud gayi')
+        swal
+          .fire({
+            icon: "error",
+            title: "Wallet Already Connected",
+            text: "please connect to a new wallet which is not already in use",
+          })
+          .then(() => {
+            localStorage.clear();
+            Router.reload();
+          });
     }
   };
   return (
@@ -93,8 +93,7 @@ export default function navabr() {
               <NavDropdown title="profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item>Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item 
-                  href="#action5"
+                <NavDropdown.Item
                   onClick={async () => {
                     console.log("cccc");
                     localStorage.clear();

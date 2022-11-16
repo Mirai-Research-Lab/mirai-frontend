@@ -35,13 +35,15 @@ MyApp.getInitialProps = async (appContext) => {
     method: "GET",
     withCredentials: true,
   });
+  // const data = { currentuser: null };
+  console.log(data);
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
       appContext.ctx,
       data.currentuser
     );
-  } 
+  }
 
   return {
     pageProps,
