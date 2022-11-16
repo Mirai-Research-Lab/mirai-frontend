@@ -1,4 +1,4 @@
-import Sell from "../../Components/Sell.js";
+import Sell from "../../Components/sell.js";
 import { useMoralis } from "react-moralis";
 import Navbar from "../../Components/nav.js";
 import styles from "../../styles/web3.module.css";

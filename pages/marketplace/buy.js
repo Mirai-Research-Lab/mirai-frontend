@@ -22,7 +22,7 @@ function Index({ currentuser }) {
       });
       Router.push("/auth");
     }
-  }, []);
+  }, [currentuser]);
 
   return (
     <>

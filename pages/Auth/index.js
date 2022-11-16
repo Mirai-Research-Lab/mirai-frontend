@@ -1,4 +1,4 @@
-import Auth from "../../components/Auth.js";
+import Auth from "../../Components/Auth.js";
 import Navbar from "../../Components/nav.js";
 
 export default function Nav() {

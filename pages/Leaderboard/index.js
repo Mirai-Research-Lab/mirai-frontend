@@ -1,4 +1,4 @@
-import Board from "../../components/Board";
+import Board from "../../Components/Board";
 import styles from "../../styles/leaderboard.module.css";
 import Navbar from "../../Components/nav.js";
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ function Leaderboard({ currentuser }) {
       });
       Router.push("/auth");
     }
-  }, []);
+  }, [currentuser]);
 
   const loadPlayerData = async () => {
     const response = await axios.get(
