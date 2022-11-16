@@ -14,7 +14,7 @@ function Leaderboard({ currentuser }) {
         title: "Cannot access page before signing in",
         text: "Redirecting to Auth page",
       });
-      Router.push("/auth");
+      Router.push("/Auth");
     }
   }, [currentuser]);
 

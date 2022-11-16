@@ -6,7 +6,7 @@ import Router from "next/router";
 export default function Home({ currentuser }) {
   useEffect(() => {
     if (!currentuser) {
-      Router.push("/auth");
+      Router.push("/Auth");
     } else Router.push("/home");
   }, [currentuser]);
 

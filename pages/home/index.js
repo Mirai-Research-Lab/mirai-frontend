@@ -14,7 +14,7 @@ function Index({ currentuser }) {
         text: "Redirecting to Auth page",
       });
       const myTimeout = setTimeout(() => {
-        Router.push("/auth");
+        Router.push("/Auth");
       }, 3000);
     }
   });

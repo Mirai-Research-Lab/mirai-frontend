@@ -86,7 +86,7 @@ export default function Navabr() {
                 Home
               </Link>
               <Link href="/marketplace/buy">MarketPlace</Link>
-              <Link href="/leaderboard" className="link">
+              <Link href="/Leaderboard" className="link">
                 Leaderboard
               </Link>
               <NavDropdown title="profile" id="navbarScrollingDropdown">
@@ -104,13 +104,13 @@ export default function Navabr() {
                       { withCredentials: true }
                     );
                     console.log(res);
-                    Router.push("/auth");
+                    Router.push("/Auth");
                   }}
                 >
                   LogOut
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/leaderboard" className="link"></Nav.Link>
+              <Nav.Link href="/Leaderboard" className="link"></Nav.Link>
             </Nav>
             <ConnectButton />
           </Navbar.Collapse>
