@@ -2,9 +2,10 @@ import Image from "next/image";
 import nft from "../public/nft.jpg";
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import pencil from '../public/pencil.png'
+import pencil from "../public/pencil.png";
 import Modal from "react-modal";
 import axios from "axios";
+import Router from "next/router";
 
 const customStyles = {
   overlay: {
@@ -22,18 +23,31 @@ const customStyles = {
 };
 function Profile({ email, username, funding_address }) {
   const { account } = useMoralis();
-  const isalreadyFunding= ()=>{
-  if(account && funding_address!=account)
-  return(
-    <div class="fashion-studio-border pt-2">
-            <span class="fashion-studio">
-              <button className="mint-nfts">Set connected wallet as Funding address</button>
-            </span>
-          </div>
-  )
-  else
-  return " ";
-  }
+  const isalreadyFunding = () => {
+    if (account && funding_address != account)
+      return (
+        <div class="fashion-studio-border pt-2">
+          <span class="fashion-studio">
+            <button
+              className="mint-nfts"
+              onClick={async () => {
+                const formdata= new FormData();
+                formdata.append("address",account)
+                await axios.post("http://localhost:3001/api/player/updateuser",
+                formdata,
+                {
+                  withCredentials: true
+                });
+                Router.reload();
+              }}
+            >
+              Set connected wallet as Funding address
+            </button>
+          </span>
+        </div>
+      );
+    else return " ";
+  };
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(true);
@@ -55,18 +69,23 @@ function Profile({ email, username, funding_address }) {
             />
           </div>
           <button className="pencil-img" onClick={openModal}>
-           <Image src={pencil} className="pencilIcon" width="30px" height="30px" />
-           <Modal isOpen={modalIsOpen} style={customStyles}>
-                    <h2>Update your profile pic</h2>
-                    <input type="file" accept="image/*,.pdf" />
-                    <button>Update</button>   
-                    <button onClick={closeModal}>Close</button>
-                  </Modal>
+            <Image
+              src={pencil}
+              className="pencilIcon"
+              width="30px"
+              height="30px"
+            />
+            <Modal isOpen={modalIsOpen} style={customStyles}>
+              <h2>Update your profile pic</h2>
+              <input type="file" accept="image/*,.pdf" />
+              <button>Update</button>
+              <button onClick={closeModal}>Close</button>
+            </Modal>
           </button>
-            <div class="ml-3 profile-name">
-              <h5 class="name">{username}</h5>
-              <p class="mail">{email}</p>
-            </div>
+          <div class="ml-3 profile-name">
+            <h5 class="name">{username}</h5>
+            <p class="mail">{email}</p>
+          </div>
           <div class="wishlist-border pt-2">
             <span class="wishlist"></span>
           </div>
@@ -80,9 +99,7 @@ function Profile({ email, username, funding_address }) {
               <button className="mint-nfts">Withdraw Balance</button>
             </span>
           </div>
-          {
-            isalreadyFunding()
-          }
+          {isalreadyFunding()}
         </div>
       </div>
     </div>
