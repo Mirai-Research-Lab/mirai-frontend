@@ -95,13 +95,13 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
+          "httpL//localhost:3001/api/auth/signup", //"https://mirai-backend-kappa.vercel.app/api/auth/signup"
           credentials,
           {
             withCredentials: true,
           }
         );
-        console.log(res);
+        console.log(res.headers);
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -135,14 +135,14 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
+          "http://localhost:3001/api/auth/signin", //"https://mirai-backend-kappa.vercel.app/api/auth/signin"
           credentials,
           {
             withCredentials: true,
           }
         );
         if (res.status === 200) {
-          console.log(res);
+          console.log(res.data);
           router.push("/home");
         } else {
           const message = await res.json();
