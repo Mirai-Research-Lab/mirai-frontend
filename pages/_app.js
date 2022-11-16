@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps, currentuser }) {
 }
 MyApp.getInitialProps = async (appContext) => {
   let data = {};
+  console.log(appContext);
   if (typeof window === "undefined") {
     const { data: responseData } = await axios.get(
       "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
