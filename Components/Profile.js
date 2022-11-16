@@ -31,13 +31,15 @@ function Profile({ email, username, funding_address }) {
             <button
               className="mint-nfts"
               onClick={async () => {
-                const formdata= new FormData();
-                formdata.append("address",account)
-                await axios.post("http://localhost:3001/api/player/updateuser",
-                formdata,
-                {
-                  withCredentials: true
-                });
+                const formdata = new FormData();
+                formdata.append("address", account);
+                await axios.post(
+                  "http://localhost:3001/api/player/updateuser",
+                  formdata,
+                  {
+                    withCredentials: true,
+                  }
+                );
                 Router.reload();
               }}
             >

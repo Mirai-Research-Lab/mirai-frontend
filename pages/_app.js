@@ -12,6 +12,7 @@ const client = new ApolloClient({
 });
 
 function MyApp({ Component, pageProps, currentuser }) {
+  console.log(currentuser);
   return (
     <>
       <SSRProvider>
@@ -32,7 +33,7 @@ function MyApp({ Component, pageProps, currentuser }) {
 MyApp.getInitialProps = async (appContext) => {
   let data = {};
   if (typeof window === "undefined") {
-    console.log(appContext.ctx.req.headers.cookie);
+    console.log(appContext.ctx.req);
     const { data: responseData } = await axios.get(
       "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
       {
@@ -43,7 +44,7 @@ MyApp.getInitialProps = async (appContext) => {
     );
     data = responseData;
   } else {
-    console.log(document.cookie);
+    console.log(document);
     const { data: responseData } = await axios.get(
       "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
       {
