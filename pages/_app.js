@@ -29,14 +29,12 @@ function MyApp({ Component, pageProps, currentuser }) {
     </>
   );
 }
-// https://mirai-backend-kappa.vercel.app/api/auth/currentuser
 MyApp.getInitialProps = async (appContext) => {
-  // const client = buildClient(appContext.ctx);
-  // const { data } = await client.get("/api/auth/currentuser");
   let data = {};
   if (typeof window === "undefined") {
+    console.log(appContext.ctx.req.headers.cookie);
     const { data: responseData } = await axios.get(
-      "http://localhost:3001/api/auth/currentuser",
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
       {
         headers: {
           cookies: appContext.ctx.req.headers.cookie,
@@ -47,7 +45,7 @@ MyApp.getInitialProps = async (appContext) => {
   } else {
     console.log(document.cookie);
     const { data: responseData } = await axios.get(
-      "http://localhost:3001/api/auth/currentuser",
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
       {
         headers: {
           cookies: document.cookie,
