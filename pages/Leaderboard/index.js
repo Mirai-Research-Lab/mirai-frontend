@@ -19,7 +19,9 @@ function Leaderboard({ currentuser }) {
   }, []);
 
   const loadPlayerData = async () => {
-    const response = await axios.get("http://localhost:3001/api/players");
+    const response = await axios.get(
+      "https://mirai-backend-kappa.vercel.app/api/players"
+    );
     setPlayers(response.data);
   };
   useEffect(() => {

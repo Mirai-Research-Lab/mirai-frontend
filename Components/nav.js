@@ -24,7 +24,7 @@ export default function navabr() {
     console.log("checking wallet address");
     try {
       const check = await axios.post(
-        "http://localhost:3001/api/wallet/checkWalletAddress",
+        "https://mirai-backend-kappa.vercel.app/api/wallet/checkWalletAddress",
         body,
         {
           withCredentials: true,
@@ -36,14 +36,14 @@ export default function navabr() {
         }
         console.log("adding new wallet to email address");
         const setEmail = await axios.put(
-          "http://localhost:3001/api/player/updateAddress",
+          "https://mirai-backend-kappa.vercel.app/api/player/updateAddress",
           body,
           {
             withCredentials: true,
           }
         );
         const setWallet = await axios.put(
-          "http://localhost:3001/api/player/addWalletAddress",
+          "https://mirai-backend-kappa.vercel.app/api/player/addWalletAddress",
           body,
           {
             withCredentials: true,
@@ -93,14 +93,14 @@ export default function navabr() {
               <NavDropdown title="profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item>Go to profile</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item 
+                <NavDropdown.Item
                   href="#action5"
                   onClick={async () => {
                     console.log("cccc");
                     localStorage.clear();
                     sessionStorage.clear();
                     const res = await axios.post(
-                      "http://localhost:3001/api/auth/signout",
+                      "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
                       { withCredentials: true }
                     );

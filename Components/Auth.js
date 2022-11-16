@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
@@ -8,8 +8,8 @@ import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
-    document.addEventListener("keydown", function(e) { 
-      if (e.keyCode == 9) e.preventDefault(); 
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode == 9) e.preventDefault();
     });
 
     // clean up
@@ -95,7 +95,7 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signup",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
           credentials,
           {
             withCredentials: true,
@@ -135,7 +135,7 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signin",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
           credentials,
           {
             withCredentials: true,
