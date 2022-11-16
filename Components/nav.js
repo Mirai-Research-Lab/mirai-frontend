@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Web3 from "web3";
-import Moralis from "moralis";
 import Router from "next/router";
 export default function navabr() {
   const swal = Swal;
@@ -33,26 +31,27 @@ export default function navabr() {
       if (check.status == 201) {
         if (check.data.includes("exists")) {
           return;
+        } else {
+          const setEmail = await axios.put(
+            "https://mirai-backend-kappa.vercel.app/api/player/updateAddress",
+            body,
+            {
+              withCredentials: true,
+            }
+          );
+          const setWallet = await axios.put(
+            "https://mirai-backend-kappa.vercel.app/api/player/addWalletAddress",
+            body,
+            {
+              withCredentials: true,
+            }
+          );
+          console.log("setWallet.status is ", setWallet.status);
         }
-        console.log("adding new wallet to email address");
-        const setEmail = await axios.put(
-          "https://mirai-backend-kappa.vercel.app/api/player/updateAddress",
-          body,
-          {
-            withCredentials: true,
-          }
-        );
-        const setWallet = await axios.put(
-          "https://mirai-backend-kappa.vercel.app/api/player/addWalletAddress",
-          body,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log("setWallet.status is ", setWallet.status);
       }
       console.log(check.status);
     } catch (e) {
+      //('ma chud gayi')
       swal
         .fire({
           icon: "error",

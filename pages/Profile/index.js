@@ -12,7 +12,7 @@ function index({ currentuser }) {
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [nfts, setNfts] = useState([]);
+  const [funding_address, setfunding_address] = useState('');
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -24,11 +24,12 @@ function index({ currentuser }) {
     }
     setEmail(currentuser.email);
     setUsername(currentuser.username);
+    setfunding_address(currentuser.funding_address);
   }, []);
   return (
     <div>
       <Navbar />
-      <Profile email={email} username={username} />
+      <Profile email={email} username={username} funding_address={funding_address} />
       {isWeb3Enabled ? (
         <>
           <MyCards />

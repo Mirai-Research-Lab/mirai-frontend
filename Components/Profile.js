@@ -1,8 +1,10 @@
 import Image from "next/image";
 import nft from "../public/nft.jpg";
 import { useState, useEffect } from "react";
+import { useMoralis } from "react-moralis";
 import pencil from '../public/pencil.png'
 import Modal from "react-modal";
+import axios from "axios";
 
 const customStyles = {
   overlay: {
@@ -18,8 +20,20 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-function Profile({ email, username }) {
-
+function Profile({ email, username, funding_address }) {
+  const { account } = useMoralis();
+  const isalreadyFunding= ()=>{
+  if(account && funding_address!=account)
+  return(
+    <div class="fashion-studio-border pt-2">
+            <span class="fashion-studio">
+              <button className="mint-nfts">Set connected wallet as Funding address</button>
+            </span>
+          </div>
+  )
+  else
+  return " ";
+  }
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(true);
@@ -58,7 +72,7 @@ function Profile({ email, username }) {
           </div>
           <div class="fashion-studio-border pt-2">
             <span class="fashion-studio">
-              <button className="mint-nfts">Mint A NFT</button>
+              <button className="mint-nfts">Mint A NFT ( remaining)</button>
             </span>
           </div>
           <div class="fashion-studio-border pt-2">
@@ -66,6 +80,9 @@ function Profile({ email, username }) {
               <button className="mint-nfts">Withdraw Balance</button>
             </span>
           </div>
+          {
+            isalreadyFunding()
+          }
         </div>
       </div>
     </div>

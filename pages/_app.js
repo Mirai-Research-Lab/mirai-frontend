@@ -61,6 +61,7 @@ MyApp.getInitialProps = async (appContext) => {
   //     withCredentials: true,
   //   }
   // );
+
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
