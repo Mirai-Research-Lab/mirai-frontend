@@ -96,7 +96,7 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signup",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
           credentials,
           {
             withCredentials: true,
@@ -140,7 +140,7 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signin",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
           credentials,
           {
             withCredentials: true,

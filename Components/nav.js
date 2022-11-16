@@ -100,7 +100,7 @@ export default function Navabr() {
                     sessionStorage.clear();
                     document.cookie = "jwt=undefined";
                     const res = await axios.post(
-                      "http://localhost:3001/api/auth/signout",
+                      "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
                       { withCredentials: true }
                     );

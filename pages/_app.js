@@ -33,7 +33,7 @@ MyApp.getInitialProps = async (appContext) => {
   let data = {};
   if (typeof window === "undefined" && appContext.ctx.req != null) {
     const { data: responseData } = await axios.get(
-      "http://localhost:3001/api/auth/currentuser",
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
       {
         headers: {
           cookies: appContext.ctx.req.headers.cookie,
@@ -43,7 +43,7 @@ MyApp.getInitialProps = async (appContext) => {
     data = responseData;
   } else {
     const { data: responseData } = await axios.get(
-      "http://localhost:3001/api/auth/currentuser", //https://mirai-backend-kappa.vercel.app
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser", //https://mirai-backend-kappa.vercel.app
       {
         headers: {
           cookies: document.cookie,
