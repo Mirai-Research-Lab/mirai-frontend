@@ -6,6 +6,7 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
+  const daysToExpire = 7;
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
     document.addEventListener("keydown", function (e) {
@@ -95,13 +96,17 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
+          "http://localhost:3001/api/auth/signup",
           credentials,
           {
             withCredentials: true,
           }
         );
-        console.log(res.headers);
+        const jwtToken = "jwt=" + res.data;
+        localStorage.setItem("jwt", jwt);
+        var date = new Date();
+        date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
+        document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -135,7 +140,7 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
+          "http://localhost:3001/api/auth/signin",
           credentials,
           {
             withCredentials: true,
@@ -143,9 +148,14 @@ function Auth() {
         );
         if (res.status === 200) {
           console.log(res.data);
+          const jwtToken = "jwt=" + res.data;
+          localStorage.setItem("jwt", jwtToken);
+          var date = new Date();
+          date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
+          document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
           router.push("/home");
         } else {
-          const message = await res.json();
+          const message = res.data;
           console.log(message);
           swal.fire({
             icon: "error",
