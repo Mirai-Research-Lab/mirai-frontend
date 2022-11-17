@@ -106,7 +106,8 @@ function Auth() {
         localStorage.setItem("jwt", jwtToken);
         var date = new Date();
         date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-        document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
+        document.cookie =
+          jwtToken + "; expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -152,7 +153,8 @@ function Auth() {
           localStorage.setItem("jwt", jwtToken);
           var date = new Date();
           date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-          document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
+          document.cookie =
+            jwtToken + "; expires=" + date.toUTCString() + ";path=/";
           router.push("/home");
         } else {
           const message = res.data;
