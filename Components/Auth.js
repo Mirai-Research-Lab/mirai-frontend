@@ -103,7 +103,7 @@ function Auth() {
           }
         );
         const jwtToken = "jwt=" + res.data;
-        localStorage.setItem("jwt", jwt);
+        localStorage.setItem("jwt", jwtToken);
         var date = new Date();
         date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
         document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
