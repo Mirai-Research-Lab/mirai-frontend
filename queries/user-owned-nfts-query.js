@@ -11,3 +11,5 @@ const USER_OWNED_NFTS_QUERY = () => gql`
     }
   }
 `;
+
+export default USER_OWNED_NFTS_QUERY;
