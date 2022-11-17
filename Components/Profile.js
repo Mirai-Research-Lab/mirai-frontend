@@ -5,6 +5,7 @@ import pencil from "../public/pencil.png";
 import Modal from "react-modal";
 import axios from "axios";
 import Router from "next/router";
+import swal from "sweetalert2";
 
 const customStyles = {
   overlay: {
@@ -21,18 +22,32 @@ const customStyles = {
   },
 };
 function Profile({ email, username, funding_address, img }) {
-  console.log(img)
-  const [item,setItem]=useState('')
-  async function updatePP(){
-    const fd= new FormData();
-    fd.append("image",item);
-    fd.append("address",'');
-    await axios.post("https://mirai-backend-kappa.vercel.app/api/player/updateuser",
-    fd,
+  const [item, setItem] = useState("");
+  async function updatePP() {
+    const formdata = new FormData();
+    console.log(item);
+    formdata.append("image", item);
+    formdata.append("address", "");
+    console.log(formdata.image);
+    try{const res = await axios.post(
+      "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
+      formdata,
+      {
+        withCredentials: true,
+        headers: {
+          cookies: document.cookie,
+        },
+      }
+    );
+    console.log(res);
+    Router.reload();}
+    catch(e)
     {
-      withCredentials: true,
-    });
-    Router.reload();
+      swal.fire({
+        icon: "error",
+        text: "Please input a valid file",
+      });
+    }
   }
   const { account } = useMoralis();
   const isalreadyFunding = () => {
@@ -64,7 +79,6 @@ function Profile({ email, username, funding_address, img }) {
   };
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
-    alert(img)
     setIsOpen(true);
   }
 
@@ -76,8 +90,8 @@ function Profile({ email, username, funding_address, img }) {
       <div className="container d-flex justify-content-center mt-5">
         <div className="card">
           <div className="top-container">
-            <Image
-              src={img||'https://res.cloudinary.com/dw5syikwo/image/upload/v1668621035/gl8my8lcye8cptjwqn6j.jpg'}
+            <img
+              src={img}
               className="img-fluid profile-image"
               width="300px"
               height="300px"
@@ -94,8 +108,12 @@ function Profile({ email, username, funding_address, img }) {
             />
             <Modal isOpen={modalIsOpen} style={customStyles}>
               <h2>Update your profile pic</h2>
-              <input type="file" accept="image/*,.pdf" />
-              <button onClick={updatePP} onChange={(e)=>setItem(e.target.files[0])}>Update</button>
+              <input
+                type="file"
+                accept="image/*,.pdf"
+                onChange={(e) => setItem(e.target.files[0])}
+              />
+              <button onClick={updatePP}>Update</button>
               <button onClick={closeModal}>Close</button>
             </Modal>
           </button>

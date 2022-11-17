@@ -5,7 +5,7 @@ const buildClient = ({ req }) => {
     // We are on the server
     console.log("server");
     return axios.create({
-      baseURL: "http://localhost:3001/",
+      baseURL: "https://mirai-backend-kappa.vercel.app/",
       headers: req.headers,
       withCredentials: true,
     });
