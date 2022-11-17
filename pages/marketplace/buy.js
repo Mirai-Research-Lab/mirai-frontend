@@ -12,7 +12,6 @@ import style from "../../styles/web3.module.css";
 function Index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
   const { isWeb3Enabled } = useMoralis();
-
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -28,9 +27,15 @@ function Index({ currentuser }) {
     <>
       <Navbar />
       {isWeb3Enabled ? (
-        <div>
-          <Marketplace activeNfts={addNfts} />
-        </div>
+        !loading ? (
+          <div>
+            <Marketplace activeNfts={addNfts.activeItems} />
+          </div>
+        ) : (
+          <div className={style.web3NotEnabled}>
+            Loading The NFTs Please Wait . . . . .
+          </div>
+        )
       ) : (
         <div className={style.web3NotEnabled}>
           Please Enable Connect Your Wallet

@@ -14,10 +14,10 @@ export default function Navabr() {
   const { account, isWeb3Enabled } = useMoralis();
   useEffect(() => {
     if (account) {
-      const body = { address: account };
+     const body = { address: account.toLowerCase() };
       checkWalletAddress(body);
     }
-  },[account]);
+  }, [account]);
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
@@ -26,6 +26,9 @@ export default function Navabr() {
         body,
         {
           withCredentials: true,
+          headers: {
+            cookies: document.cookie,
+          },
         }
       );
       if (check.status == 201) {
@@ -37,6 +40,9 @@ export default function Navabr() {
             body,
             {
               withCredentials: true,
+              headers: {
+                cookies: document.cookie,
+              },
             }
           );
           const setWallet = await axios.put(
@@ -44,6 +50,9 @@ export default function Navabr() {
             body,
             {
               withCredentials: true,
+              headers: {
+                cookies: document.cookie,
+              },
             }
           );
           console.log("setWallet.status is ", setWallet.status);
@@ -108,7 +117,12 @@ export default function Navabr() {
                     const res = await axios.post(
                       "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
-                      { withCredentials: true }
+                      {
+                        withCredentials: true,
+                        headers: {
+                          cookies: document.cookie,
+                        },
+                      }
                     );
                     console.log(res);
                     Router.push("/Auth");
