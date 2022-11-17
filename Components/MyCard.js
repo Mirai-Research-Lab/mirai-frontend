@@ -36,10 +36,12 @@ export default function CardDetails({ nft }) {
   const { runContractFunction: approve } = useWeb3Contract();
   const { runContractFunction: listItem } = useWeb3Contract();
 
+  // console.log(nft);
+
   const processURIs = async () => {
     const options = {
       abi: IpfsNFT,
-      contractAddress: networkMapping[formattedChainId]["IpfsNFT"][4],
+      contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
       functionName: "tokenURI",
       params: {
         tokenId: nft.tokenId,
@@ -47,19 +49,21 @@ export default function CardDetails({ nft }) {
     };
     let tokenUri = await runContractFunction({ params: options });
 
-    console.log("hello", tokenUri);
+    // console.log("hello", tokenUri);
     setNftUri(tokenUri);
     const formattedTokenUri = tokenUri.replace(
       "ipfs://",
       "https://ipfs.io/ipfs/"
     );
     const response = await axios.get(formattedTokenUri);
-    console.log(response.data);
+    // console.log(response.data);
     const formattedImageUri = response.data.image.replace(
       "ipfs://",
       "https://ipfs.io/ipfs/"
     );
     setFormattedImageAddress(formattedImageUri);
+
+    console.log("helllo", formattedImageUri);
   };
   useEffect(() => {
     if (nft) processURIs();
@@ -77,6 +81,8 @@ export default function CardDetails({ nft }) {
     Router.reload();
   }
 
+  // console.log("dfdsaf", formattedImageUri);
+
   const handlebuy = (e) => {
     approve({
       abi: IpfsNFT,
@@ -88,7 +94,7 @@ export default function CardDetails({ nft }) {
         tokenId: nft.tokenId,
       },
       onSuccess: (result) => {
-        console.log("approve result: ", result);
+        // console.log("approve result: ", result);
         listItem({
           abi: Marketplace,
           contractAddress:
@@ -101,15 +107,15 @@ export default function CardDetails({ nft }) {
             price: price,
           },
           onSuccess: (result) => {
-            console.log("listItem result: ", result);
+            // console.log("listItem result: ", result);
           },
           onError: (error) => {
-            console.log("listItem error", error);
+            // console.log("listItem error", error);
           },
         });
       },
       onError: (error) => {
-        console.log("approve error", error);
+        // console.log("approve error", error);
       },
     });
 

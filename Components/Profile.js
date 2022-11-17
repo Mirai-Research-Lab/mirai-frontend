@@ -46,10 +46,10 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   const withdraw = async () => {
     withdrawAmount({
       onSuccess: (txHash) => {
-        console.log(txHash);
+        // console.log(txHash);
       },
       onError: (error) => {
-        console.log(error);
+        // console.log(error);
       },
     });
   };
@@ -58,7 +58,7 @@ function Profile({ email, username, funding_address, img, currentuser }) {
     if (currentuser.mintCount > 0) {
       const tokenId = staticMint({
         onSuccess: async (result) => {
-          console.log(result);
+          // console.log(result);
           await axios.post(
             "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
             {
@@ -73,7 +73,7 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           );
         },
         onError: (error) => {
-          console.log(error);
+          // console.log(error);
         },
       });
     }
@@ -81,10 +81,10 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   const [item, setItem] = useState("");
   async function updatePP() {
     const formdata = new FormData();
-    console.log(item);
+    // console.log(item);
     formdata.append("image", item);
     formdata.append("address", "");
-    console.log(formdata.image);
+    // console.log(formdata.image);
     try {
       const res = await axios.post(
         "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
@@ -96,7 +96,7 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
       Router.reload();
     } catch (e) {
       swal.fire({
@@ -121,8 +121,8 @@ function Profile({ email, username, funding_address, img, currentuser }) {
                   {
                     withCredentials: true,
                     headers: {
-            cookies: document.cookie,
-          },
+                      cookies: document.cookie,
+                    },
                   }
                 );
                 Router.reload();
