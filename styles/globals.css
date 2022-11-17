@@ -87,7 +87,7 @@ body {
 }
 .homeImg {
   width: 100vw;
-  height: 103vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   /* position: absolute; */
