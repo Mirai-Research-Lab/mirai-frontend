@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "../styles/leaderboard.module.css";
 
-export default function Profiles({ Leaderboard, players }) {
-  return <div id={styles.profile}>{Item({ Leaderboard, players })}</div>;
+export default function Profiles({ players }) {
+  return <div id={styles.profile}>{Item({ players })}</div>;
 }
 
 function Item({ players }) {
@@ -15,7 +15,7 @@ function Item({ players }) {
 
             <div className={styles.info}>
               <h3 className={styles.textdark}>{player.username}</h3>
-              <span>Position : {index + 1} </span>
+              <span>Position : {index + 4} </span>
               <span>
                 Address : {player.funding_address || "0x000000000000000000dEaD"}
               </span>

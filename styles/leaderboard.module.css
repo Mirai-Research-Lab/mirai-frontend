@@ -102,7 +102,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
 #profile{
     /* display: flex; */
 
-    margin-top: 3em;
+    margin-top: -20em;
 }
 
 #profile .flex{
@@ -163,7 +163,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
     font-family: 'Poppins', sans-serif;
 }
 .topthreedetails> img{
-    width: 50%;
+    height: 150px;
+    width: 150px;
     border-radius: 100%;
 }
 .topthreedetails>h3{
@@ -174,4 +175,10 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
 }
 .info>span{
     padding-right: 50px;
+}
+.topthreesection
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
 }
