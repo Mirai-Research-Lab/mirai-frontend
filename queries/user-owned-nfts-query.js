@@ -1,13 +1,10 @@
 import { gql } from "@apollo/client";
 
-const USER_OWNED_NFTS_QUERY = gql`
+const USER_OWNED_NFTS_QUERY = (address) => gql`
   {
-    userOwnedNfts(
-      where : {owner: ``}
-    ) {
+    nftMinteds(where: { owner: address }) {
+      minter
       tokenId
-      nftAddress
-      id
     }
   }
 `;

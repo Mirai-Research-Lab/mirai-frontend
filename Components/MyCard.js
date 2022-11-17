@@ -1,5 +1,5 @@
 import { useWeb3Contract, useMoralis } from "react-moralis";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Modal from "react-modal";
 import Router from "next/router";
@@ -7,9 +7,6 @@ import Router from "next/router";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNFT from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import Marketplace from "../constants/frontEndAbiLocation/Marketplace.json";
-import nft from "../public/nft.jpg";
-
-// import styles from "../styles/auth.module.css"
 
 const customStyles = {
   overlay: {
@@ -26,11 +23,39 @@ const customStyles = {
   },
 };
 
-export default function CardDetails({ tokenId }) {
+export default function CardDetails({ tokenId, nft }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [price, setPrice] = React.useState(0);
+  const [nftUri, setNftUri] = React.useState({});
   const { web3, account } = useMoralis();
   const chainId = "5";
+  const [formattedImageAddress, setFormattedImageAddress] = React.useState("");
+
+  const { runContractFunction: getTokenUri } = useWeb3Contract({
+    abi: IpfsNFT,
+    contractAddress:
+      networkMapping[web3.currentProvider.networkVersion]["IpfsNFT"],
+    functionName: "tokenId",
+    params: {
+      tokenId: nft.tokenId,
+    },
+  });
+
+  useEffect(() => {
+    if (nft) {
+      const tokenURI = getTokenUri({
+        onSuccess: (result) => {
+          setNftUri(result);
+        },
+      });
+
+      setNftUri(tokenURI);
+
+      setFormattedImageAddress(
+        tokenURI.image.replace("ipfs://", "https://ipfs.io/ipfs")
+      );
+    }
+  }, [nft, getTokenUri]);
 
   const { runContractFunction: approve } = useWeb3Contract({
     abi: IpfsNFT,
@@ -53,10 +78,6 @@ export default function CardDetails({ tokenId }) {
     },
   });
 
-  let person = {
-    name: "Anshu Bokachoda",
-    imageId: "1bX5QH6",
-  };
   function openModal() {
     setIsOpen(true);
   }
@@ -94,36 +115,30 @@ export default function CardDetails({ tokenId }) {
 
   return (
     <>
-      <div className="marketplace-container myCard-container">
-        <div className="marketplace-heading ">
-          <h1>MY Cards</h1>
-          <span>Following are the cards you own </span>
-        </div>
-
-        {/* <div className="nft-cards my-cards-div"> */}
-        <div className="nft-card" onClick={(e) => openModal()}>
-          <Image src={nft} className="nft-image" alt="" />
-          <div className="nft-card-info">
-            <div className="nft-card-info-heading">
-              <h1>Card Name</h1>
-              <span>Card Description</span>
-              <div>
-                <button onClick={openModal}>Sell</button>
-                <Modal isOpen={modalIsOpen} style={customStyles}>
-                  <h2>List at Eth</h2>
-                  <input
-                    placeholder="Eth Amount"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  ></input>
-                  <button onClick={(e) => handlebuy()}>List</button>
-                  <button onClick={closeModal}>Close</button>
-                </Modal>
-              </div>
+      {/* <div className="nft-cards my-cards-div"> */}
+      <div className="nft-card" onClick={(e) => openModal()}>
+        <Image src={formattedImageAddress} className="nft-image" alt="" />
+        <div className="nft-card-info">
+          <div className="nft-card-info-heading">
+            <h1>nftUri.name</h1>
+            <span>nftUri.description</span>
+            <div>
+              <button onClick={openModal}>Sell</button>
+              <Modal isOpen={modalIsOpen} style={customStyles}>
+                <h2>List at Eth</h2>
+                <input
+                  placeholder="Eth Amount"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                ></input>
+                <button onClick={(e) => handlebuy()}>List</button>
+                <button onClick={closeModal}>Close</button>
+              </Modal>
             </div>
           </div>
         </div>
       </div>
+
       {/* </div> */}
     </>
   );

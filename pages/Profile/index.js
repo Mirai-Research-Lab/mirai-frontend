@@ -1,19 +1,29 @@
 import Profile from "../../Components/Profile";
-import MyCards from "../../Components/MyCard.js";
+import MyCard from "../../Components/MyCard.js";
 import Navbar from "../../Components/nav.js";
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react";
+import USER_OWNED_NFTS_QUERY from "../../queries/user-owned-nfts-query";
+import { useQuery } from "@apollo/client";
 import style from "../../styles/web3.module.css";
 import swal from "sweetalert2";
 import Router from "next/router";
 import Moralis from "moralis";
 
 function Index({ currentuser }) {
+  const {
+    loading,
+    error,
+    data: userOwnedNfts,
+  } = useQuery(USER_OWNED_NFTS_QUERY(`${currentuser.funding_address}`));
+
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [funding_address, setfunding_address] = useState("");
   const [image, setImage] = useState("");
+
+  console.log(userOwnedNfts);
 
   useEffect(() => {
     if (!currentuser) {
@@ -42,7 +52,25 @@ function Index({ currentuser }) {
         />
         {isWeb3Enabled ? (
           <>
-            <MyCards />
+            {userOwnedNfts ? (
+              <div className="marketplace-container myCard-container">
+                <div className="marketplace-heading ">
+                  <h1>MY Cards</h1>
+                  <span>Following are the cards you own </span>
+                </div>
+
+                {userOwnedNfts.userOwnedNfts.map((nft) => {
+                  // nft has 3 properties: tokenId, nftAddress, id
+                  return (
+                    <>
+                      <MyCard nft={nft} />
+                    </>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>Loading...</div>
+            )}
           </>
         ) : (
           <div className={style.web3NotEnabled}>
