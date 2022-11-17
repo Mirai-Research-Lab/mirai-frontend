@@ -1,8 +1,19 @@
 .auth{
-    background-image: url("../assets/bg4.jpg");
+    /* background-image: url("../assets/bg4.jpg"); */
+    position: fixed;
+    background:  #252525;
     width: 100%;
     height:749px;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+.about{
+    margin:20px;
+}
+.logoimg{
+    border-radius: 50%;
 }
 .authbox{
     position: absolute;

@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
+import Image from "next/image";
+import logo from '../public/logo.jpg'
 function Auth() {
   const daysToExpire = 7;
   useEffect(() => {
@@ -175,6 +177,9 @@ function Auth() {
   };
   return (
     <div className={styles.auth}>
+      <div className={styles.about}>
+        <Image className={styles.logoimg} src={logo} height="80" width="80"/>
+      </div>
       <div className={styles.authbox}>
         <div className={styles.heading}>
           <div className={styles.formboxdiv}>

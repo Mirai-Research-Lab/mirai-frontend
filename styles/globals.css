@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: gaming-font;
-  src: url("./fonts/space-mission-font/SpaceMission-rgyw9.otf");
+  src: url("./fonts/pdark.ttf");
 }
 @font-face {
   font-family: modern;
@@ -41,7 +41,7 @@
   font-size: 3rem;
 }
 .navbar-brand > span {
-  color: #c16a00;
+  color: #00a1c1;
 }
 .link {
   margin-right: 40px;
@@ -55,7 +55,7 @@
 }
 .link:hover{
   color:white;
-  background: linear-gradient(45deg, transparent 5%, #c16a00 5%);
+  background: linear-gradient(45deg, transparent 5%, #0097c1 5%);
 }
 .me-auto{
   display: flex;
@@ -72,10 +72,11 @@
 .me-auto>a:hover{
   color:white;
   /* padding:10px 20px 10px 20px; */
-  background: linear-gradient(45deg, transparent 5%, #c16a00 5%);
+  background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
 }
 .img_container{
   /* position:fixed; */
+  /* overflow-y: hidden; */
   padding-top: 80px;
   width: 100%;
 }
@@ -101,14 +102,14 @@
   color: #ffffff;
   font-family: gaming-font;
   font-weight: 900;
-  font-style: italic;
-  font-size: 5rem;
+  /* font-style: italic; */
+  font-size: 4rem;
 }
 .home-desc-main > span {
   font-family: gaming-font;
   letter-spacing: 5px;
   font-weight: 900;
-  color: rgb(193, 106, 0);
+  color: rgb(0, 193, 193);
 }
 .play-btn {
   margin-top: 50px;
@@ -128,14 +129,14 @@ a span:nth-child(1) {
 }
 a span:nth-child(2) {
   color: #fff;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 177, 193);
 }
 a span:nth-child(1):before {
   content: attr(data-attr);
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 180, 193);
   padding: 15px;
   transition: 0.5s;
   transform-origin: top;
@@ -177,7 +178,7 @@ a span:nth-child(2):after {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 164, 193);
   padding: 15px;
   transition: 0.5s;
   transform-origin: top;
