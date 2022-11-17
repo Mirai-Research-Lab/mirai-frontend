@@ -8,13 +8,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Web3 from "web3";
-export default function navabr() {
-  const swal=Swal;
-  const { account } = useMoralis();
+import Router from "next/router";
+export default function Navabr() {
+  const swal = Swal;
+  const { account, isWeb3Enabled } = useMoralis();
   useEffect(() => {
     if (account) {
-      const body = { address: account };
+     const body = { address: account.toLowerCase() };
       checkWalletAddress(body);
     }
   }, [account]);
@@ -22,40 +22,55 @@ export default function navabr() {
     console.log("checking wallet address");
     try {
       const check = await axios.post(
-        "http://localhost:3001/api/wallet/checkWalletAddress",
+        "https://mirai-backend-kappa.vercel.app/api/wallet/checkWalletAddress",
         body,
         {
           withCredentials: true,
+          headers: {
+            cookies: document.cookie,
+          },
         }
       );
       if (check.status == 201) {
-        console.log("adding new wallet to email address");
+        if (check.data.includes("exists")) {
+          return;
+        } else {
           const setEmail = await axios.put(
-            "http://localhost:3001/api/player/updateAddress",
+            "https://mirai-backend-kappa.vercel.app/api/player/updateAddress",
             body,
             {
               withCredentials: true,
+              headers: {
+                cookies: document.cookie,
+              },
             }
           );
-        const setWallet = await axios.put(
-          "http://localhost:3001/api/player/addWalletAddress",
-          body,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log("setWallet.status is ", setWallet.status);
+          const setWallet = await axios.put(
+            "https://mirai-backend-kappa.vercel.app/api/player/addWalletAddress",
+            body,
+            {
+              withCredentials: true,
+              headers: {
+                cookies: document.cookie,
+              },
+            }
+          );
+          console.log("setWallet.status is ", setWallet.status);
+        }
       }
       console.log(check.status);
     } catch (e) {
-      swal.fire({
-        icon: "error",
-        title: "Wallet Already Connected",
-        text: "please connect to a new wallet which is not already in use",
-      });
-      console.log(e);
-      window.web3 = await new window.Moralis.Web3.enable({ provider: "walletconnect" });
-      await window.web3.eth.currentProvider.disconnect();
+      //('ma chud gayi')
+      swal
+        .fire({
+          icon: "error",
+          title: "Wallet Already Connected",
+          text: "please connect to a new wallet which is not already in use",
+        })
+        .then(() => {
+          localStorage.clear();
+          Router.reload();
+        });
     }
   };
   return (
@@ -76,21 +91,46 @@ export default function navabr() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/home" className="link">
+              <Link href="/home" className="link">
                 Home
-              </Nav.Link>
+              </Link>
               <Link href="/marketplace/buy">MarketPlace</Link>
-              <Link href="/leaderboard" className="link">
+
+              <Link href="/Leaderboard" className="link">
                 Leaderboard
               </Link>
               <NavDropdown title="profile" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="/profile">
+                <NavDropdown.Item
+                  onClick={() => {
+                    Router.push("/Profile");
+                  }}
+                >
                   Go to profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">LogOut</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={async () => {
+                    console.log("cccc");
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    document.cookie = "jwt=undefined";
+                    const res = await axios.post(
+                      "https://mirai-backend-kappa.vercel.app/api/auth/signout",
+                      {},
+                      {
+                        withCredentials: true,
+                        headers: {
+                          cookies: document.cookie,
+                        },
+                      }
+                    );
+                    console.log(res);
+                    Router.push("/Auth");
+                  }}
+                >
+                  LogOut
+                </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/leaderboard" className="link"></Nav.Link>
             </Nav>
             <ConnectButton />
           </Navbar.Collapse>

@@ -1,106 +1,143 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,600&family=Rajdhani:wght@300;400;500;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
 @import "bootstrap/dist/css/bootstrap.css";
 
 @font-face {
   font-family: gaming-font;
-  src: url('./fonts/space-mission-font/SpaceMission-rgyw9.otf');
+  src: url("/fonts/pdark.ttf") format("truetype");
 }
 @font-face {
-  font-family:modern;
-  src: url('./fonts/sportypo-font/SportypoReguler-OVGwe.ttf');
+  font-family: modern;
+  src: url("/fonts/sportypo-font/SportypoReguler-OVGwe.ttf") format("truetype");
 }
 @font-face {
   font-family: jetbrains;
-  src: url('../styles/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf');
+  src: url("/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf")
+    format("truetype");
 }
 
-
+html {
+  background-color: #252525;
+}
 * {
   font-family: gaming-font;
 }
-::-webkit-scrollbar{
+body {
+  overflow-x: hidden;
+  background-color: #252525;
+}
+::-webkit-scrollbar {
   width: 8px;
 }
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   /* background: #2c9ec1; */
   background: #252525;
 }
-::-webkit-scrollbar-thumb{
-  background-image: linear-gradient(#2c9ec1,#88e3ff);
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(#2c9ec1, #88e3ff);
   border-radius: 8px;
 }
 .navbar {
-  height:5rem;
-  background:none ;
+  height: 5rem;
+  background: none;
   position: fixed;
-  width:100%;
+  width: 100%;
   z-index: 100;
 }
-.navbar-brand{
+.navbar-brand {
   font-size: 3rem;
 }
-.navbar-brand>span{
-  color: #c16a00;
+.navbar-brand > span {
+  color: #00a1c1;
 }
-.link{
-  margin-right:40px;
+.link {
+  margin-right: 40px;
   font-size: 1.2rem;
 }
-.link:hover{
-  color:white;
-  background: linear-gradient(45deg, transparent 5%, #c16a00 5%);
+
+.nav-link {
+  /* margin-top:20px; */
+  padding-right: 20px;
+  text-decoration: none;
 }
-/* .me-auto{
-  padding-right: 30px;
-} */
+.link:hover {
+  color: white;
+  background: linear-gradient(45deg, transparent 5%, #0097c1 5%);
+}
+.me-auto {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.me-auto > a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: rgb(155, 155, 155);
+  margin: 20px;
+}
+.me-auto > a:hover {
+  color: white;
+  /* padding:10px 20px 10px 20px; */
+  background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
+}
 .img_container{
-  /* position:fixed; */
+  position:fixed;
+  /* overflow-y: hidden; */
   padding-top: 80px;
-  width:100%;
+  width: 100%;
 }
 .homeImg {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   /* position: absolute; */
 }
-.home_desc{
+.home_desc {
   width: 100%;
   height: 100vh;
   position: absolute;
-  width:50%;
-  height:auto;
-  transform: translateX(100%);
+  width: 50%;
+  height: auto;
+  transform: translateX(850px);
   top: 100px;
   margin-top: 60px;
 }
-.home-desc-main{
-  top:100px;
-  color:#ffffff;
+.home-desc-main {
+  top: 100px;
+  color: #ffffff;
   font-family: gaming-font;
   font-weight: 900;
-  font-style: italic;
-  font-size: 5rem;
+  /* font-style: italic; */
+  font-size: 3rem;
 }
-.home-desc-main>span{
+.home-desc-main > span {
   font-family: gaming-font;
   letter-spacing: 5px;
   font-weight: 900;
-  color:rgb(193, 106, 0);
+  color: rgb(0, 193, 193);
 }
-.play-btn{
+.play-btn {
   margin-top: 50px;
   letter-spacing: 5px;
 }
-.play-btn>a{
+.play-btn > a {
   padding: 20px;
+}
+.buy{
+  position: absolute;
+  bottom: 80px;
+  right:30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border:none;
+  border-radius: 20px;
+  padding:10px;
 }
 a span {
   padding: 15px;
-  transition: .5s;
+  transition: 0.5s;
   position: relative;
 }
 a span:nth-child(1) {
@@ -109,22 +146,22 @@ a span:nth-child(1) {
 }
 a span:nth-child(2) {
   color: #fff;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 177, 193);
 }
 a span:nth-child(1):before {
   content: attr(data-attr);
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 180, 193);
   padding: 15px;
-  transition: 0.5S;
+  transition: 0.5s;
   transform-origin: top;
   transform: rotateX(90deg) translateY(-50%);
 }
 a:hover span:nth-child(1):before {
   transform: rotateX(0deg) translateY(0%);
-} 
+}
 a span:nth-child(2):before {
   content: attr(data-attr);
   position: absolute;
@@ -132,268 +169,295 @@ a span:nth-child(2):before {
   left: 0;
   background: #212529;
   padding: 15px;
-  transition: 0.5S;
+  transition: 0.5s;
   transform-origin: bottom;
   transform: rotateX(90deg) translateY(50%);
 }
 a:hover span:nth-child(2):before {
   transform: rotateX(0deg) translateY(0%);
-} 
-a  span:nth-child(1):after {
-content: attr(data-attr);
-padding: 15px;
-position: absolute;
-top: 0;
-left: 0;
-background: #212529;
-transform-origin: bottom;
-transform: rotateX(0deg) translateY(0%);
-transition: 0.5s;
+}
+a span:nth-child(1):after {
+  content: attr(data-attr);
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #212529;
+  transform-origin: bottom;
+  transform: rotateX(0deg) translateY(0%);
+  transition: 0.5s;
 }
 a:hover span:nth-child(1):after {
-transform: rotateX(90deg) translateY(50%);
+  transform: rotateX(90deg) translateY(50%);
 }
 a span:nth-child(2):after {
   content: attr(data-attr);
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(193, 106, 0);
+  background: rgb(0, 164, 193);
   padding: 15px;
-  transition: 0.5S;
+  transition: 0.5s;
   transform-origin: top;
   transform: rotateX(0deg) translateY(0%);
 }
 a:hover span:nth-child(2):after {
   transform: rotateX(90deg) translateY(-50%);
-} 
-
+}
 
 /*MARKETPLACE*/
-.marketplace-container{
+.marketplace-container {
   background: #252525;
-  height:auto;
-  top:0;
-  padding-top:117px;
+  height: auto;
+  top: 0;
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.myCard-container
-{
+.myCard-container {
   margin-left: 30%;
 }
-.marketplace-heading{
-  color:white;
-  width:100%;
+.marketplace-heading {
+  color: white;
+  width: 100%;
   text-align: center;
   margin-bottom: 20px;
-  text-shadow: 0 0 15px #fff, 0 0 10px #079bc9, 0 0 30px #008594, 0 0 30px #00fffb, 0 0 40px #07e7f3, 0 0 50px #37b2ef, 0 0 60px #0081c1;
+  text-shadow: 0 0 15px #fff, 0 0 10px #079bc9, 0 0 30px #008594,
+    0 0 30px #00fffb, 0 0 40px #07e7f3, 0 0 50px #37b2ef, 0 0 60px #0081c1;
 }
-.marketplace-heading>span{
+.marketplace-heading > span {
   text-shadow: none;
-  font-family:Poppins;
+  font-family: Poppins;
   font-weight: 400;
   font-size: 20px;
 }
-.nft-cards{
+.nft-cards {
   display: flex;
   flex-direction: row;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
-  margin:10px;
+  margin: 10px;
   flex-wrap: wrap;
-  color:white;
+  color: white;
   /* width:80vw; */
 }
-.my-cards-div{
+.my-cards-div {
   padding-left: 100px;
+  /* text-align: center; */
+  text-align: center;
 }
-.nft-card{
-  margin:10px;
+.nft-card {
+  margin: 10px;
   border-radius: 20px;
-  width:fit-content;
-  width:20rem;
+  width: fit-content;
+  width: 20rem;
   /* margin:20px; */
-  box-shadow: rgba(221, 221, 221, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
+  box-shadow: rgba(221, 221, 221, 0.16) 0px 10px 36px 0px,
+    rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
   margin-top: 50px;
 }
-.nft-image{
+.nft-image {
   border-radius: 20px;
-  width:20rem;
+  width: 20rem;
+  padding: 20px;
   height: 300px;
-  object-fit:cover;
+  object-fit: cover;
   overflow: hidden;
   text-align: center;
 }
-nft-card-info{
+nft-card-info {
   display: flex;
   flex-direction: column;
 }
-.nft-card-info-heading{
-  margin:20px
+.nft-card-info-heading {
+  margin: 20px;
+  color: white;
 }
-.nft-card-info-heading>span , .nft-card-info-heading>h1,nft-card-info>button{
-  font-family:Poppins;
+.nft-card-info-heading > span,
+.nft-card-info-heading > h1,
+nft-card-info > button {
+  font-family: Poppins;
   font-weight: 400;
   font-size: 20px;
 }
 
 /*card-details*/
-.card-details{
+.card-details {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  color:white;
-  padding:150px 40px 40px 40px;
+  color: white;
+  padding: 150px 40px 40px 40px;
   background-color: #252525;
-  height:100vh;
+  height: 100vh;
 }
-.card-details>div{
+.card-details > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.nft-details-image{ 
+.nft-details-image {
   border-radius: 25px;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
 }
-.card-details__info__name>h1{
-  font-family:Poppins;
+.card-details__info__name > h1 {
+  font-family: Poppins;
   font-weight: 400;
 }
-.card-details__info__description>p{
-  font-family:Poppins;
+.card-details__info__description > p {
+  font-family: Poppins;
   font-weight: 400;
-  width:800px
+  width: 800px;
 }
 
 /*Profile*/
-.profile{
+.profile {
   background-color: #252525;
-  height:100%;
-  color:white;
-  position: fixed;
-  width:30%;  
-  margin-top: 80px;
+  height: 100%;
+  color: white;
+  width: 30%;
+  /* margin-top: 300px; */
 }
-.profile-name{
-  font-family:Poppins;
+.profile-name {
+  font-family: Poppins;
   font-weight: 400;
-  width:800px;
+  width: 200px;
+  text-align: center;
 }
-.profile-name>h5{
-  color:white;
+.profile-name > h5 {
+  color: white;
 }
-.card{
-	background-color: #252525;
-	width: 280px;
-	border-radius: 33px;
-	box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
-	padding: 2rem !important;
+.card {
+  background-color: #252525 !important;
+  width: 280px;
+  border-radius: 33px;
+  box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
+  padding: 2rem !important;
+  margin-top: -5vh;
 }
-.top-container{
-	display: flex;
-	align-items: center;
+.top-container {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
 }
-.profile-image{
-	border-radius: 10px;
-	border: 2px solid #5957f9;
-  /* padding-left: 10px; */
+.profile-image {
+  border-radius: 10px;
+  border: 2px solid #5957f9;
+  position: absolute;
+  transform: translate(-32px,-120px);
+  width: 280px;
 }
-.name{
-	font-size: 15px;
-	font-weight: bold;
+.pencilIcon {
+  /* position: absolute; */
+  background-color: white;
+  border-radius: 50%;
+  object-fit: fill;
+}
+.pencil-img {
+  transform: translate(0px, -20px);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: none;
+  border: none;
+}
+.name {
+  font-size: 15px;
+  font-weight: bold;
   font-family: Poppins;
-	color: #272727;
-	position: relative;
-	top: 8px;
+  color: #272727;
+  position: relative;
+  top: 8px;
   margin-left: 7px;
 }
-.mail{
-	font-size: 14px;
-	color: grey;
+.profile-flex {
+  display: flex;
+  background-color: #252525;
+  flex-direction: row;
+}
+.mail {
+  font-size: 14px;
+  color: grey;
   font-family: Poppins;
-	position: relative;
-	top: 2px;
+  position: relative;
+  top: 2px;
   margin-left: 7px;
 }
-.middle-container{
-	background-color: #eee;
-	border-radius: 12px;
-
+.middle-container {
+  background-color: #eee;
+  border-radius: 12px;
 }
 .middle-container:hover {
-	border: 1px solid #5957f9;
+  border: 1px solid #5957f9;
 }
-.dollar-div{
-	background-color: #5957f9;
-	padding: 12px;
-	border-radius: 10px;
+.dollar-div {
+  background-color: #5957f9;
+  padding: 12px;
+  border-radius: 10px;
 }
-.round-div{
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	background-color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+.round-div {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-.dollar{
-	font-size: 16px !important;
-	color: #5957f9 !important;
-	font-weight: bold !important;
+.dollar {
+  font-size: 16px !important;
+  color: #5957f9 !important;
+  font-weight: bold !important;
 }
 
-
-.current-balance{
-	font-size: 15px;
-	color: #272727;
+.current-balance {
+  font-size: 15px;
+  color: #272727;
   font-family: Poppins;
-	font-weight: bold;
+  font-weight: bold;
 }
-.amount{
-	color: #5957f9;
-	font-size: 16px;
-	font-weight: bold;
+.amount {
+  color: #5957f9;
+  font-size: 16px;
+  font-weight: bold;
   font-family: Poppins;
 }
-.dollar-sign{
-	font-size: 16px;
+.dollar-sign {
+  font-size: 16px;
   font-family: Poppins;
-	color: #272727;
-	font-weight: bold;
+  color: #272727;
+  font-weight: bold;
 }
 
-.recent-border{
-	border-left: 2px solid #5957f9;
-	display: flex;
-	align-items: center;
-
+.recent-border {
+  border-left: 2px solid #5957f9;
+  display: flex;
+  align-items: center;
 }
 .recent-border:hover {
-	border-bottom: 1px solid #dee2e6!important;
+  border-bottom: 1px solid #dee2e6 !important;
 }
 
-.recent-orders{
-	font-size: 16px;
-	font-weight: 700;
-	color: #5957f9;
-	margin-left: 2px;
+.recent-orders {
+  font-size: 16px;
+  font-weight: 700;
+  color: #5957f9;
+  margin-left: 2px;
   font-family: Poppins;
 }
 
-.wishlist{
+.wishlist {
   font-family: Poppins;
 }
-.fashion-studio{
+.fashion-studio {
   font-family: Poppins;
+  background-color: #252525;
 }
 
 /* button, button::after {
@@ -409,42 +473,42 @@ nft-card-info{
   outline: transparent;
   position: relative;
 } */
-.mint-nfts{
+.mint-nfts {
   background-color: #5957f9;
   border-radius: 10px;
   padding: 10px;
-  color:white;
+  color: white;
   font-family: Poppins;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 15px;
   width: 200px;
-  height: 50px;
+  height: 65px;
   border: none;
   outline: none;
   cursor: pointer;
 }
-.Sellsection{
-    position: absolute;
-    background-color: #252525;
-    margin-top: 120px;
-    left: 50px;
-    width: 100px;
-    border-radius: 30px;
-    color:black;
-    justify-content: center;
-    text-align: center;
-    border:none;
-    box-shadow: rgba(221, 221, 221, 0.16) 0px 10px 36px 0px, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
-    color: white;
-    height: 30px;
+.Sellsection {
+  position: absolute;
+  background-color: #252525;
+  margin-top: 120px;
+  left: 50px;
+  width: 100px;
+  border-radius: 30px;
+  color: black;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  box-shadow: rgba(221, 221, 221, 0.16) 0px 10px 36px 0px,
+    rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
+  color: white;
+  height: 30px;
 }
-.Sellsection:hover{
+.Sellsection:hover {
   box-shadow: 0 0 20px 5px #4c84fe;
   background-color: #00fffb;
   color: black;
-
 }
-.mint-nfts:hover{
+.mint-nfts:hover {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }

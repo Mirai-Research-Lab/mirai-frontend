@@ -4,15 +4,38 @@ import { NotificationProvider } from "@web3uikit/core";
 import { SSRProvider } from "react-bootstrap";
 import axios from "axios";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import buildClient from "../api/buildClient";
+import Head from "next/head";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "https://api.studio.thegraph.com/query/36895/nft-marketplace/v0.0.1",
+  uri: "https://api.studio.thegraph.com/query/36895/nft-marketplace/v0.0.3",
 });
 
 function MyApp({ Component, pageProps, currentuser }) {
+  console.log(currentuser);
   return (
     <>
+      <Head>
+        <link
+          rel="preload"
+          href="/fonts/pdark.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/sportypo-font/SportypoReguler-OVGwe.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+      </Head>
       <SSRProvider>
         <MoralisProvider initializeOnMount={false}>
           <ApolloProvider client={client}>
@@ -28,20 +51,37 @@ function MyApp({ Component, pageProps, currentuser }) {
     </>
   );
 }
-
 MyApp.getInitialProps = async (appContext) => {
-  const { data } = await axios("http://localhost:3001/api/auth/currentuser", {
-    headers: appContext.ctx.req?.headers || null,
-    method: "GET",
-    withCredentials: true,
-  });
+  let data = {};
+  if (typeof window === "undefined" && appContext.ctx.req != null) {
+    const { data: responseData } = await axios.get(
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser",
+      {
+        headers: {
+          cookies: appContext.ctx.req.headers.cookie,
+        },
+      }
+    );
+    data = responseData;
+  } else {
+    const { data: responseData } = await axios.get(
+      "https://mirai-backend-kappa.vercel.app/api/auth/currentuser", //https://mirai-backend-kappa.vercel.app
+      {
+        headers: {
+          cookies: document.cookie,
+        },
+      }
+    );
+    data = responseData;
+  }
+  console.log(data);
   let pageProps = {};
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(
       appContext.ctx,
       data.currentuser
     );
-  } 
+  }
 
   return {
     pageProps,

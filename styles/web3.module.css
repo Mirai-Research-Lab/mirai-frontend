@@ -1,0 +1,7 @@
+.web3NotEnabled {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  font-size: 2rem;
+  color: white;
+}

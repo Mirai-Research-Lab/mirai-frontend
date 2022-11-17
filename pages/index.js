@@ -3,12 +3,10 @@ import { useMoralis } from "react-moralis";
 import Router from "next/router";
 // import "../styles/leaderboard.css";
 
-export default function Home({ currentuser }) {
+export default function Home() {
   useEffect(() => {
-    if (!currentuser) {
-      Router.push("/auth");
-    } else Router.push("/home");
-  }, [currentuser]);
+    Router.push("/Auth");
+  }, []);
 
   return <></>;
 }
