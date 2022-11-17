@@ -11,13 +11,13 @@ import Swal from "sweetalert2";
 import Router from "next/router";
 export default function Navabr() {
   const swal = Swal;
-  const { account } = useMoralis();
+  const { account, isWeb3Enabled } = useMoralis();
   useEffect(() => {
     if (account) {
       const body = { address: account };
       checkWalletAddress(body);
     }
-  });
+  },[account,isWeb3Enabled]);
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
