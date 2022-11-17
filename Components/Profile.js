@@ -1,5 +1,4 @@
 import Image from "next/image";
-import nft from "../public/nft.jpg";
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import pencil from "../public/pencil.png";
@@ -21,23 +20,25 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-function Profile({ email, username, funding_address }) {
+function Profile({ email, username, funding_address, img }) {
   const { account } = useMoralis();
   const isalreadyFunding = () => {
     if (account && funding_address != account)
       return (
-        <div class="fashion-studio-border pt-2">
-          <span class="fashion-studio">
+        <div className="fashion-studio-border pt-2">
+          <span className="fashion-studio">
             <button
               className="mint-nfts"
               onClick={async () => {
-                const formdata= new FormData();
-                formdata.append("address",account)
-                await axios.post("http://localhost:3001/api/player/updateuser",
-                formdata,
-                {
-                  withCredentials: true
-                });
+                const formdata = new FormData();
+                formdata.append("address", account);
+                await axios.post(
+                  "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
+                  formdata,
+                  {
+                    withCredentials: true,
+                  }
+                );
                 Router.reload();
               }}
             >
@@ -58,14 +59,18 @@ function Profile({ email, username, funding_address }) {
   }
   return (
     <div className="profile">
-      <div class="container d-flex justify-content-center mt-5">
-        <div class="card">
-          <div class="top-container">
+      <div className="container d-flex justify-content-center mt-5">
+        <div className="card">
+          <div className="top-container">
             <Image
-              src={nft}
-              class="img-fluid profile-image"
+              src={
+                img ||
+                "https://res.cloudinary.com/dw5syikwo/image/upload/v1668621035/gl8my8lcye8cptjwqn6j.jpg"
+              }
+              className="img-fluid profile-image"
               width="300px"
               height="300px"
+              alt="profile"
             />
           </div>
           <button className="pencil-img" onClick={openModal}>
@@ -74,6 +79,7 @@ function Profile({ email, username, funding_address }) {
               className="pencilIcon"
               width="30px"
               height="30px"
+              alt="edit"
             />
             <Modal isOpen={modalIsOpen} style={customStyles}>
               <h2>Update your profile pic</h2>
@@ -82,20 +88,20 @@ function Profile({ email, username, funding_address }) {
               <button onClick={closeModal}>Close</button>
             </Modal>
           </button>
-          <div class="ml-3 profile-name">
-            <h5 class="name">{username}</h5>
-            <p class="mail">{email}</p>
+          <div className="ml-3 profile-name">
+            <h5 className="name">{username}</h5>
+            <p className="mail">{email}</p>
           </div>
-          <div class="wishlist-border pt-2">
-            <span class="wishlist"></span>
+          <div className="wishlist-border pt-2">
+            <span className="wishlist"></span>
           </div>
-          <div class="fashion-studio-border pt-2">
-            <span class="fashion-studio">
+          <div className="fashion-studio-border pt-2">
+            <span className="fashion-studio">
               <button className="mint-nfts">Mint A NFT ( remaining)</button>
             </span>
           </div>
-          <div class="fashion-studio-border pt-2">
-            <span class="fashion-studio">
+          <div className="fashion-studio-border pt-2">
+            <span className="fashion-studio">
               <button className="mint-nfts">Withdraw Balance</button>
             </span>
           </div>
