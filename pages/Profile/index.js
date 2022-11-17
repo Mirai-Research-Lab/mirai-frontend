@@ -15,15 +15,13 @@ function Index({ currentuser }) {
     loading,
     error,
     data: userOwnedNfts,
-  } = useQuery(USER_OWNED_NFTS_QUERY(`${currentuser.funding_address}`));
+  } = useQuery(USER_OWNED_NFTS_QUERY);
 
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [funding_address, setfunding_address] = useState("");
   const [image, setImage] = useState("");
-
-  console.log(userOwnedNfts);
 
   useEffect(() => {
     if (!currentuser) {
@@ -59,7 +57,7 @@ function Index({ currentuser }) {
                   <span>Following are the cards you own </span>
                 </div>
 
-                {userOwnedNfts.userOwnedNfts.map((nft) => {
+                {userOwnedNfts.nftMinteds.map((nft) => {
                   // nft has 3 properties: tokenId, nftAddress, id
                   return (
                     <>
