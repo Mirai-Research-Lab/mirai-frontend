@@ -82,8 +82,8 @@ body {
   /* padding:10px 20px 10px 20px; */
   background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
 }
-.img_container{
-  position:fixed;
+.img_container {
+  position: fixed;
   /* overflow-y: hidden; */
   width: 100%;
 }
@@ -100,7 +100,7 @@ body {
   position: absolute;
   width: 50%;
   height: auto;
-  transform: translateX(850px);
+  transform: translateX(880px);
   top: 100px;
   margin-top: 60px;
 }
@@ -125,14 +125,15 @@ body {
 .play-btn > a {
   padding: 20px;
 }
-.buy{
+.buy {
   position: absolute;
   bottom: 80px;
-  right:30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-  border:none;
+  right: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border: none;
   border-radius: 20px;
-  padding:10px;
+  padding: 10px;
 }
 a span {
   padding: 15px;
@@ -336,7 +337,7 @@ nft-card-info > button {
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
   padding: 2rem !important;
-  margin-top: -5vh;
+  margin-top: 100px;
 }
 .top-container {
   display: flex;
@@ -346,8 +347,6 @@ nft-card-info > button {
 .profile-image {
   border-radius: 10px;
   border: 2px solid #5957f9;
-  position: absolute;
-  transform: translate(-32px,-120px);
   width: 280px;
 }
 .pencilIcon {
