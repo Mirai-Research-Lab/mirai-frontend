@@ -3,9 +3,16 @@ function abc(index, player) {
   return (
     <div className={styles.topthreedetails}>
       <img src={player.image} alt="profile" />
-      <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
-      <h5>position {index + 1}</h5>
-      <span>Highest score : {player.high_score || 999}</span>
+      <h3
+        className={styles.textdark}
+        style={{ fontFamily: "jetbrains", marginTop: "20px" }}
+      >
+        {player.username || "PlayerNotSet"}
+      </h3>
+      <h5 style={{ fontFamily: "jetbrains" }}>position {index + 1}</h5>
+      <span style={{ fontFamily: "jetbrains" }}>
+        Highest score : {player.high_score || 999}
+      </span>
     </div>
   );
 }

@@ -27,7 +27,6 @@ const customStyles = {
 export default function CardDetails({ nft }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [price, setPrice] = React.useState(0);
-  const [nftUri, setNftUri] = React.useState({});
   const { web3, account, chainId } = useMoralis();
   const formattedChainId = parseInt(Number(chainId.toString()));
   const [formattedImageAddress, setFormattedImageAddress] = React.useState("");
@@ -35,7 +34,7 @@ export default function CardDetails({ nft }) {
   const { runContractFunction } = useWeb3Contract();
   const { runContractFunction: approve } = useWeb3Contract();
   const { runContractFunction: listItem } = useWeb3Contract();
-
+  const nftAddress = networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0];
   // console.log(nft);
 
   const processURIs = async () => {
@@ -49,8 +48,6 @@ export default function CardDetails({ nft }) {
     };
     let tokenUri = await runContractFunction({ params: options });
 
-    // console.log("hello", tokenUri);
-    setNftUri(tokenUri);
     const formattedTokenUri = tokenUri.replace(
       "ipfs://",
       "https://ipfs.io/ipfs/"
@@ -66,7 +63,9 @@ export default function CardDetails({ nft }) {
     console.log("helllo", formattedImageUri);
   };
   useEffect(() => {
-    if (nft) processURIs();
+    if (nft && nft.minter == account) {
+      processURIs();
+    }
   }, [nft]);
 
   function openModal() {
@@ -74,7 +73,7 @@ export default function CardDetails({ nft }) {
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(!modalIsOpen);
   }
   function closeModaleth() {
     setIsOpen(false);
@@ -121,41 +120,61 @@ export default function CardDetails({ nft }) {
 
     closeModaleth();
   };
-
+  const formatAddress = (address) => {
+    return address.substring(0, 4) + "..." + address.substring(38);
+  };
   return (
     <>
+      <Modal isOpen={modalIsOpen} style={customStyles}>
+        <h2>List at Eth</h2>
+        <input
+          placeholder="Eth Amount"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        ></input>
+        <button onClick={(e) => handlebuy()}>List</button>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
       {/* <div className="nft-cards my-cards-div"> */}
-      {formattedImageAddress != "" ? (
-        <div className="nft-card" onClick={(e) => openModal()}>
-          <Image
-            src={formattedImageAddress}
-            className="nft-image"
-            alt=""
-            width={350}
-            height={350}
-          />
-          <div className="nft-card-info">
-            <div className="nft-card-info-heading">
-              <h1>nftUri.name</h1>
-              <span>nftUri.description</span>
-              <div>
-                <button onClick={openModal}>Sell</button>
-                <Modal isOpen={modalIsOpen} style={customStyles}>
-                  <h2>List at Eth</h2>
-                  <input
-                    placeholder="Eth Amount"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  ></input>
-                  <button onClick={(e) => handlebuy()}>List</button>
-                  <button onClick={closeModal}>Close</button>
-                </Modal>
+      {nft.minter == account ? (
+        formattedImageAddress != "" ? (
+          <div className="nft-card">
+            <Image
+              src={formattedImageAddress}
+              className="nft-image"
+              alt=""
+              width={350}
+              height={350}
+            />
+            <div className="nft-card-info">
+              <div className="nft-card-info-heading">
+                <div style={{ fontFamily: "jetbrains" }}>
+                  Token Id: {nft.tokenId}
+                </div>
+                <div style={{ fontFamily: "jetbrains" }}>
+                  NFT Address: {formatAddress(nftAddress)}
+                </div>
+                <div>
+                  <button className="buyNftButton" onClick={openModal}>
+                    Sell
+                  </button>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(nftAddress);
+                    }}
+                    className="clipartButton"
+                  >
+                    Copy NFT Address
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <>Loading</>
+        )
       ) : (
-        <>Loading</>
+        <div></div>
       )}
 
       {/* </div> */}
