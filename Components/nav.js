@@ -17,7 +17,7 @@ export default function Navabr() {
       const body = { address: account };
       checkWalletAddress(body);
     }
-  },[account,isWeb3Enabled]);
+  },[account]);
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
