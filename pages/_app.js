@@ -9,7 +9,7 @@ import Head from "next/head";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "https://api.studio.thegraph.com/query/36895/nft-marketplace/v0.0.5",
+  uri: "https://api.studio.thegraph.com/query/36895/nft-marketplace/v0.0.6",
 });
 
 function MyApp({ Component, pageProps, currentuser }) {
