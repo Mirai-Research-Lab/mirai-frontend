@@ -5,7 +5,7 @@ import nft2 from "../public/nft2.jpg";
 import nft3 from "../public/nft3.jpg";
 import nft4 from "../public/nft4.webp";
 import Modal from "react-modal";
-import Sell from "./Sell.js";
+import Sell from "./sell";
 import Router from "next/router";
 
 // import styles from "../styles/auth.module.css"
@@ -54,25 +54,25 @@ export default function CardDetails() {
         </div>
 
         {/* <div className="nft-cards my-cards-div"> */}
-          <div className="nft-card">
-            <Image src={nft} className="nft-image" />
-            <div className="nft-card-info">
-              <div className="nft-card-info-heading">
-                <h1>Card Name</h1>
-                <span>Card Description</span>
-                <div>
-                  <button onClick={openModal}>Sell</button>
-                  <Modal isOpen={modalIsOpen} style={customStyles}>
-                    <h2>List at Eth</h2>
-                    <input placeholder="Eth Amount"></input>
-                    <button onClick={closeModaleth}>List</button>
-                    <button onClick={closeModal}>Close</button>
-                  </Modal>
-                </div>
+        <div className="nft-card">
+          <Image src={nft} className="nft-image" />
+          <div className="nft-card-info">
+            <div className="nft-card-info-heading">
+              <h1>Card Name</h1>
+              <span>Card Description</span>
+              <div>
+                <button onClick={openModal}>Sell</button>
+                <Modal isOpen={modalIsOpen} style={customStyles}>
+                  <h2>List at Eth</h2>
+                  <input placeholder="Eth Amount"></input>
+                  <button onClick={closeModaleth}>List</button>
+                  <button onClick={closeModal}>Close</button>
+                </Modal>
               </div>
             </div>
           </div>
         </div>
+      </div>
       {/* </div> */}
     </>
   );

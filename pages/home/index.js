@@ -1,28 +1,30 @@
-import MainPage from "../../Components/Main.js"
-import Features from "../../Components/Option.js"
-import Navbar from '../../Components/nav.js';
+import MainPage from "../../Components/Main.js";
+import Features from "../../Components/Option.js";
+import Navbar from "../../Components/nav.js";
 import { useEffect } from "react";
 import Router from "next/router.js";
 import axios from "axios";
 import swal from "sweetalert2";
-function index({currentuser}) {
-  useEffect(()=>{
+function Index({ currentuser }) {
+  useEffect(() => {
     if (!currentuser) {
       swal.fire({
         icon: "error",
         title: "Cannot access page before signing in",
         text: "Redirecting to Auth page",
       });
-      const myTimeout = setTimeout(()=>{Router.push("/auth");}, 3000);
+      const myTimeout = setTimeout(() => {
+        Router.push("/Auth");
+      }, 3000);
     }
-  },)
+  });
   return (
     <div>
-      <Navbar/>
-    <MainPage/>
-    <Features/>
+      <Navbar />
+      <MainPage />
+      <Features />
     </div>
-  )
+  );
 }
 
-export default index  
+export default Index;

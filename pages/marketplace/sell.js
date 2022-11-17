@@ -1,9 +1,9 @@
-import Sell from "../../Components/Sell.js";
+import Sell from "../../Components/sell.js";
 import { useMoralis } from "react-moralis";
 import Navbar from "../../Components/nav.js";
 import styles from "../../styles/web3.module.css";
 
-function index() {
+function Index() {
   let person = {
     name: "Lin Lanying",
     imageId: "1bX5QH6",
@@ -27,4 +27,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

@@ -8,7 +8,7 @@ import Router from "next/router.js";
 import swal from "sweetalert2";
 import style from "../../styles/web3.module.css";
 
-function index({ currentuser }) {
+function Index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
   const { isWeb3Enabled } = useMoralis();
   console.log(addNfts);
@@ -20,9 +20,9 @@ function index({ currentuser }) {
         title: "Cannot access page before signing in",
         text: "Redirecting to Auth page",
       });
-      Router.push("/auth");
+      Router.push("/Auth");
     }
-  }, []);
+  }, [currentuser]);
 
   return (
     <>
@@ -40,4 +40,4 @@ function index({ currentuser }) {
   );
 }
 
-export default index;
+export default Index;

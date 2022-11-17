@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 import Navbar from "../../Components/nav.js";
-import Editprofile from '../../Components/Editprofile.js';
+import Editprofile from "../../Components/Editprofile.js";
 
-function index() {
+function Index() {
   return (
     <div>
-        <Navbar/>
-        <Editprofile/>
+      <Navbar />
+      <Editprofile />
     </div>
-  )
+  );
 }
 
-export default index
+export default Index;

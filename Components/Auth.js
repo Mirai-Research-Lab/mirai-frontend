@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
@@ -6,10 +6,11 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
 function Auth() {
+  const daysToExpire = 7;
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
-    document.addEventListener("keydown", function(e) { 
-      if (e.keyCode == 9) e.preventDefault(); 
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode == 9) e.preventDefault();
     });
 
     // clean up
@@ -95,13 +96,17 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signup",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
           credentials,
           {
             withCredentials: true,
           }
         );
-        console.log(res);
+        const jwtToken = "jwt=" + res.data;
+        var date = new Date();
+        date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+        document.cookie =
+          jwtToken + ";expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -135,17 +140,22 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signin",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
           credentials,
           {
             withCredentials: true,
           }
         );
         if (res.status === 200) {
-          console.log(res);
+          console.log(res.data);
+          const jwtToken = "jwt=" + res.data;
+          var date = new Date();
+          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+          document.cookie =
+            jwtToken + ";expires=" + date.toUTCString() + ";path=/";
           router.push("/home");
         } else {
-          const message = await res.json();
+          const message = res.data;
           console.log(message);
           swal.fire({
             icon: "error",

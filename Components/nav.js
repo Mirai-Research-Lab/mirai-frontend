@@ -8,10 +8,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Web3 from "web3";
-import Moralis from "moralis";
 import Router from "next/router";
-export default function navabr() {
+export default function Navabr() {
   const swal = Swal;
   const { account } = useMoralis();
   useEffect(() => {
@@ -19,12 +17,12 @@ export default function navabr() {
       const body = { address: account };
       checkWalletAddress(body);
     }
-  }, [account]);
+  });
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
       const check = await axios.post(
-        "http://localhost:3001/api/wallet/checkWalletAddress",
+        "https://mirai-backend-kappa.vercel.app/api/wallet/checkWalletAddress",
         body,
         {
           withCredentials: true,
@@ -33,26 +31,27 @@ export default function navabr() {
       if (check.status == 201) {
         if (check.data.includes("exists")) {
           return;
+        } else {
+          const setEmail = await axios.put(
+            "https://mirai-backend-kappa.vercel.app/api/player/updateAddress",
+            body,
+            {
+              withCredentials: true,
+            }
+          );
+          const setWallet = await axios.put(
+            "https://mirai-backend-kappa.vercel.app/api/player/addWalletAddress",
+            body,
+            {
+              withCredentials: true,
+            }
+          );
+          console.log("setWallet.status is ", setWallet.status);
         }
-        console.log("adding new wallet to email address");
-        const setEmail = await axios.put(
-          "http://localhost:3001/api/player/updateAddress",
-          body,
-          {
-            withCredentials: true,
-          }
-        );
-        const setWallet = await axios.put(
-          "http://localhost:3001/api/player/addWalletAddress",
-          body,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log("setWallet.status is ", setWallet.status);
       }
       console.log(check.status);
     } catch (e) {
+      //('ma chud gayi')
       swal
         .fire({
           icon: "error",
@@ -87,31 +86,37 @@ export default function navabr() {
                 Home
               </Link>
               <Link href="/marketplace/buy">MarketPlace</Link>
-              <Link href="/leaderboard" className="link">
+
+              <Link href="/Leaderboard" className="link">
                 Leaderboard
               </Link>
               <NavDropdown title="profile" id="navbarScrollingDropdown">
-                <NavDropdown.Item>Go to profile</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    Router.push("/Profile");
+                  }}
+                >
+                  Go to profile
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item 
-                  href="#action5"
+                <NavDropdown.Item
                   onClick={async () => {
                     console.log("cccc");
                     localStorage.clear();
                     sessionStorage.clear();
+                    document.cookie = "jwt=undefined";
                     const res = await axios.post(
-                      "http://localhost:3001/api/auth/signout",
+                      "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
                       { withCredentials: true }
                     );
                     console.log(res);
-                    Router.push("/auth");
+                    Router.push("/Auth");
                   }}
                 >
                   LogOut
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/leaderboard" className="link"></Nav.Link>
             </Nav>
             <ConnectButton />
           </Navbar.Collapse>

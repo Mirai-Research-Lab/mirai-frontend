@@ -320,6 +320,7 @@ nft-card-info > button {
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
   padding: 2rem !important;
+  margin-top:  -5vh;
 }
 .top-container{
 	display: flex;
@@ -455,9 +456,9 @@ nft-card-info > button {
   color: white;
   font-family: Poppins;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 15px;
   width: 200px;
-  height: 85px;
+  height: 65px;
   border: none;
   outline: none;
   cursor: pointer;

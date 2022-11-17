@@ -1,4 +1,4 @@
-import Board from "../../components/Board";
+import Board from "../../Components/Board";
 import styles from "../../styles/leaderboard.module.css";
 import Navbar from "../../Components/nav.js";
 import { useState, useEffect } from "react";
@@ -14,12 +14,14 @@ function Leaderboard({ currentuser }) {
         title: "Cannot access page before signing in",
         text: "Redirecting to Auth page",
       });
-      Router.push("/auth");
+      Router.push("/Auth");
     }
-  }, []);
+  }, [currentuser]);
 
   const loadPlayerData = async () => {
-    const response = await axios.get("http://localhost:3001/api/players");
+    const response = await axios.get(
+      "https://mirai-backend-kappa.vercel.app/api/players"
+    );
     setPlayers(response.data);
   };
   useEffect(() => {

@@ -42,10 +42,10 @@ function topthree({ players }) {
   );
 }
 
-function top3({ Leaderboard, players }) {
+function Top3({ Leaderboard, players }) {
   return (
-    <div className={styles.top3}>{topthree({ Leaderboard, players })}</div>
+    <div className={styles.Top3}>{topthree({ Leaderboard, players })}</div>
   );
 }
 
-export default top3;
+export default Top3;
