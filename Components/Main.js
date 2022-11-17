@@ -20,6 +20,9 @@ function Main() {
           </a>
         </div>
       </div>
+      <button className="buy">
+        Buy us a coffee
+      </button>
     </div>
   );
 }
