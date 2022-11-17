@@ -1,14 +1,23 @@
 import Profile from "../../Components/Profile";
-import MyCards from "../../Components/MyCard.js";
+import MyCard from "../../Components/MyCard.js";
 import Navbar from "../../Components/nav.js";
 import { useMoralis } from "react-moralis";
 import { useEffect, useState } from "react";
+import USER_OWNED_NFTS_QUERY from "../../queries/user-owned-nfts-query";
+import { useQuery } from "@apollo/client";
 import style from "../../styles/web3.module.css";
 import swal from "sweetalert2";
 import Router from "next/router";
 import Moralis from "moralis";
 
 function Index({ currentuser }) {
+  const {
+    loading,
+    error,
+    data: userOwnedNfts,
+  } = useQuery(USER_OWNED_NFTS_QUERY);
+
+  console.log(userOwnedNfts);
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -32,21 +41,44 @@ function Index({ currentuser }) {
   return (
     <div>
       <Navbar />
-      <Profile
-        email={email}
-        username={username}
-        funding_address={funding_address}
-        img={image}
-      />
-      {isWeb3Enabled ? (
-        <>
-          <MyCards />
-        </>
-      ) : (
-        <div className={style.web3NotEnabled}>
-          Please Connect Your Wallet To See The NFTs You Own
-        </div>
-      )}
+      <div className="profile-flex">
+        <Profile
+          email={email}
+          username={username}
+          funding_address={funding_address}
+          img={image}
+          currentuser={currentuser}
+        />
+        {isWeb3Enabled ? (
+          <>
+            {userOwnedNfts && userOwnedNfts.nftMinteds.length > 0 ? (
+              <div className="marketplace-container myCard-container">
+                <div className="marketplace-heading ">
+                  <h1>MY Cards</h1>
+                  <span>Following are the cards you own </span>
+                </div>
+
+                {userOwnedNfts.nftMinteds.map((nft) => {
+                  // nft has 3 properties: tokenId, nftAddress, id
+                  return (
+                    <>
+                      <MyCard nft={nft} />
+                    </>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className={style.web3NotEnabled}>
+                Loading The NFTs Please Wait . . . . .
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={style.web3NotEnabled}>
+            Please Connect Your Wallet To See The NFTs You Own
+          </div>
+        )}
+      </div>
     </div>
   );
 }

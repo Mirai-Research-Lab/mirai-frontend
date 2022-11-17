@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Router from "next/router.js";
 import swal from "sweetalert2";
+import style from "../../styles/web3.module.css";
 function Leaderboard({ currentuser }) {
   const [players, setPlayers] = useState([]);
   useEffect(() => {
@@ -22,16 +23,23 @@ function Leaderboard({ currentuser }) {
     const response = await axios.get(
       "https://mirai-backend-kappa.vercel.app/api/players"
     );
+    console.log(response.data);
     setPlayers(response.data);
+  
   };
   useEffect(() => {
     loadPlayerData();
+    console.log(players);
   }, []);
   return (
     <div>
       <Navbar />
       <div className={styles.leaderboard} id={styles.Lboard}>
-        <Board players={players}></Board>
+        {players.length?<Board players={players}></Board>:(
+          <div className={style.web3NotEnabled}>
+            Loading The Leaderboard Please Wait . . . . .
+          </div>
+        )}
       </div>
     </div>
   );

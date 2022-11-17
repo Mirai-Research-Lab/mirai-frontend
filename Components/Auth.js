@@ -6,7 +6,7 @@ import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
 import Image from "next/image";
-import logo from '../public/logo.jpg'
+import logo from "../public/logo.jpg";
 function Auth() {
   const daysToExpire = 7;
   useEffect(() => {
@@ -68,7 +68,7 @@ function Auth() {
     console.log(e);
     const credentials = {
       username: username,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
     if (!username || !email || !password || !repassword)
@@ -102,7 +102,10 @@ function Auth() {
           credentials,
           {
             withCredentials: true,
-          }
+            headers: {
+              cookies: document.cookie,
+            },
+          },
         );
         const jwtToken = "jwt=" + res.data;
         var date = new Date();
@@ -124,7 +127,7 @@ function Auth() {
     console.log("clicked");
     e.preventDefault();
     const credentials = {
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
     if (!email || !password) {
@@ -146,6 +149,9 @@ function Auth() {
           credentials,
           {
             withCredentials: true,
+            headers: {
+              cookies: document.cookie,
+            },
           }
         );
         if (res.status === 200) {
@@ -178,7 +184,7 @@ function Auth() {
   return (
     <div className={styles.auth}>
       <div className={styles.about}>
-        <Image className={styles.logoimg} src={logo} height="80" width="80"/>
+        <Image className={styles.logoimg} src={logo} height="80" width="80" />
       </div>
       <div className={styles.authbox}>
         <div className={styles.heading}>

@@ -1,42 +1,20 @@
 import styles from "../styles/leaderboard.module.css";
 function abc(index, player) {
-  if (index == 0) {
     return (
       <div className={styles.topthreedetails}>
-        {/* <img src={value.img} alt="" /> */}
+        <img src={player.image} alt="profile" />
         <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
-        <h5>1st position</h5>
-        <span>Highest score : {player.high_score || 99999}</span>
+        <h5>position {index+1}</h5>
+        <span>Highest score : {player.high_score || 999}</span>
       </div>
     );
-  }
-  if (index == 1) {
-    return (
-      <div className={styles.topthreedetails}>
-        {/* <img src={value.img} alt="" /> */}
-        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
-        <h5>2nd position</h5>
-        <span>Highest score : {player.high_score || 99999}</span>
-      </div>
-    );
-  }
-  if (index == 2) {
-    return (
-      <div className={styles.topthreedetails}>
-        {/* <img src={value.img} alt="" /> */}
-        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
-        <h5>3rd position</h5>
-        <span>Highest score : {player.high_score || 99999}</span>
-      </div>
-    );
-  }
 }
 
 function topthree({ players }) {
   return (
     <span className={styles.topthreesection}>
-      {players.map((player, index) => (
-        <>{abc(index, player)}</>
+      {players.slice(0,3).map((player, index) => (
+        <div style={{marginLeft:"30px",}}>{abc(index, player)}</div>
       ))}
     </span>
   );
