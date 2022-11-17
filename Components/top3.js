@@ -6,7 +6,7 @@ function abc(index, player) {
         {/* <img src={value.img} alt="" /> */}
         <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
         <h5>1st position</h5>
-        <span>Highest score : {player.high_score || 99999}</span>
+        <span>Highest score : {player.high_score || 999}</span>
       </div>
     );
   }

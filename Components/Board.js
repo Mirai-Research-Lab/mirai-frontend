@@ -14,6 +14,15 @@ export default function Board({ players }) {
   return (
     <div className={styles.board}>
       <h1 className={styles.leaderboard}>Leaderboard</h1>
+
+      <div className={styles.duration}>
+        <button onClick={handleClick} data-id="0">
+          Today
+        </button>
+        <button onClick={handleClick} data-id="30">
+          All Time
+        </button>
+      </div>
       <TOP3 Leaderboard={between(Leaderboard, period)} players={players} />
       <Profiles
         Leaderboard={between(Leaderboard, period)}

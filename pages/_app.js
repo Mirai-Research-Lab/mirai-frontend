@@ -5,6 +5,7 @@ import { SSRProvider } from "react-bootstrap";
 import axios from "axios";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import buildClient from "../api/buildClient";
+import Head from "next/head";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -12,8 +13,29 @@ const client = new ApolloClient({
 });
 
 function MyApp({ Component, pageProps, currentuser }) {
+  console.log(currentuser);
   return (
     <>
+      <Head>
+        <link
+          rel="preload"
+          href="/fonts/pdark.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/sportypo-font/SportypoReguler-OVGwe.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf"
+          as="font"
+          crossOrigin="anonymous"
+        />
+      </Head>
       <SSRProvider>
         <MoralisProvider initializeOnMount={false}>
           <ApolloProvider client={client}>
