@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useWeb3Contract } from "react-moralis";
 import pencil from "../public/pencil.png";
 import Modal from "react-modal";
 import axios from "axios";
 import Router from "next/router";
+
+import Marketplace from "../constants/frontEndAbiLocation/Marketplace.json";
+import IpfsNFT from "../constants/frontEndAbiLocation/IpfsNFT.json";
+import networkMapping from "../constants/networkMapping.json";
 
 const customStyles = {
   overlay: {
@@ -20,8 +24,57 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-function Profile({ email, username, funding_address, img }) {
-  const { account } = useMoralis();
+function Profile({ email, username, funding_address, img, currentuser }) {
+  const { web3, account } = useMoralis();
+  const chainId = "5";
+
+  const { runContractFunction: withdrawAmount } = useWeb3Contract({
+    abi: Marketplace,
+    contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
+    functionName: "withdrawAmount",
+    params: {},
+  });
+
+  const { runContractFunction: staticMint } = useWeb3Contract({
+    abi: IpfsNFT,
+    contractAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+    functionName: "staticMint",
+    params: {},
+  });
+
+  const withdraw = async () => {
+    withdrawAmount({
+      onSuccess: (txHash) => {
+        console.log(txHash);
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+  };
+
+  const mintnfts = async () => {
+    if (currentuser.mintCount > 0) {
+      const tokenId = staticMint({
+        onSuccess: async (result) => {
+          console.log(result);
+          await axios.post(
+            "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
+            {
+              withCredentials: true,
+              body: {
+                username: currentuser.username,
+              },
+            }
+          );
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      });
+    }
+  };
+
   const isalreadyFunding = () => {
     if (account && funding_address != account)
       return (
@@ -97,12 +150,20 @@ function Profile({ email, username, funding_address, img }) {
           </div>
           <div className="fashion-studio-border pt-2">
             <span className="fashion-studio">
-              <button className="mint-nfts">Mint A NFT ( remaining)</button>
+              <button
+                className="mint-nfts"
+                onClick={mintnfts}
+                disabled={currentuser.mintCount <= 0}
+              >
+                Mint A NFT ( {currentuser.mintCount} remaining )
+              </button>
             </span>
           </div>
           <div className="fashion-studio-border pt-2">
             <span className="fashion-studio">
-              <button className="mint-nfts">Withdraw Balance</button>
+              <button className="mint-nfts" onClick={withdraw}>
+                Withdraw Balance
+              </button>
             </span>
           </div>
           {isalreadyFunding()}
