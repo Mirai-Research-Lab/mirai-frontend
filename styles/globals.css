@@ -5,19 +5,24 @@
 
 @font-face {
   font-family: gaming-font;
-  src: url("./fonts/pdark.ttf");
+  src: url("/fonts/pdark.ttf") format("truetype");
 }
 @font-face {
   font-family: modern;
-  src: url("./fonts/sportypo-font/SportypoReguler-OVGwe.ttf");
+  src: url("/fonts/sportypo-font/SportypoReguler-OVGwe.ttf") format("truetype");
 }
 @font-face {
   font-family: jetbrains;
-  src: url("../styles/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf");
+  src: url("/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf")
+    format("truetype");
 }
 
 * {
   font-family: gaming-font;
+}
+body {
+  overflow-x: hidden;
+  background-color: #252525;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -48,40 +53,41 @@
   font-size: 1.2rem;
 }
 
-.nav-link{
+.nav-link {
   /* margin-top:20px; */
-  padding-right:20px;
+  padding-right: 20px;
   text-decoration: none;
 }
-.link:hover{
-  color:white;
+.link:hover {
+  color: white;
   background: linear-gradient(45deg, transparent 5%, #0097c1 5%);
 }
-.me-auto{
+.me-auto {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.me-auto>a{
+.me-auto > a {
   font-size: 1.2rem;
   text-decoration: none;
-  color:rgb(155, 155, 155);
-  margin:20px;
+  color: rgb(155, 155, 155);
+  margin: 20px;
 }
-.me-auto>a:hover{
-  color:white;
+.me-auto > a:hover {
+  color: white;
   /* padding:10px 20px 10px 20px; */
   background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
 }
-.img_container{
+.img_container {
   /* position:fixed; */
   /* overflow-y: hidden; */
-  padding-top: 80px;
   width: 100%;
+  background-image: url("/backwall.png");
+  background-color: #cccccc;
 }
 .homeImg {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -193,7 +199,6 @@ a:hover span:nth-child(2):after {
   background: #252525;
   height: auto;
   top: 0;
-  padding-top: 117px;
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
@@ -254,9 +259,9 @@ nft-card-info {
   display: flex;
   flex-direction: column;
 }
-.nft-card-info-heading{
-  margin:20px;
-  color:white;
+.nft-card-info-heading {
+  margin: 20px;
+  color: white;
 }
 .nft-card-info-heading > span,
 .nft-card-info-heading > h1,
@@ -302,9 +307,7 @@ nft-card-info > button {
   background-color: #252525;
   height: 100%;
   color: white;
-  position: fixed;
   width: 30%;
-  margin-top: 80px;
 }
 .profile-name {
   font-family: Poppins;
@@ -316,37 +319,37 @@ nft-card-info > button {
   color: white;
 }
 .card {
-  background-color: #252525;
+  background-color: #252525 !important;
   width: 280px;
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
   padding: 2rem !important;
-  margin-top:  -5vh;
+  margin-top: -5vh;
 }
-.top-container{
-	display: flex;
+.top-container {
+  display: flex;
   /* flex-direction: column; */
-	align-items: center;
+  align-items: center;
 }
-.profile-image{
-	border-radius: 10px;
-	border: 2px solid #5957f9;
+.profile-image {
+  border-radius: 10px;
+  border: 2px solid #5957f9;
   position: absolute;
 }
-.pencilIcon{
-  position:absolute;
+.pencilIcon {
+  position: absolute;
   background-color: white;
-  border-radius: 50%; 
-  object-fit:fill;
+  border-radius: 50%;
+  object-fit: fill;
 }
-.pencil-img{
+.pencil-img {
   transform: translate(0px, -20px);
-  cursor:pointer;
+  cursor: pointer;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   background: none;
-  border:none;
+  border: none;
 }
 .name {
   font-size: 15px;
@@ -356,6 +359,11 @@ nft-card-info > button {
   position: relative;
   top: 8px;
   margin-left: 7px;
+}
+.profile-flex {
+  display: flex;
+  background-color: #252525;
+  flex-direction: row;
 }
 .mail {
   font-size: 14px;
@@ -434,8 +442,8 @@ nft-card-info > button {
 }
 .fashion-studio {
   font-family: Poppins;
+  background-color: #252525;
 }
-
 
 /* button, button::after {
   width: 100px;
