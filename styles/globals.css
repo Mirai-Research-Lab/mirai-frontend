@@ -362,6 +362,7 @@ nft-card-info > button {
 }
 .profile-flex {
   display: flex;
+  background-color: #252525;
   flex-direction: row;
 }
 .mail {
