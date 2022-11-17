@@ -33,7 +33,7 @@ function Index({ currentuser }) {
           </div>
         ) : (
           <div className={style.web3NotEnabled}>
-            Loading The NFTs Please Wait . . . . .
+            . . . . Loading The NFTs Please Wait . . . . .
           </div>
         )
       ) : (
