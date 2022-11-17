@@ -334,10 +334,11 @@ nft-card-info > button {
 .card {
   background-color: #252525 !important;
   width: 280px;
+  height: 300px;
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
   padding: 2rem !important;
-  margin-top: 100px;
+  margin-top: 30x;
 }
 .top-container {
   display: flex;
