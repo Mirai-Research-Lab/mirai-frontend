@@ -319,7 +319,7 @@ nft-card-info > button {
   color: white;
 }
 .card {
-  background-color: #252525;
+  background-color: #252525 !important;
   width: 280px;
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
