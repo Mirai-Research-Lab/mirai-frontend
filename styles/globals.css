@@ -17,6 +17,9 @@
     format("truetype");
 }
 
+html {
+  background-color: #252525;
+}
 * {
   font-family: gaming-font;
 }
