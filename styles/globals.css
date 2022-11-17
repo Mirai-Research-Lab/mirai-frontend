@@ -359,6 +359,11 @@ nft-card-info > button {
   top: 8px;
   margin-left: 7px;
 }
+.profile-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .mail {
   font-size: 14px;
   color: grey;
