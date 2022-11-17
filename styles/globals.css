@@ -75,7 +75,7 @@
   background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
 }
 .img_container{
-  position:fixed;
+  /* position:fixed; */
   /* overflow-y: hidden; */
   padding-top: 80px;
   width: 100%;
