@@ -33,6 +33,8 @@ export default function CardDetails({ nft }) {
   const [formattedImageAddress, setFormattedImageAddress] = React.useState("");
 
   const { runContractFunction } = useWeb3Contract();
+  const { runContractFunction: approve } = useWeb3Contract();
+  const { runContractFunction: listItem } = useWeb3Contract();
 
   const processURIs = async () => {
     const options = {
@@ -63,28 +65,6 @@ export default function CardDetails({ nft }) {
     if (nft) processURIs();
   }, [nft]);
 
-  const { runContractFunction: approve } = useWeb3Contract({
-    abi: IpfsNFT,
-    contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
-    functionName: "approve",
-    params: {
-      nftAddress: networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-      tokenId: nft.tokenId,
-    },
-  });
-
-  const { runContractFunction: listItem } = useWeb3Contract({
-    abi: Marketplace,
-    contractAddress:
-      networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-    functionName: "listItem",
-    params: {
-      nftAddress: networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-      tokenId: nft.tokenId,
-      price: price,
-    },
-  });
-
   function openModal() {
     setIsOpen(true);
   }
@@ -98,12 +78,28 @@ export default function CardDetails({ nft }) {
   }
 
   const handlebuy = (e) => {
-    e.preventDefault();
-
     approve({
+      abi: IpfsNFT,
+      contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
+      functionName: "approve",
+      params: {
+        nftAddress:
+          networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+        tokenId: nft.tokenId,
+      },
       onSuccess: (result) => {
         console.log("approve result: ", result);
         listItem({
+          abi: Marketplace,
+          contractAddress:
+            networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+          functionName: "listItem",
+          params: {
+            nftAddress:
+              networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+            tokenId: nft.tokenId,
+            price: price,
+          },
           onSuccess: (result) => {
             console.log("listItem result: ", result);
           },
