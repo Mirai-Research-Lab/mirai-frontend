@@ -5,7 +5,6 @@ import Router from "next/router";
 export default function Nav() {
   useEffect(() => {
     if (
-      localStorage.getItem("jwt") != null &&
       document.cookie &&
       document.cookie != "jwt=undefined" &&
       document.cookie != ""
