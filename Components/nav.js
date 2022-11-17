@@ -90,13 +90,13 @@ export default function Navabr() {
               <Link href="/Leaderboard" className="link">
                 Leaderboard
               </Link>
-              <NavDropdown title="profile" id="navbarScrollingDropdown">
+              <NavDropdown title="Profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item
                   onClick={() => {
                     Router.push("/Profile");
                   }}
                 >
-                  Go to profile
+                  Go To Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
