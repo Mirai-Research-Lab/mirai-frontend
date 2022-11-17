@@ -103,10 +103,11 @@ function Auth() {
           }
         );
         const jwtToken = "jwt=" + res.data;
-        localStorage.setItem("jwt", jwt);
+        localStorage.setItem("jwt", jwtToken);
         var date = new Date();
-        date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-        document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
+        date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+        document.cookie =
+          jwtToken + ";expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -151,8 +152,9 @@ function Auth() {
           const jwtToken = "jwt=" + res.data;
           localStorage.setItem("jwt", jwtToken);
           var date = new Date();
-          date.setTime(date.getTime() + daysToExpire * 24 * 60 * 60 * 1000);
-          document.cookie = jwtToken + "; expires=" + date.toLocaleDateString();
+          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+          document.cookie =
+            jwtToken + ";expires=" + date.toUTCString() + ";path=/";
           router.push("/home");
         } else {
           const message = res.data;
