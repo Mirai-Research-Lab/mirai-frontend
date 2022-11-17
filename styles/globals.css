@@ -22,6 +22,7 @@
 }
 body {
   overflow-x: hidden;
+  background-color: #252525;
 }
 ::-webkit-scrollbar {
   width: 8px;
