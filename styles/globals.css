@@ -306,9 +306,7 @@ nft-card-info > button {
   background-color: #252525;
   height: 100%;
   color: white;
-  position: fixed;
   width: 30%;
-  margin-top: 80px;
 }
 .profile-name {
   font-family: Poppins;
