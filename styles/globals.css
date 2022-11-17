@@ -89,6 +89,7 @@ body {
   width: 100vw;
   height: 103vh;
   background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
   /* position: absolute; */
 }
 .home_desc {
