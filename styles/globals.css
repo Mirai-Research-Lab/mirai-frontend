@@ -208,9 +208,6 @@ a:hover span:nth-child(2):after {
 .myCard-container {
   margin-left: 30%;
 }
-.card {
-  background-color: #252525;
-}
 .marketplace-heading {
   color: white;
   width: 100%;
@@ -445,6 +442,7 @@ nft-card-info > button {
 }
 .fashion-studio {
   font-family: Poppins;
+  background-color: #252525;
 }
 
 /* button, button::after {
