@@ -103,7 +103,6 @@ function Auth() {
           }
         );
         const jwtToken = "jwt=" + res.data;
-        localStorage.setItem("jwt", jwtToken);
         var date = new Date();
         date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
         document.cookie =
@@ -150,7 +149,6 @@ function Auth() {
         if (res.status === 200) {
           console.log(res.data);
           const jwtToken = "jwt=" + res.data;
-          localStorage.setItem("jwt", jwtToken);
           var date = new Date();
           date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
           document.cookie =
