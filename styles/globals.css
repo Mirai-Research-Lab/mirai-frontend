@@ -361,7 +361,7 @@ nft-card-info > button {
 }
 .profile-flex {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 .mail {
