@@ -82,6 +82,8 @@ body {
   /* position:fixed; */
   /* overflow-y: hidden; */
   width: 100%;
+  background-image: url("/backwall.png");
+  background-color: #cccccc;
 }
 .homeImg {
   width: 100vw;
