@@ -11,7 +11,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ], */
-    domains: ["res.cloudinary.com","t3.ftcdn.net"],
+    domains: ["res.cloudinary.com", "t3.ftcdn.net", "ipfs.io"],
   },
 };
 

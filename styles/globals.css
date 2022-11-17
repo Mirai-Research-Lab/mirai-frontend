@@ -253,6 +253,7 @@ a:hover span:nth-child(2):after {
 .nft-image {
   border-radius: 20px;
   width: 20rem;
+  padding: 20px;
   height: 300px;
   object-fit: cover;
   overflow: hidden;
