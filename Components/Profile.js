@@ -21,6 +21,19 @@ const customStyles = {
   },
 };
 function Profile({ email, username, funding_address, img }) {
+  console.log(img)
+  const [item,setItem]=useState('')
+  async function updatePP(){
+    const fd= new FormData();
+    fd.append("image",item);
+    fd.append("address",'');
+    await axios.post("https://mirai-backend-kappa.vercel.app/api/player/updateuser",
+    fd,
+    {
+      withCredentials: true,
+    });
+    Router.reload();
+  }
   const { account } = useMoralis();
   const isalreadyFunding = () => {
     if (account && funding_address != account)
@@ -51,6 +64,7 @@ function Profile({ email, username, funding_address, img }) {
   };
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
+    alert(img)
     setIsOpen(true);
   }
 
@@ -63,10 +77,7 @@ function Profile({ email, username, funding_address, img }) {
         <div className="card">
           <div className="top-container">
             <Image
-              src={
-                img ||
-                "https://res.cloudinary.com/dw5syikwo/image/upload/v1668621035/gl8my8lcye8cptjwqn6j.jpg"
-              }
+              src={img||'https://res.cloudinary.com/dw5syikwo/image/upload/v1668621035/gl8my8lcye8cptjwqn6j.jpg'}
               className="img-fluid profile-image"
               width="300px"
               height="300px"
@@ -84,7 +95,7 @@ function Profile({ email, username, funding_address, img }) {
             <Modal isOpen={modalIsOpen} style={customStyles}>
               <h2>Update your profile pic</h2>
               <input type="file" accept="image/*,.pdf" />
-              <button>Update</button>
+              <button onClick={updatePP} onChange={(e)=>setItem(e.target.files[0])}>Update</button>
               <button onClick={closeModal}>Close</button>
             </Modal>
           </button>
