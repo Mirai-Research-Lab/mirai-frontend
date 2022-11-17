@@ -208,6 +208,9 @@ a:hover span:nth-child(2):after {
 .myCard-container {
   margin-left: 30%;
 }
+.card {
+  background-color: #252525;
+}
 .marketplace-heading {
   color: white;
   width: 100%;
