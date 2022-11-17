@@ -17,7 +17,7 @@ export default function Marketplace({ activeNfts }) {
     contractAddress: networkMapping[chainId]["Marketplace"][1],
     functionName: "buyItem",
     params: {
-      nftAddress: networkMapping[chainId]["IpfsNFT"],
+      nftAddress: networkMapping[chainId]["IpfsNFT"][4],
     },
   });
   const { data, error, runContractFunction, isFetching, isLoading } =
@@ -78,19 +78,33 @@ export default function Marketplace({ activeNfts }) {
   useEffect(() => {
     setTokenUris();
   }, [activeNfts]);
-  const handleBuy = (e, tokenId) => {
-    buyItem({
+  const handleBuy = async (e, tokenId, price) => {
+    // await buyItem({
+    //   params: {
+    //     tokenId: tokenId,
+    //   },
+
+    //   onSuccess: (e) => {
+    //     console.log("success");
+    //   },
+
+    //   onError: (e) => {
+    //     console.log("error");
+    //   },
+    // });
+    console.log("buying");
+    const options = {
+      abi: MarketplaceAbi,
+      contractAddress: networkMapping[chainId]["Marketplace"][1],
+      functionName: "buyItem",
       params: {
+        nftAddress: networkMapping[chainId]["IpfsNFT"][4],
         tokenId: tokenId,
       },
-
-      onSuccess: (e) => {
-        console.log("success");
-      },
-
-      onError: (e) => {
-        console.log("error");
-      },
+      msgValue: ethers.utils.parseEther(price),
+    };
+    const response = await runContractFunction({
+      params: options,
     });
   };
 
@@ -113,7 +127,7 @@ export default function Marketplace({ activeNfts }) {
                 return (
                   <>
                     <div
-                      onClick={(e) => handleBuy(e, value.tokenId)}
+                      onClick={(e) => handleBuy(e, value.tokenId, value.price)}
                       key={index}
                     >
                       <div className="nft-image">
