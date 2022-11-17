@@ -7,6 +7,7 @@ import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import style from "../styles/web3.module.css";
+import ClipArt from "../public/clipart.png";
 export default function Marketplace({ activeNfts }) {
   const [nfts, setNfts] = useState([]);
   const chainId = "5";
@@ -86,7 +87,7 @@ export default function Marketplace({ activeNfts }) {
   };
 
   const formatAddress = (address) => {
-    return address.substring(0, 6) + "..." + address.substring(38);
+    return address.substring(0, 4) + "..." + address.substring(38);
   };
   return (
     <>
@@ -98,8 +99,8 @@ export default function Marketplace({ activeNfts }) {
           See Your Listed NFTs
         </button>
         <div className="marketplace-heading">
-          <h1>MARKETPLACE</h1>
-          <span>Buy NFTs</span>
+          <h1 style={{ fontFamily: "gaming-font" }}>MARKETPLACE</h1>
+          <span style={{ fontFamily: "gaming-font" }}>Buy NFTs</span>
         </div>
 
         <div className="nft-cards">
@@ -109,10 +110,7 @@ export default function Marketplace({ activeNfts }) {
               nfts.map((value, index) => {
                 return (
                   <>
-                    <div
-                      onClick={(e) => handleBuy(e, value.tokenId, value.price)}
-                      key={index}
-                    >
+                    <div key={index}>
                       <div className="nft-image">
                         <Image
                           src={value.imageUri}
@@ -123,9 +121,33 @@ export default function Marketplace({ activeNfts }) {
                       </div>
                       <div className="nft-card-info">
                         <div className="nft-card-info-heading">
-                          <h1>Price: {value.price} ETH</h1>
-                          <span>Seller:{formatAddress(value.seller)}</span>
-                          <span>NFT Address: {formatAddress(nftAddress)}</span>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            Price: {value.price} ETH
+                          </div>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            Seller: {formatAddress(value.seller)}
+                          </div>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            NFT Address: {formatAddress(nftAddress)}
+                          </div>
+                          <div style={{ textAlign: "center" }}>
+                            <button
+                              onClick={(e) =>
+                                handleBuy(e, value.tokenId, value.price)
+                              }
+                              className="buyNftButton"
+                            >
+                              Buy NFT
+                            </button>
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(nftAddress);
+                              }}
+                              className="clipartButton"
+                            >
+                              Copy NFT Address
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

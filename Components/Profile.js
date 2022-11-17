@@ -135,13 +135,15 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       );
     else return " ";
   };
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
+
   function openModal() {
-    setIsOpen(true);
+    setisOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    console.log("closing modal");
+    setisOpen(!isOpen);
   }
   return (
     <div className="profile">
@@ -164,17 +166,17 @@ function Profile({ email, username, funding_address, img, currentuser }) {
               height="30px"
               alt="edit"
             />
-            <Modal isOpen={modalIsOpen} style={customStyles}>
-              <h2>Update your profile pic</h2>
-              <input
-                type="file"
-                accept="image/*,.pdf"
-                onChange={(e) => setItem(e.target.files[0])}
-              />
-              <button onClick={updatePP}>Update</button>
-              <button onClick={closeModal}>Close</button>
-            </Modal>
           </button>
+          <Modal isOpen={isOpen} style={customStyles}>
+            <h2>Update your profile pic</h2>
+            <input
+              type="file"
+              accept="image/*,.pdf"
+              onChange={(e) => setItem(e.target.files[0])}
+            />
+            <button onClick={updatePP}>Update</button>
+            <button onClick={closeModal}>Close</button>
+          </Modal>
           <div className="ml-3 profile-name">
             <h5 className="name">{username}</h5>
             <p className="mail">{email}</p>

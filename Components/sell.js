@@ -95,13 +95,13 @@ function Sell({ activeNfts }) {
   const formatAddress = (address) => {
     return address.substring(0, 6) + "..." + address.substring(38);
   };
-  
+
   return (
     <>
       <div className="marketplace-container ">
         <div className="marketplace-heading">
-          <h1>YOUR LISTED NFTS</h1>
-          <span>Update NFTs</span>
+          <h1 style={{ fontFamily: "gaming-font" }}>YOUR LISTED NFTS</h1>
+          <span style={{ fontFamily: "gaming-font" }}>Update NFTs</span>
         </div>
         {ownersNfts && ownersNfts.length > 0 ? (
           <div className="nft-cards">

@@ -54,8 +54,10 @@ function Index({ currentuser }) {
             {userOwnedNfts && userOwnedNfts.nftMinteds.length > 0 ? (
               <div className="marketplace-container myCard-container">
                 <div className="marketplace-heading ">
-                  <h1>MY Cards</h1>
-                  <span>Following are the cards you own </span>
+                  <h1 style={{ fontFamily: "gaming-font" }}>MY Cards</h1>
+                  <span style={{ fontFamily: "gaming-font" }}>
+                    Following are the cards you own{" "}
+                  </span>
                 </div>
 
                 {userOwnedNfts.nftMinteds.map((nft) => {
