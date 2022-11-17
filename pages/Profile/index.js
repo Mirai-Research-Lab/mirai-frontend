@@ -17,6 +17,7 @@ function Index({ currentuser }) {
     data: userOwnedNfts,
   } = useQuery(USER_OWNED_NFTS_QUERY);
 
+  console.log(userOwnedNfts);
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -50,7 +51,7 @@ function Index({ currentuser }) {
         />
         {isWeb3Enabled ? (
           <>
-            {userOwnedNfts ? (
+            {userOwnedNfts && userOwnedNfts.nftMinteds.length > 0 ? (
               <div className="marketplace-container myCard-container">
                 <div className="marketplace-heading ">
                   <h1>MY Cards</h1>
@@ -67,7 +68,9 @@ function Index({ currentuser }) {
                 })}
               </div>
             ) : (
-              <div>Loading...</div>
+              <div className={style.web3NotEnabled}>
+                Loading The NFTs Please Wait . . . . .
+              </div>
             )}
           </>
         ) : (

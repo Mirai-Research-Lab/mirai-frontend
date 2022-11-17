@@ -12,14 +12,6 @@ import style from "../styles/web3.module.css";
 export default function Marketplace({ activeNfts }) {
   const [nfts, setNfts] = useState([]);
   const chainId = "5";
-  const { runContractFunction: buyItem } = useWeb3Contract({
-    abi: MarketplaceAbi,
-    contractAddress: networkMapping[chainId]["Marketplace"][1],
-    functionName: "buyItem",
-    params: {
-      nftAddress: networkMapping[chainId]["IpfsNFT"][4],
-    },
-  });
   const { data, error, runContractFunction, isFetching, isLoading } =
     useWeb3Contract();
 
@@ -59,7 +51,7 @@ export default function Marketplace({ activeNfts }) {
     for (let i = 0; i < activeNfts.length; i++) {
       const options = {
         abi: IpfsNftAbi,
-        contractAddress: networkMapping[chainId]["IpfsNFT"][4],
+        contractAddress: networkMapping[chainId]["IpfsNFT"][5],
         functionName: "tokenURI",
         params: {
           tokenId: activeNfts[i].tokenId,
@@ -79,26 +71,13 @@ export default function Marketplace({ activeNfts }) {
     setTokenUris();
   }, [activeNfts]);
   const handleBuy = async (e, tokenId, price) => {
-    // await buyItem({
-    //   params: {
-    //     tokenId: tokenId,
-    //   },
-
-    //   onSuccess: (e) => {
-    //     console.log("success");
-    //   },
-
-    //   onError: (e) => {
-    //     console.log("error");
-    //   },
-    // });
     console.log("buying");
     const options = {
       abi: MarketplaceAbi,
       contractAddress: networkMapping[chainId]["Marketplace"][1],
       functionName: "buyItem",
       params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"][4],
+        nftAddress: networkMapping[chainId]["IpfsNFT"][5],
         tokenId: tokenId,
       },
       msgValue: ethers.utils.parseEther(price),
