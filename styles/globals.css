@@ -362,7 +362,6 @@ nft-card-info > button {
 .profile-flex {
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 .mail {
   font-size: 14px;
