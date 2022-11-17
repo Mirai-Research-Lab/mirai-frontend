@@ -5,6 +5,7 @@ import { SSRProvider } from "react-bootstrap";
 import axios from "axios";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import buildClient from "../api/buildClient";
+import Head from "next/head";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
