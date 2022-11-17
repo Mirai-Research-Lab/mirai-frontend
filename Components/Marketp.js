@@ -51,7 +51,7 @@ export default function Marketplace({ activeNfts }) {
     for (let i = 0; i < activeNfts.length; i++) {
       const options = {
         abi: IpfsNftAbi,
-        contractAddress: networkMapping[chainId]["IpfsNFT"][4],
+        contractAddress: networkMapping[chainId]["IpfsNFT"][5],
         functionName: "tokenURI",
         params: {
           tokenId: activeNfts[i].tokenId,
@@ -77,7 +77,7 @@ export default function Marketplace({ activeNfts }) {
       contractAddress: networkMapping[chainId]["Marketplace"][1],
       functionName: "buyItem",
       params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"][4],
+        nftAddress: networkMapping[chainId]["IpfsNFT"][5],
         tokenId: tokenId,
       },
       msgValue: ethers.utils.parseEther(price),
