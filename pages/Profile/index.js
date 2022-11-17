@@ -38,9 +38,7 @@ function Index({ currentuser }) {
         img={image}
       />
       {isWeb3Enabled ? (
-        <>
-          <MyCards />
-        </>
+        <MyCards />
       ) : (
         <div className={style.web3NotEnabled}>
           Please Connect Your Wallet To See The NFTs You Own
