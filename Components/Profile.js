@@ -5,6 +5,7 @@ import pencil from "../public/pencil.png";
 import Modal from "react-modal";
 import axios from "axios";
 import Router from "next/router";
+import swal from "sweetalert2";
 
 import Marketplace from "../constants/frontEndAbiLocation/Marketplace.json";
 import IpfsNFT from "../constants/frontEndAbiLocation/IpfsNFT.json";
@@ -74,7 +75,34 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       });
     }
   };
-
+const [item, setItem] = useState("");
+  async function updatePP() {
+    const formdata = new FormData();
+    console.log(item);
+    formdata.append("image", item);
+    formdata.append("address", "");
+    console.log(formdata.image);
+    try{const res = await axios.post(
+      "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
+      formdata,
+      {
+        withCredentials: true,
+        headers: {
+          cookies: document.cookie,
+        },
+      }
+    );
+    console.log(res);
+    Router.reload();}
+    catch(e)
+    {
+      swal.fire({
+        icon: "error",
+        text: "Please input a valid file",
+      });
+    }
+  }
+  const { account } = useMoralis();
   const isalreadyFunding = () => {
     if (account && funding_address != account)
       return (
@@ -115,11 +143,8 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       <div className="container d-flex justify-content-center mt-5">
         <div className="card">
           <div className="top-container">
-            <Image
-              src={
-                img ||
-                "https://res.cloudinary.com/dw5syikwo/image/upload/v1668621035/gl8my8lcye8cptjwqn6j.jpg"
-              }
+            <img
+              src={img}
               className="img-fluid profile-image"
               width="300px"
               height="300px"
@@ -136,8 +161,12 @@ function Profile({ email, username, funding_address, img, currentuser }) {
             />
             <Modal isOpen={modalIsOpen} style={customStyles}>
               <h2>Update your profile pic</h2>
-              <input type="file" accept="image/*,.pdf" />
-              <button>Update</button>
+              <input
+                type="file"
+                accept="image/*,.pdf"
+                onChange={(e) => setItem(e.target.files[0])}
+              />
+              <button onClick={updatePP}>Update</button>
               <button onClick={closeModal}>Close</button>
             </Modal>
           </button>
