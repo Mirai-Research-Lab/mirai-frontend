@@ -93,7 +93,7 @@ export default function Marketplace({ activeNfts }) {
       <div className="marketplace-container ">
         <button
           className="seelistednfts"
-          onClick={() => Router.push("/Marketplace/sell")}
+          onClick={() => Router.push("/marketplace/sell")}
         >
           See Your Listed NFTs
         </button>
