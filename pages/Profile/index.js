@@ -37,6 +37,7 @@ function Index({ currentuser }) {
         username={username}
         funding_address={funding_address}
         img={image}
+        currentuser={currentuser}
       />
       {isWeb3Enabled ? (
         <>

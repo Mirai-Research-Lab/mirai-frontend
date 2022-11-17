@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import Router from "next/router.js";
 import swal from "sweetalert2";
+
 import style from "../../styles/web3.module.css";
 
 function Index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
   const { isWeb3Enabled } = useMoralis();
-  console.log(addNfts);
 
   useEffect(() => {
     if (!currentuser) {

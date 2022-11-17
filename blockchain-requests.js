@@ -8,61 +8,12 @@ export const useGameContract = () => {
   const { web3, account } = useMoralis();
   const price = "10000000000000000";
 
-  const { runContractFunction: staticMint } = useWeb3Contract({
-    abi: IpfsNFT,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["IpfsNFT"],
-    functionName: "staticMint",
-    params: {
-      tokenId: tokenId,
-    },
-  });
-
-  const tokenId = staticMint();
-
-  const { runContractFunction: approve } = useWeb3Contract({
-    abi: IpfsNFT,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["IpfsNFT"],
-    functionName: "approve",
-    params: {
-      nftAddress:
-        networkMapping[web3.currentProvider.networkVersion]["Marketplace"],
-      tokenId: tokenId,
-    },
-  });
-
-  const { runContractFunction: listItem } = useWeb3Contract({
-    abi: Marketplace,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["Marketplace"],
-    functionName: "listItem",
-    params: {
-      nftAddress:
-        networkMapping[web3.currentProvider.networkVersion]["Marketplace"],
-      tokenId: tokenId,
-      price: price, // todo: make this dynamic
-    },
-  });
-
   const { runContractFunction: fundContract } = useWeb3Contract({
     abi: GameContract,
     contractAddress:
       networkMapping[web3.currentProvider.networkVersion]["GameContract"],
     functionName: "fundContract",
     params: {},
-  });
-
-  const { runContractFunction: buyItem } = useWeb3Contract({
-    abi: Marketplace,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["Marketplace"],
-    functionName: "buyItem",
-    params: {
-      nftAddress:
-        networkMapping[web3.currentProvider.networkVersion]["IpfsNFT"],
-      tokenId: tokenId,
-    },
   });
 
   const { runContractFunction: cancelItem } = useWeb3Contract({
@@ -88,14 +39,6 @@ export const useGameContract = () => {
       tokenId: tokenId,
       updatedPrice: price,
     },
-  });
-
-  const { runContractFunction: withdrawAmount } = useWeb3Contract({
-    abi: Marketplace,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["Marketplace"],
-    functionName: "withdrawAmount",
-    params: {},
   });
 
   const { runContractFunction: getAmountOwned } = useWeb3Contract({
