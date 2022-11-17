@@ -75,34 +75,33 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       });
     }
   };
-const [item, setItem] = useState("");
+  const [item, setItem] = useState("");
   async function updatePP() {
     const formdata = new FormData();
     console.log(item);
     formdata.append("image", item);
     formdata.append("address", "");
     console.log(formdata.image);
-    try{const res = await axios.post(
-      "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
-      formdata,
-      {
-        withCredentials: true,
-        headers: {
-          cookies: document.cookie,
-        },
-      }
-    );
-    console.log(res);
-    Router.reload();}
-    catch(e)
-    {
+    try {
+      const res = await axios.post(
+        "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
+        formdata,
+        {
+          withCredentials: true,
+          headers: {
+            cookies: document.cookie,
+          },
+        }
+      );
+      console.log(res);
+      Router.reload();
+    } catch (e) {
       swal.fire({
         icon: "error",
         text: "Please input a valid file",
       });
     }
   }
-  const { account } = useMoralis();
   const isalreadyFunding = () => {
     if (account && funding_address != account)
       return (
