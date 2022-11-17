@@ -13,6 +13,8 @@ function Index({ currentuser }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [funding_address, setfunding_address] = useState("");
+  const [image, setImage] = useState("");
+
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -25,7 +27,8 @@ function Index({ currentuser }) {
     setEmail(currentuser.email);
     setUsername(currentuser.username);
     setfunding_address(currentuser.funding_address);
-  }, []);
+    setImage(currentuser.image);
+  }, [currentuser]);
   return (
     <div>
       <Navbar />
@@ -33,6 +36,7 @@ function Index({ currentuser }) {
         email={email}
         username={username}
         funding_address={funding_address}
+        img={image}
       />
       {isWeb3Enabled ? (
         <>

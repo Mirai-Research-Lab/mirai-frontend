@@ -5,7 +5,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
+import Image from "next/image";
+import logo from '../public/logo.jpg'
 function Auth() {
+  const daysToExpire = 7;
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
     document.addEventListener("keydown", function (e) {
@@ -101,7 +104,11 @@ function Auth() {
             withCredentials: true,
           }
         );
-        console.log(res.headers);
+        const jwtToken = "jwt=" + res.data;
+        var date = new Date();
+        date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+        document.cookie =
+          jwtToken + ";expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
       } catch (err) {
         swal.fire({
@@ -143,9 +150,14 @@ function Auth() {
         );
         if (res.status === 200) {
           console.log(res.data);
+          const jwtToken = "jwt=" + res.data;
+          var date = new Date();
+          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+          document.cookie =
+            jwtToken + ";expires=" + date.toUTCString() + ";path=/";
           router.push("/home");
         } else {
-          const message = await res.json();
+          const message = res.data;
           console.log(message);
           swal.fire({
             icon: "error",
@@ -165,6 +177,9 @@ function Auth() {
   };
   return (
     <div className={styles.auth}>
+      <div className={styles.about}>
+        <Image className={styles.logoimg} src={logo} height="80" width="80"/>
+      </div>
       <div className={styles.authbox}>
         <div className={styles.heading}>
           <div className={styles.formboxdiv}>

@@ -17,7 +17,7 @@ export default function Navabr() {
       const body = { address: account };
       checkWalletAddress(body);
     }
-  }, [account]);
+  });
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
@@ -86,18 +86,25 @@ export default function Navabr() {
                 Home
               </Link>
               <Link href="/marketplace/buy">MarketPlace</Link>
+
               <Link href="/Leaderboard" className="link">
                 Leaderboard
               </Link>
               <NavDropdown title="profile" id="navbarScrollingDropdown">
-                <NavDropdown.Item>Go to profile</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    Router.push("/Profile");
+                  }}
+                >
+                  Go to profile
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
-                  href="#action5"
                   onClick={async () => {
                     console.log("cccc");
                     localStorage.clear();
                     sessionStorage.clear();
+                    document.cookie = "jwt=undefined";
                     const res = await axios.post(
                       "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
@@ -110,7 +117,6 @@ export default function Navabr() {
                   LogOut
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/Leaderboard" className="link"></Nav.Link>
             </Nav>
             <ConnectButton />
           </Navbar.Collapse>
