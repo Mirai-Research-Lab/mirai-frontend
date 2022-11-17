@@ -66,6 +66,9 @@ function Profile({ email, username, funding_address, img, currentuser }) {
               body: {
                 username: currentuser.username,
               },
+              headers: {
+                cookies: document.cookie,
+              },
             }
           );
         },
@@ -117,6 +120,9 @@ function Profile({ email, username, funding_address, img, currentuser }) {
                   formdata,
                   {
                     withCredentials: true,
+                    headers: {
+            cookies: document.cookie,
+          },
                   }
                 );
                 Router.reload();

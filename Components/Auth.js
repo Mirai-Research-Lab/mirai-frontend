@@ -68,7 +68,7 @@ function Auth() {
     console.log(e);
     const credentials = {
       username: username,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
     if (!username || !email || !password || !repassword)
@@ -102,7 +102,10 @@ function Auth() {
           credentials,
           {
             withCredentials: true,
-          }
+            headers: {
+              cookies: document.cookie,
+            },
+          },
         );
         const jwtToken = "jwt=" + res.data;
         var date = new Date();
@@ -124,7 +127,7 @@ function Auth() {
     console.log("clicked");
     e.preventDefault();
     const credentials = {
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
     if (!email || !password) {
@@ -146,6 +149,9 @@ function Auth() {
           credentials,
           {
             withCredentials: true,
+            headers: {
+              cookies: document.cookie,
+            },
           }
         );
         if (res.status === 200) {
