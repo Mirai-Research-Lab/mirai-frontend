@@ -1,20 +1,22 @@
 import styles from "../styles/leaderboard.module.css";
 function abc(index, player) {
-    return (
-      <div className={styles.topthreedetails}>
-        <img src={player.image} alt="profile" />
-        <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
-        <h5>position {index+1}</h5>
-        <span>Highest score : {player.high_score || 999}</span>
-      </div>
-    );
+  return (
+    <div className={styles.topthreedetails}>
+      <img src={player.image} alt="profile" />
+      <h3 className={styles.textdark}>{player.username || "PlayerNotSet"}</h3>
+      <h5>position {index + 1}</h5>
+      <span>Highest score : {player.high_score || 999}</span>
+    </div>
+  );
 }
 
 function topthree({ players }) {
   return (
     <span className={styles.topthreesection}>
-      {players.slice(0,3).map((player, index) => (
-        <div style={{marginLeft:"30px",}}>{abc(index, player)}</div>
+      {players.slice(0, 3).map((player, index) => (
+        <div key={index} style={{ marginLeft: "30px" }}>
+          {abc(index, player)}
+        </div>
       ))}
     </span>
   );

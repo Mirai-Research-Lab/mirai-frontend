@@ -1,7 +1,5 @@
 import Router from "next/router";
 import Image from "next/image";
-import nft from "../public/nft.jpg";
-import { marketplace } from "./database";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { useWeb3Contract } from "react-moralis";
@@ -14,7 +12,7 @@ export default function Marketplace({ activeNfts }) {
   const chainId = "5";
   const { data, error, runContractFunction, isFetching, isLoading } =
     useWeb3Contract();
-
+  const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
   const setNftsInArray = async (imageUris) => {
     const nfts = [];
     for (let i = 0; i < imageUris.length; i++) {
@@ -93,6 +91,12 @@ export default function Marketplace({ activeNfts }) {
   return (
     <>
       <div className="marketplace-container ">
+        <button
+          className="seelistednfts"
+          onClick={() => Router.push("/Marketplace/sell")}
+        >
+          See Your Listed NFTs
+        </button>
         <div className="marketplace-heading">
           <h1>MARKETPLACE</h1>
           <span>Buy NFTs</span>
@@ -121,6 +125,7 @@ export default function Marketplace({ activeNfts }) {
                         <div className="nft-card-info-heading">
                           <h1>Price: {value.price} ETH</h1>
                           <span>Seller:{formatAddress(value.seller)}</span>
+                          <span>NFT Address: {formatAddress(nftAddress)}</span>
                         </div>
                       </div>
                     </div>
@@ -129,7 +134,7 @@ export default function Marketplace({ activeNfts }) {
               })
             ) : (
               <div className={style.web3NotEnabled}>
-                Loading The NFTs Please Wait . . . . .
+                . . . . No NFTs Available for Sale . . . .
               </div>
             )}
           </div>
