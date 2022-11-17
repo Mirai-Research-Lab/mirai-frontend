@@ -351,11 +351,7 @@ nft-card-info > button {
   width: 280px;
 }
 .pencilIcon {
-<<<<<<< HEAD
-  position: absolute;
-=======
   /* position: absolute; */
->>>>>>> 8267991f3946fd435c330cdf1f2e1ec6290dd772
   background-color: white;
   border-radius: 50%;
   object-fit: fill;
