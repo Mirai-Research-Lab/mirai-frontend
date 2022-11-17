@@ -10,7 +10,6 @@ export default function Nav() {
       document.cookie != "jwt=undefined" &&
       document.cookie != ""
     ) {
-      Router.push("/home");
     }
   });
   return (
