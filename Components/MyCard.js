@@ -81,34 +81,63 @@ export default function CardDetails({ nft }) {
   }
 
   // console.log("dfdsaf", formattedImageUri);
-  const handleBuy = async (result) => {
-    console.log(result);
-    const options = {
-      abi: Marketplace,
-      contractAddress:
-        networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-      functionName: "listItem",
-      params: {
-        nftAddress:
-          networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-        tokenId: nft.tokenId,
-        price: ethers.utils.parseUnits(price.toString(), "ether"),
-      },
-    };
+  // const handleBuy = async (result) => {
+  //   console.log(result);
+  //   const options = {
+  //     abi: Marketplace,
+  //     contractAddress:
+  //       networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+  //     functionName: "listItem",
+  //     params: {
+  //       nftAddress:
+  //         networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+  //       tokenId: nft.tokenId,
+  //       price: ethers.utils.parseUnits(price.toString(), "ether"),
+  //     },
+  //   };
 
-    await listItem({
-      gasLimit: 3e7,
-      params: options,
-      onSuccess: (result) => {
-        console.log(result);
-        closeModaleth();
-      },
-      onError: (result) => {
-        console.log(result);
-        // closeModaleth();
-      },
-    });
+  //   await listItem({
+  //     gasLimit: 3e7,
+  //     params: options,
+  //     onSuccess: (result) => {
+  //       console.log(result);
+  //       closeModaleth();
+  //     },
+  //     onError: (result) => {
+  //       console.log(result);
+  //       // closeModaleth();
+  //     },
+  //   });
+  // };
+
+  const handleBuyEthers = async (result) => {
+    console.log(result);
+    console.log("hello");
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const marketPlaceContract = new ethers.Contract(
+          networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+          Marketplace,
+          signer
+        );
+        let listingTx = await marketPlaceContract.listItem(
+          networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
+          nft.tokenId,
+          ethers.utils.parseUnits(price.toString(), "ether"),
+          {
+            gasLimit: 500000,
+          }
+        );
+        console.log(listingTx);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
+
   const handleApprove = async () => {
     console.log(price);
     if (price > 0) {
@@ -126,7 +155,7 @@ export default function CardDetails({ nft }) {
       await approve({
         gasLimit: 3e7,
         params: options,
-        onSuccess: (result) => handleBuy(result),
+        onSuccess: (result) => handleBuyEthers(result),
         onError: (error) => {
           console.log("approve error", error);
         },
