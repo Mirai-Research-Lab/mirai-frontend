@@ -10,7 +10,7 @@ import swal from "sweetalert2";
 import USER_BOUGHT_NFTS_QUERY from "../../queries/user-bought-nfts-query";
 import Router from "next/router";
 import CANCELLED_ITEMS_QUERY from "../../queries/cancelled-nfts-query";
-
+import GET_ACTIVE_ITEMS_QUERY from "../../queries/active-items-query";
 function Index({ currentuser }) {
   const {
     loading,
@@ -25,9 +25,10 @@ function Index({ currentuser }) {
   const { loading: loading3, data: cancelledNfts } = useQuery(
     CANCELLED_ITEMS_QUERY
   );
-  console.log(userOwnedNfts);
-  console.log(userBoughtNfts);
-  console.log(cancelledNfts);
+
+  const { loading: loading4, data: activeNfts } = useQuery(
+    GET_ACTIVE_ITEMS_QUERY
+  );
   const { isWeb3Enabled, account, chainId } = useMoralis();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -57,7 +58,7 @@ function Index({ currentuser }) {
           minter: userOwnedNfts.nftMinteds[i].minter,
           tokenId: userOwnedNfts.nftMinteds[i].tokenId,
         };
-        if (!total.includes(item)) total.push(item);
+        if (!total.includes(item) && item.minter === account) total.push(item);
       }
     }
     if (userBoughtNfts && userBoughtNfts.boughtItems.length > 0) {
@@ -66,7 +67,7 @@ function Index({ currentuser }) {
           minter: userBoughtNfts.boughtItems[i].buyer,
           tokenId: userBoughtNfts.boughtItems[i].tokenId,
         };
-        if (!total.includes(item)) total.push(item);
+        if (!total.includes(item) && item.minter === account) total.push(item);
       }
     }
     if (cancelledNfts && cancelledNfts.itemCancelleds.length > 0) {
@@ -75,12 +76,30 @@ function Index({ currentuser }) {
           minter: cancelledNfts.itemCancelleds[i].seller,
           tokenId: cancelledNfts.itemCancelleds[i].tokenId,
         };
-        if (!total.includes(item)) total.push(item);
+        if (!total.includes(item) && item.minter === account) total.push(item);
+      }
+    }
+
+    // Remove already listed nfts
+    if (activeNfts && activeNfts.activeItems.length > 0) {
+      for (let i = 0; i < activeNfts.activeItems.length; i++) {
+        const item = {
+          minter: activeNfts.activeItems[i].seller,
+          tokenId: activeNfts.activeItems[i].tokenId,
+        };
+        for (let j = 0; j < total.length; j++) {
+          if (
+            total[j].tokenId === item.tokenId &&
+            total[j].minter === item.minter
+          ) {
+            total.splice(j, 1);
+          }
+        }
       }
     }
     console.log(total);
     setTotalNfts(total);
-  }, [userBoughtNfts, userOwnedNfts, cancelledNfts]);
+  }, [userBoughtNfts, userOwnedNfts, cancelledNfts, activeNfts]);
   return (
     <div>
       <Navbar />
@@ -113,8 +132,11 @@ function Index({ currentuser }) {
                 })}
               </div>
             ) : (
-              <div className={style.web3NotEnabled}>
-                Loading The NFTs Please Wait . . . . .
+              <div
+                className={style.web3NotEnabled}
+                style={{ marginLeft: "200px" }}
+              >
+                There Are No NFTs That You Own
               </div>
             )}
           </>
