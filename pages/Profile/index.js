@@ -58,7 +58,15 @@ function Index({ currentuser }) {
           minter: userOwnedNfts.nftMinteds[i].minter,
           tokenId: userOwnedNfts.nftMinteds[i].tokenId,
         };
-        if (!total.includes(item) && item.minter === account) total.push(item);
+        for (let j = 0; j < total.length; j++) {
+          if (
+            item.minter == account &&
+            total[j].minter !== item.minter &&
+            total[j].tokenId !== item.tokenId
+          ) {
+            total.push(item);
+          }
+        }
       }
     }
     if (userBoughtNfts && userBoughtNfts.boughtItems.length > 0) {
@@ -67,7 +75,15 @@ function Index({ currentuser }) {
           minter: userBoughtNfts.boughtItems[i].buyer,
           tokenId: userBoughtNfts.boughtItems[i].tokenId,
         };
-        if (!total.includes(item) && item.minter === account) total.push(item);
+        for (let j = 0; j < total.length; j++) {
+          if (
+            item.minter == account &&
+            total[j].minter !== item.minter &&
+            total[j].tokenId !== item.tokenId
+          ) {
+            total.push(item);
+          }
+        }
       }
     }
     if (cancelledNfts && cancelledNfts.itemCancelleds.length > 0) {
@@ -76,7 +92,15 @@ function Index({ currentuser }) {
           minter: cancelledNfts.itemCancelleds[i].seller,
           tokenId: cancelledNfts.itemCancelleds[i].tokenId,
         };
-        if (!total.includes(item) && item.minter === account) total.push(item);
+        for (let j = 0; j < total.length; j++) {
+          if (
+            item.minter == account &&
+            total[j].minter !== item.minter &&
+            total[j].tokenId !== item.tokenId
+          ) {
+            total.push(item);
+          }
+        }
       }
     }
 
@@ -107,7 +131,7 @@ function Index({ currentuser }) {
       >
         See Your Listed NFTs
       </button>
-      <Navbar currentuser={currentuser}/>
+      <Navbar currentuser={currentuser} />
       <div className="profile-flex">
         <Profile
           email={email}
