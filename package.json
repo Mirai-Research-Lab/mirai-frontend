@@ -31,6 +31,7 @@
     "react-moralis": "^1.4.0",
     "react-native-leaderboard": "^1.0.6",
     "react-router-dom": "^6.4.3",
+    "react-toastify": "^9.1.1",
     "sweetalert2": "^11.6.7"
   },
   "devDependencies": {

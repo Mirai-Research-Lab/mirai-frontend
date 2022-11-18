@@ -9,12 +9,14 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import Image from "next/image";
+import logo from '../public/logo.jpg'
 export default function Navabr() {
   const swal = Swal;
   const { account, isWeb3Enabled } = useMoralis();
   useEffect(() => {
     if (account) {
-     const body = { address: account.toLowerCase() };
+      const body = { address: account.toLowerCase() };
       checkWalletAddress(body);
     }
   }, [account]);
@@ -81,11 +83,14 @@ export default function Navabr() {
       bg="dark"
       variant="dark"
     >
+      <Container className="navbarimg-container">
+        <Image className="logoimg" src={logo} height="80" width="80" /></Container>
+      <Container className="navbar-container"></Container>
       <Container className="navbar-container">
         <div>
-          <Navbar.Brand href="#home" className="navbar-brand">
+          {/* <Navbar.Brand href="#home" className="navbar-brand">
             MIRAI
-          </Navbar.Brand>
+          </Navbar.Brand> */}
         </div>
         <div>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -98,6 +103,9 @@ export default function Navabr() {
 
               <Link href="/Leaderboard" className="link">
                 Leaderboard
+              </Link>
+              <Link href="/contact" className="link">
+                Contact
               </Link>
               <NavDropdown title="profile" id="navbarScrollingDropdown">
                 <NavDropdown.Item

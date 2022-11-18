@@ -113,6 +113,21 @@ function Auth() {
         document.cookie =
           jwtToken + ";expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
+
+
+        swal.fire({
+          title: '<strong>Disclaimer</u></strong>',
+          icon: 'info',
+          html:
+            "anm fnmabnabhjabgkabgkabgkabgkBGKHABGSGS<br><br>hjvzhjavadgbag",
+          showCloseButton: true,
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> GOT IT!',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+        })
+
+        
       } catch (err) {
         swal.fire({
           icon: "error",
