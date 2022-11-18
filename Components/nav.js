@@ -10,16 +10,20 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 import Image from "next/image";
-import logo from '../public/logo.jpg'
-export default function Navabr() {
+import logo from "../public/logo.jpg";
+export default function Navabr({ currentuser }) {
   const swal = Swal;
   const { account, isWeb3Enabled } = useMoralis();
-  useEffect(() => {
-    if (account) {
-      const body = { address: account.toLowerCase() };
-      checkWalletAddress(body);
-    }
-  }, [account]);
+  useEffect(
+    (currentuser) => {
+      if (account) {
+        console.log("hello");
+        const body = { address: account.toLowerCase() };
+        checkWalletAddress(body);
+      }
+    },
+    [account, currentuser]
+  );
   const checkWalletAddress = async (body) => {
     console.log("checking wallet address");
     try {
@@ -62,7 +66,6 @@ export default function Navabr() {
       }
       console.log(check.status);
     } catch (e) {
-      //('ma chud gayi')
       swal
         .fire({
           icon: "error",
@@ -84,7 +87,10 @@ export default function Navabr() {
       variant="dark"
     >
       <Container className="navbarimg-container">
-       <Link href="/home"><Image className="logoimg" src={logo} height="80" width="80" /></Link> </Container>
+        <Link href="/home">
+          <Image className="logoimg" src={logo} height="80" width="80" />
+        </Link>{" "}
+      </Container>
       <Container className="navbar-container"></Container>
       <Container className="navbar-container">
         <div>

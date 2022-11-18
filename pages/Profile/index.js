@@ -108,7 +108,7 @@ function Index({ currentuser }) {
       >
         See Your Listed NFTs
       </button>
-      <Navbar />
+      <Navbar currentuser={currentuser}/>
       <div className="profile-flex">
         <Profile
           email={email}

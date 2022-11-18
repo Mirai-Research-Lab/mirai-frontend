@@ -28,13 +28,12 @@ const customStyles = {
 export default function CardDetails({ nft }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [price, setPrice] = React.useState(0);
-  const { web3, account, chainId } = useMoralis();
+  const { account, chainId } = useMoralis();
   const formattedChainId = parseInt(Number(chainId.toString()));
   const [formattedImageAddress, setFormattedImageAddress] = React.useState("");
 
   const { runContractFunction } = useWeb3Contract();
   const { runContractFunction: approve } = useWeb3Contract();
-  const { runContractFunction: listItem } = useWeb3Contract();
   const nftAddress = networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0];
   // console.log(nft);
 
@@ -81,36 +80,6 @@ export default function CardDetails({ nft }) {
     Router.reload();
   }
 
-  // console.log("dfdsaf", formattedImageUri);
-  // const handleBuy = async (result) => {
-  //   console.log(result);
-  //   const options = {
-  //     abi: Marketplace,
-  //     contractAddress:
-  //       networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-  //     functionName: "listItem",
-  //     params: {
-  //       nftAddress:
-  //         networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-  //       tokenId: nft.tokenId,
-  //       price: ethers.utils.parseUnits(price.toString(), "ether"),
-  //     },
-  //   };
-
-  //   await listItem({
-  //     gasLimit: 3e7,
-  //     params: options,
-  //     onSuccess: (result) => {
-  //       console.log(result);
-  //       closeModaleth();
-  //     },
-  //     onError: (result) => {
-  //       console.log(result);
-  //       // closeModaleth();
-  //     },
-  //   });
-  // };
-
   const handleBuyEthers = async (result) => {
     console.log(result);
     console.log("hello");
@@ -136,6 +105,11 @@ export default function CardDetails({ nft }) {
         closeModaleth();
       } catch (err) {
         console.log(err);
+        swal.fire({
+          icon: "error",
+          title: "Transaction Error",
+          message: "There is some error! please refresh",
+        });
       }
     }
   };
@@ -144,7 +118,7 @@ export default function CardDetails({ nft }) {
     if (price <= 0) {
       swal.fire({
         icon: "error",
-        title: "Listing Price cannot be 0",
+        title: "Invalid Listing Price",
         text: "Please enter appropriate amount",
       });
       return;

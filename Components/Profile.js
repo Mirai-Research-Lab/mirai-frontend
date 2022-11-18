@@ -66,14 +66,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   };
   const withdraw = () => {
     withdrawEthers();
-    // withdrawAmount({
-    //   onSuccess: (txHash) => {
-    //     // console.log(txHash);
-    //   },
-    //   onError: (error) => {
-    //     // console.log(error);
-    //   },
-    // });
   };
   const mintEthersNft = async () => {
     const { ethereum } = window;
@@ -105,38 +97,13 @@ function Profile({ email, username, funding_address, img, currentuser }) {
         );
       } catch (err) {
         console.log(err);
+        
       }
     }
   };
   const mintnfts = async () => {
     if (mintCount > 0) {
       mintEthersNft();
-      // const tokenId = staticMint({
-      //   onSuccess: async (result) => {
-      //     // console.log(result);
-      //     setMintCount(mintCount - 1);
-
-      //     try {
-      //       const decrementResult = await axios.post(
-      //         "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
-      //         {
-      //           username: currentuser.username,
-      //         },
-      //         {
-      //           withCredentials: true,
-      //           headers: {
-      //             cookies: document.cookie,
-      //           },
-      //         }
-      //       );
-      //     } catch (err) {
-      //       console.log(err);
-      //     }
-      //   },
-      //   onError: (error) => {
-      //     console.log(error);
-      //   },
-      // });
     }
   };
   const [item, setItem] = useState("");

@@ -7,16 +7,16 @@ import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import style from "../styles/web3.module.css";
-import ClipArt from "../public/clipart.png";
+import swal from "sweetalert2";
+
 export default function Marketplace({ activeNfts }) {
   const [nfts, setNfts] = useState([]);
   const chainId = "5";
-  const { data, error, runContractFunction, isFetching, isLoading } =
-    useWeb3Contract();
+  const { runContractFunction } = useWeb3Contract();
   const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
   const { account } = useMoralis();
   const setNftsInArray = async (imageUris) => {
-    const nfts = [];
+    const nftsTemp = [];
     for (let i = 0; i < imageUris.length; i++) {
       const nft = {
         tokenId: activeNfts[i].tokenId,
@@ -24,11 +24,10 @@ export default function Marketplace({ activeNfts }) {
         price: ethers.utils.formatEther(activeNfts[i].price.toString()),
         seller: activeNfts[i].seller,
       };
-      console.log(nfts);
-      nfts.push(nft);
+      nftsTemp.push(nft);
     }
-    console.log(nfts);
-    setNfts(nfts);
+    const filteredNfts = nftsTemp.filter((nft) => nft.seller != account);
+    setNfts(filteredNfts);
   };
   const setImageUris = async (tokenUris) => {
     const imageUris = await Promise.all(
@@ -58,11 +57,9 @@ export default function Marketplace({ activeNfts }) {
         },
       };
       let tokenUri = await runContractFunction({ params: options });
-      console.log(tokenUri.toString());
       let formattedTokenUri = tokenUri
         .toString()
         .replace("ipfs://", "https://ipfs.io/ipfs/");
-      console.log(formattedTokenUri);
       tokenUris.push(formattedTokenUri.toString());
     }
     setImageUris(tokenUris);
@@ -89,29 +86,16 @@ export default function Marketplace({ activeNfts }) {
             gasLimit: 500000,
           }
         );
-        console.log(listingTx);
       } catch (err) {
         console.log(err);
+        swal.fire({
+          icon: "error",
+          title: "Transaction Error",
+          text: "There is some error! please refresh",
+        });
       }
     }
   };
-  const handleBuy = async (e, tokenId, price) => {
-    console.log("buying");
-    const options = {
-      abi: MarketplaceAbi,
-      contractAddress: networkMapping[chainId]["Marketplace"][1],
-      functionName: "buyItem",
-      params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"][5],
-        tokenId: tokenId,
-      },
-      msgValue: ethers.utils.parseEther(price),
-    };
-    const response = await runContractFunction({
-      params: options,
-    });
-  };
-
   const formatAddress = (address) => {
     return address.substring(0, 4) + "..." + address.substring(38);
   };

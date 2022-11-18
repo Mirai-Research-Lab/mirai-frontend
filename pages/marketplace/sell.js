@@ -22,7 +22,7 @@ function Index({ currentuser }) {
   }, [currentuser]);
   return (
     <>
-      <Navbar />
+      <Navbar currentuser={currentuser}/>
       {isWeb3Enabled ? (
         !loading ? (
           <div>

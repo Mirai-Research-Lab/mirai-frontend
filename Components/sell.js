@@ -124,24 +124,6 @@ function Sell({ activeNfts }) {
   };
   const cancelItem = async (tid) => {
     cancelItemEthers(tid);
-    // const options = {
-    //   abi: MarketplaceAbi,
-    //   contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
-    //   functionName: "cancelItem",
-    //   params: {
-    //     nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-    //     tokenId: tid,
-    //   },
-    // };
-    // await runContractFunction({
-    //   params: options,
-    //   onSuccess: (success) => {
-    //     console.log(success);
-    //   },
-    //   onError: (err) => {
-    //     console.log(err);
-    //   },
-    // });
   };
 
   const updateItemEthersCall = async () => {
@@ -166,6 +148,11 @@ function Sell({ activeNfts }) {
         console.log(updatingTx);
       } catch (err) {
         console.log(err);
+        swal.fire({
+          icon: "error",
+          title: "",
+          text: "Please enter appropriate amount",
+        });
       }
     }
   };
@@ -173,35 +160,12 @@ function Sell({ activeNfts }) {
     if (price <= 0) {
       swal.fire({
         icon: "error",
-        title: "Listing Price cannot be 0",
-        text: "Please enter appropriate amount",
+        title: "Transaction Error",
+        text: "There is some error! please refresh",
       });
       return;
     }
     updateItemEthersCall();
-    // const options = {
-    //   abi: MarketplaceAbi,
-    //   contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
-    //   functionName: "updateItem",
-    //   params: {
-    //     nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-    //     tokenId: tid,
-    //     updatedPrice: price,
-    //   },
-    // };
-
-    // await runContractFunction({
-    //   params: options,
-
-    //   onSuccess: () => {
-    //     alert("OK");
-    //   },
-
-    //   onError: (err) => {
-    //     alert("Error");
-    //     console.log(err);
-    //   },
-    // });
   };
 
   const formatAddress = (address) => {

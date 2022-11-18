@@ -1,11 +1,9 @@
 import Image from "next/image";
-// import backwall from "../public/backwall.jpg";
 import backwall from "../public/backwall.png";
 import Modal from "react-modal";
 import { useState } from "react";
 import GameContract from "../constants/frontEndAbiLocation/GameContract.json";
 import networkMapping from "../constants/networkMapping.json";
-import { AccordionButton } from "react-bootstrap";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";
 import swal from "sweetalert2";
@@ -25,11 +23,9 @@ const customStyles = {
   },
 };
 function Main() {
-  const { account } = useMoralis();
   const chainId = "5";
   const [modalIsOpen, setIsOpen] = useState(false);
   const [price, setPrice] = useState(0);
-  const { runContractFunction } = useWeb3Contract();
   function openModal() {
     setIsOpen(true);
   }
@@ -38,7 +34,7 @@ function Main() {
     setIsOpen(!modalIsOpen);
   }
   const handleDontaionEthers = async () => {
-    if (price<=0) {
+    if (price <= 0) {
       swal.fire({
         icon: "error",
         title: "Amount entered cannot be 0",
@@ -66,32 +62,15 @@ function Main() {
         Router.reload();
       } catch (err) {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Transaction Error",
+          message: "There is some error! please refresh",
+        });
       }
     }
   };
-  const handleDonation = async () => {
-    const decimals = 18;
-    const options = {
-      abi: GameContract,
-      contractAddress: networkMapping[chainId]["IpfsNFT"][5],
-      functionName: "fundContract",
-      params: {},
-      gasLimit: "300000000",
-      msgValue: ethers.utils.parseUnits(price.toString(), "ether"),
-    };
-    await runContractFunction({
-      params: options,
-      onSuccess: (result) => {
-        alert("OK");
-        console.log(result);
-      },
 
-      onError: (err) => {
-        alert("Error");
-        console.log(err);
-      },
-    });
-  };
   return (
     <div className="img_container">
       <Modal isOpen={modalIsOpen} style={customStyles}>
