@@ -35,7 +35,6 @@ function Index({ currentuser }) {
   const [funding_address, setfunding_address] = useState("");
   const [image, setImage] = useState("");
   const [totalNfts, setTotalNfts] = useState([]);
-
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -58,32 +57,17 @@ function Index({ currentuser }) {
           minter: userOwnedNfts.nftMinteds[i].minter,
           tokenId: userOwnedNfts.nftMinteds[i].tokenId,
         };
-        for (let j = 0; j < total.length; j++) {
-          if (
-            item.minter == account &&
-            total[j].minter !== item.minter &&
-            total[j].tokenId !== item.tokenId
-          ) {
-            total.push(item);
-          }
-        }
+        if (!total.includes(item) && item.minter === account) total.push(item);
       }
     }
+    console.log("hello", total);
     if (userBoughtNfts && userBoughtNfts.boughtItems.length > 0) {
       for (let i = 0; i < userBoughtNfts.boughtItems.length; i++) {
         const item = {
           minter: userBoughtNfts.boughtItems[i].buyer,
           tokenId: userBoughtNfts.boughtItems[i].tokenId,
         };
-        for (let j = 0; j < total.length; j++) {
-          if (
-            item.minter == account &&
-            total[j].minter !== item.minter &&
-            total[j].tokenId !== item.tokenId
-          ) {
-            total.push(item);
-          }
-        }
+        if (!total.includes(item) && item.minter === account) total.push(item);
       }
     }
     if (cancelledNfts && cancelledNfts.itemCancelleds.length > 0) {
@@ -92,18 +76,10 @@ function Index({ currentuser }) {
           minter: cancelledNfts.itemCancelleds[i].seller,
           tokenId: cancelledNfts.itemCancelleds[i].tokenId,
         };
-        for (let j = 0; j < total.length; j++) {
-          if (
-            item.minter == account &&
-            total[j].minter !== item.minter &&
-            total[j].tokenId !== item.tokenId
-          ) {
-            total.push(item);
-          }
-        }
+        if (!total.includes(item) && item.minter === account) total.push(item);
       }
     }
-
+    console.log(total);
     // Remove already listed nfts
     if (activeNfts && activeNfts.activeItems.length > 0) {
       for (let i = 0; i < activeNfts.activeItems.length; i++) {
