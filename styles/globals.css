@@ -18,14 +18,13 @@
 }
 
 html {
-  background-color: #252525;
+  background-image: url("/bg4.jpg");
 }
 * {
   font-family: gaming-font;
 }
 body {
   overflow-x: hidden;
-  background-color: #252525;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -50,7 +49,7 @@ body {
 
 .seelistednftsRight {
   position: fixed;
-  top: 80px;
+  top: 90px;
   right: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
@@ -190,7 +189,7 @@ body {
 }
 .seelistednfts {
   position: fixed;
-  top: 80px;
+  top: 90px;
   left: 30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
@@ -274,7 +273,7 @@ a:hover span:nth-child(2):after {
 
 /*MARKETPLACE*/
 .marketplace-container {
-  background: #252525;
+  background-image: url("/bg4.jpg");
   height: auto;
   top: 0;
   padding-bottom: 3rem;
@@ -389,6 +388,7 @@ nft-card-info > button {
   height: 100%;
   color: white;
   width: 30%;
+  background-image: url("/bg4.jpg");
   /* margin-top: 300px; */
 }
 .profile-name {
@@ -402,6 +402,7 @@ nft-card-info > button {
 }
 .card {
   background-color: #252525 !important;
+  background-image: url("/bg4.jpg");
   width: 280px;
   height: 300px;
   border-radius: 33px;
@@ -447,6 +448,7 @@ nft-card-info > button {
   display: flex;
   background-color: #252525;
   flex-direction: row;
+  background-image: url("/bg4.jpg");
 }
 .mail {
   font-size: 14px;

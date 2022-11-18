@@ -169,6 +169,11 @@ export default function Marketplace({ activeNfts }) {
                             <button
                               onClick={() => {
                                 navigator.clipboard.writeText(nftAddress);
+                                swal.fire({
+                                  icon: "info",
+                                  title: "Copied",
+                                  text: "Successfully Copied NFT Address",
+                                });
                               }}
                               className="clipartButton"
                             >
