@@ -2,7 +2,7 @@ import Router from "next/router";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { useWeb3Contract } from "react-moralis";
+import { useMoralis, useWeb3Contract } from "react-moralis";
 import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
@@ -14,6 +14,7 @@ export default function Marketplace({ activeNfts }) {
   const { data, error, runContractFunction, isFetching, isLoading } =
     useWeb3Contract();
   const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
+  const { account } = useMoralis();
   const setNftsInArray = async (imageUris) => {
     const nfts = [];
     for (let i = 0; i < imageUris.length; i++) {
@@ -133,7 +134,7 @@ export default function Marketplace({ activeNfts }) {
             {/* todo: activeNfts.map */}
             {nfts.length > 0 ? (
               nfts.map((value, index) => {
-                return (
+                return value.seller !== account ? (
                   <>
                     <div key={index}>
                       <div className="nft-image">
@@ -178,6 +179,8 @@ export default function Marketplace({ activeNfts }) {
                       </div>
                     </div>
                   </>
+                ) : (
+                  <></>
                 );
               })
             ) : (
