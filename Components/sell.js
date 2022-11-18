@@ -9,7 +9,6 @@ import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 
 import { useMoralis, useWeb3Contract } from "react-moralis";
 function Sell({ activeNfts }) {
-  const [nfts, setNfts] = useState([]);
   const [ownersNfts, setOwnersNfts] = useState([]);
   const chainId = "5";
   const { account } = useMoralis();
@@ -17,7 +16,7 @@ function Sell({ activeNfts }) {
     useWeb3Contract();
   const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
   const setNftsInArray = async (imageUris) => {
-    const nfts = [];
+    const nftsTemp = [];
     for (let i = 0; i < imageUris.length; i++) {
       const nft = {
         tokenId: activeNfts[i].tokenId,
@@ -25,11 +24,11 @@ function Sell({ activeNfts }) {
         price: ethers.utils.formatEther(activeNfts[i].price.toString()),
         seller: activeNfts[i].seller,
       };
-      console.log(nfts);
-      nfts.push(nft);
+      nftsTemp.push(nft);
     }
-    console.log(nfts);
-    setNfts(nfts);
+    let nftsOwned = nftsTemp.filter((nft) => nft.seller === account);
+    console.log(nftsOwned);
+    setOwnersNfts(nftsOwned);
   };
   const setImageUris = async (tokenUris) => {
     const imageUris = await Promise.all(
@@ -140,10 +139,12 @@ function Sell({ activeNfts }) {
     });
   };
 
-  useEffect(() => {
-    const filterNfts = nfts.filter((nft) => nft.seller === account);
-    setOwnersNfts(filterNfts);
-  }, [account]);
+  // useEffect(() => {
+  //   console.log("I am all nfts", nfts);
+  //   const filterNfts = nfts.filter((nft) => nft.seller === account);
+  //   setOwnersNfts(filterNfts);
+  //   console.log("hello", filterNfts);
+  // }, [account]);
   const formatAddress = (address) => {
     return address.substring(0, 6) + "..." + address.substring(38);
   };
@@ -166,14 +167,29 @@ function Sell({ activeNfts }) {
                         src={value.imageUri}
                         alt="nft"
                         className="nft-image"
+                        width={350}
+                        height={350}
                       />
                       <div className="nft-card-info">
                         <div className="nft-card-info-heading">
-                          <h1>Current Listed Price : {value.price}</h1>
-                          <span>Card Token Id: {value.tokenId}</span>
-                          <span>NFT Address: {formatAddress(nftAddress)}</span>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            Current Listed Price : {value.price}
+                          </div>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            Card Token Id: {value.tokenId}
+                          </div>
+                          <div style={{ fontFamily: "jetbrains" }}>
+                            NFT Address: {formatAddress(nftAddress)}
+                          </div>
 
                           <div style={{ textAlign: "center" }}>
+                            <button
+                              onClick={(e) => cancelItem(e)}
+                              className="buyNftButton"
+                              style={{ marginRight: "20px" }}
+                            >
+                              Update Listing
+                            </button>
                             <button
                               onClick={(e) => cancelItem(e)}
                               className="buyNftButton"

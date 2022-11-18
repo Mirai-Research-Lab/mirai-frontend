@@ -132,6 +132,7 @@ export default function CardDetails({ nft }) {
           }
         );
         console.log(listingTx);
+        closeModaleth();
       } catch (err) {
         console.log(err);
       }
