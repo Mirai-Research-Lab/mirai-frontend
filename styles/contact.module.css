@@ -1,102 +1,109 @@
 .contact {
-    background-color: #252525;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  background-color: #252525;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("/bg4.jpg");        
 }
-.contactbox{
-    position: absolute;
-    top: 90px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 30%;
-    height: 75%;
-    background: linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
-    padding: 30px;
+.contactbox {
+  position: absolute;
+  top: 90px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 30%;
+  height: 75%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding: 30px;
 }
-.contactbox:hover{
-    animation:borderanimate 0.5s linear;
-    box-shadow: 0 15px 15px 0 #5bc3e2, 0 6px 20px 0 #2ab0f4;
+.contactbox:hover {
+  animation: borderanimate 0.5s linear;
+  box-shadow: 0 15px 15px 0 #5bc3e2, 0 6px 20px 0 #2ab0f4;
 }
 @keyframes borderanimate {
-    0%{
-        box-shadow:none;
-    }
-    100%{
-        box-shadow: 0 7px 7px 0 #5bc3e2, 0 6px 20px 0 #4c84fe;
-    }
+  0% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: 0 7px 7px 0 #5bc3e2, 0 6px 20px 0 #4c84fe;
+  }
 }
-.inputgroup{
-    top: 130px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    position: absolute;
-    width: 280px;
-    transition: .5s;
+.inputgroup {
+  top: 130px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
 }
-.inputfield{
-    width: 100%;
-    padding: 10px 0;
-    margin: 20px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    color: white;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
-    font-family: poppins ;
+.inputfield {
+  width: 100%;
+  padding: 10px 0;
+  margin: 20px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  color: white;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+  font-family: poppins;
 }
-.contactheading{
-    color: #6bdcfe;
-    text-shadow: 0 0 20px #4c84fe;
-    top: 30px;
-    position: relative;
-    left: 110px;
-    font-size: 1.5rem;
-
+.contactheading {
+  color: #6bdcfe;
+  text-shadow: 0 0 20px #4c84fe;
+  top: 30px;
+  position: relative;
+  left: 110px;
+  font-size: 1.5rem;
 }
-.submitbtn_1{
-    width: 85%;
-    padding: 10px 30px;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    background: linear-gradient(to right,  #5bc3e2, #4c84fe);
-    border: 0;
-    outline: none;
-    border-radius: 30px;
-    margin-top: 10px;
+.submitbtn_1 {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, #5bc3e2, #4c84fe);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  margin-top: 10px;
 }
 .blob5 {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    margin-left: -150px;
-    margin-top: 300px;
-    background: linear-gradient(180deg, rgba(3, 58, 86, 0.42) 31.77%,
-            #437bc4 100%);
-    border-radius: 100%;
-    filter: blur(23px);
-    animation: bouncess 18s ease-in-out infinite alternate;
-    z-index: -1;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-left: -150px;
+  margin-top: 300px;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 58, 86, 0.42) 31.77%,
+    #437bc4 100%
+  );
+  border-radius: 100%;
+  filter: blur(23px);
+  animation: bouncess 18s ease-in-out infinite alternate;
+  z-index: -1;
 }
 
 @keyframes bouncess {
-    from {
-        transform: translate(0px, 0px) rotate(-270deg);
-    }
+  from {
+    transform: translate(0px, 0px) rotate(-270deg);
+  }
 
-    to {
-        transform: translate(-10px, -250px) rotate(-140deg);
-    }
+  to {
+    transform: translate(-10px, -250px) rotate(-140deg);
+  }
 }

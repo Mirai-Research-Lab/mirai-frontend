@@ -120,11 +120,14 @@ function Index({ currentuser }) {
         {isWeb3Enabled ? (
           <>
             {totalNfts && totalNfts.length > 0 ? (
-              <div className="marketplace-container myCard-container">
+              <div
+                className="marketplace-container myCard-container"
+                style={{ marginRight: "25rem" }}
+              >
                 <div className="marketplace-heading ">
                   <h1 style={{ fontFamily: "gaming-font" }}>MY Cards</h1>
                   <span style={{ fontFamily: "gaming-font" }}>
-                    Following are the cards you own{" "}
+                    Following are the cards you own
                   </span>
                 </div>
 

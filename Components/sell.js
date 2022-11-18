@@ -97,47 +97,78 @@ function Sell({ activeNfts }) {
   useEffect(() => {
     setTokenUris();
   }, [activeNfts]);
-  const handleBuy = async (tokenId, price) => {
-    console.log("buying");
-    const options = {
-      abi: MarketplaceAbi,
-      contractAddress: networkMapping[chainId]["Marketplace"][1],
-      functionName: "buyItem",
-      params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"][5],
-        tokenId: tokenId,
-      },
-      msgValue: ethers.utils.parseEther(price),
-    };
-    const response = await runContractFunction({
-      params: options,
-    });
-  };
 
-  const cancelItem = async (tid) => {
-    const options = {
-      abi: MarketplaceAbi,
-      contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
-      functionName: "cancelItem",
-      params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-        tokenId: tid,
-      },
-    };
-
-    await runContractFunction({
-      params: options,
-
-      onSuccess: (success) => {
-        console.log(success);
-      },
-
-      onError: (err) => {
+  const cancelItemEthers = async (tid) => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const marketPlaceContract = new ethers.Contract(
+          networkMapping[chainId]["Marketplace"].slice(-1)[0],
+          MarketplaceAbi,
+          signer
+        );
+        let cancelTx = await marketPlaceContract.cancelItem(
+          networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+          tid,
+          {
+            gasLimit: 500000,
+          }
+        );
+        console.log(cancelTx);
+      } catch (err) {
         console.log(err);
-      },
-    });
+      }
+    }
+  };
+  const cancelItem = async (tid) => {
+    cancelItemEthers(tid);
+    // const options = {
+    //   abi: MarketplaceAbi,
+    //   contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
+    //   functionName: "cancelItem",
+    //   params: {
+    //     nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+    //     tokenId: tid,
+    //   },
+    // };
+    // await runContractFunction({
+    //   params: options,
+    //   onSuccess: (success) => {
+    //     console.log(success);
+    //   },
+    //   onError: (err) => {
+    //     console.log(err);
+    //   },
+    // });
   };
 
+  const updateItemEthersCall = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const marketPlaceContract = new ethers.Contract(
+          networkMapping[chainId]["Marketplace"].slice(-1)[0],
+          MarketplaceAbi,
+          signer
+        );
+        let updatingTx = await marketPlaceContract.updateItem(
+          networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+          tid,
+          ethers.utils.parseUnits(price, "ether"),
+          {
+            gasLimit: 500000,
+          }
+        );
+        console.log(updatingTx);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const updateItem = async () => {
     if (price <= 0) {
       swal.fire({
@@ -147,29 +178,30 @@ function Sell({ activeNfts }) {
       });
       return;
     }
-    const options = {
-      abi: MarketplaceAbi,
-      contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
-      functionName: "updateItem",
-      params: {
-        nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-        tokenId: tid,
-        updatedPrice: price,
-      },
-    };
+    updateItemEthersCall();
+    // const options = {
+    //   abi: MarketplaceAbi,
+    //   contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
+    //   functionName: "updateItem",
+    //   params: {
+    //     nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+    //     tokenId: tid,
+    //     updatedPrice: price,
+    //   },
+    // };
 
-    await runContractFunction({
-      params: options,
+    // await runContractFunction({
+    //   params: options,
 
-      onSuccess: () => {
-        alert("OK");
-      },
+    //   onSuccess: () => {
+    //     alert("OK");
+    //   },
 
-      onError: (err) => {
-        alert("Error");
-        console.log(err);
-      },
-    });
+    //   onError: (err) => {
+    //     alert("Error");
+    //     console.log(err);
+    //   },
+    // });
   };
 
   const formatAddress = (address) => {
