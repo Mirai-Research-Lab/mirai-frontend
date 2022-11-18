@@ -90,7 +90,19 @@ function Main() {
           <br />
           Let's <span>SHOOT</span>!
         </div>
-        <div className="play-btn">
+        <div className="play-btn" onClick={()=>{
+        swal.fire({
+          title: '<strong>Disclaimer</u></strong>',
+          icon: 'info',
+          html:
+            "anm fnmabnabhjabgkabgkabgkabgkBGKHABGSGS<br><br>hjvzhjavadgbag",
+          showCloseButton: true,
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> GOT IT!',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+        })
+        }}>
           <a href="https://azulul.itch.io/mirai-shooter" target="_blank">
             <span data-attr="Play">Play</span>
             <span data-attr="Now">Now</span>
