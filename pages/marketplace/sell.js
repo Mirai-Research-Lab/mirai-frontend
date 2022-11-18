@@ -9,6 +9,7 @@ import style from "../../styles/web3.module.css";
 function Index({ currentuser }) {
   const { loading, error, data: addNfts } = useQuery(GET_ACTIVE_ITEMS_QUERY);
   const { isWeb3Enabled } = useMoralis();
+  console.log(addNfts);
   useEffect(() => {
     if (!currentuser) {
       swal.fire({
@@ -25,7 +26,7 @@ function Index({ currentuser }) {
       {isWeb3Enabled ? (
         !loading ? (
           <div>
-            <Sell activeNfts={addNfts} />
+            <Sell activeNfts={addNfts.activeItems} />
           </div>
         ) : (
           <div className={style.web3NotEnabled}>

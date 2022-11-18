@@ -8,6 +8,7 @@ import networkMapping from "../constants/networkMapping.json";
 import { AccordionButton } from "react-bootstrap";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";
+import Router from "next/router";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
@@ -35,7 +36,31 @@ function Main() {
   function closeModal() {
     setIsOpen(!modalIsOpen);
   }
-
+  const handleDontaionEthers = async () => {
+    if (price <= 0) return;
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const gameContract = new ethers.Contract(
+          networkMapping[chainId]["GameContract"].slice(-1)[0],
+          GameContract,
+          signer
+        );
+        let listingTx = await gameContract.fundContract({
+          value: ethers.utils.parseUnits(price.toString(), "ether"),
+          gasLimit: 500000,
+        });
+        console.log(listingTx);
+        setPrice(0);
+        closeModal();
+        Router.reload();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const handleDonation = async () => {
     const decimals = 18;
     const options = {
@@ -44,7 +69,7 @@ function Main() {
       functionName: "fundContract",
       params: {},
       gasLimit: "300000000",
-      msgValue: ethers.utils.parseUnits(price.toString(), decimals),
+      msgValue: ethers.utils.parseUnits(price.toString(), "ether"),
     };
     await runContractFunction({
       params: options,
@@ -68,7 +93,7 @@ function Main() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         ></input>
-        <button onClick={(e) => handleDonation()}>Donate</button>
+        <button onClick={(e) => handleDontaionEthers()}>Donate</button>
         <button onClick={closeModal}>Close</button>
       </Modal>
       <Image className="homeImg" src={backwall} alt={"Home"} />

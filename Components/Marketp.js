@@ -69,6 +69,31 @@ export default function Marketplace({ activeNfts }) {
   useEffect(() => {
     setTokenUris();
   }, [activeNfts]);
+  const handleBuyEthers = async (tokenId, price) => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const marketPlaceContract = new ethers.Contract(
+          networkMapping[chainId]["Marketplace"].slice(-1)[0],
+          MarketplaceAbi,
+          signer
+        );
+        let listingTx = await marketPlaceContract.buyItem(
+          networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+          tokenId,
+          {
+            value: ethers.utils.parseUnits(price.toString(), "ether"),
+            gasLimit: 500000,
+          }
+        );
+        console.log(listingTx);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const handleBuy = async (e, tokenId, price) => {
     console.log("buying");
     const options = {
@@ -133,7 +158,8 @@ export default function Marketplace({ activeNfts }) {
                           <div style={{ textAlign: "center" }}>
                             <button
                               onClick={(e) =>
-                                handleBuy(e, value.tokenId, value.price)
+                                // handleBuy(e, value.tokenId, value.price)
+                                handleBuyEthers(value.tokenId, value.price)
                               }
                               className="buyNftButton"
                             >
