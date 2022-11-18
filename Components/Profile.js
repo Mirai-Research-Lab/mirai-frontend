@@ -65,15 +65,15 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           try {
             const decrementResult = await axios.post(
               "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
-              {
-                withCredentials: true,
-                body: {
+                {
                   username: currentuser.username,
                 },
-                headers: {
-                  cookies: document.cookie,
+                {
+                  withCredentials: true,
+                  headers: {
+                    cookies: document.cookie,
+                  },
                 },
-              }
             );
           } catch (err) {
             console.log(err);
@@ -196,9 +196,9 @@ function Profile({ email, username, funding_address, img, currentuser }) {
               <button
                 className="mint-nfts"
                 onClick={mintnfts}
-                disabled={currentuser.mintCount <= 0}
+                disabled={mintCount <= 0}
               >
-                Mint A NFT ( {currentuser.mintCount} remaining )
+                Mint A NFT ( {mintCount} remaining )
               </button>
             </span>
           </div>

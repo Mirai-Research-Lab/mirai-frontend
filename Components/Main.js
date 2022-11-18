@@ -103,8 +103,8 @@ function Main() {
           <br />
           Let's <span>SHOOT</span>!
         </div>
-        <div className="play-btn" target="_blank">
-          <a href="https://azulul.itch.io/mirai-shooter">
+        <div className="play-btn" >
+          <a href="https://azulul.itch.io/mirai-shooter" target="_blank">
             <span data-attr="Play">Play</span>
             <span data-attr="Now">Now</span>
           </a>

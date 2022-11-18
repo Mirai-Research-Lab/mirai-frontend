@@ -6,10 +6,26 @@ import { sell } from "./database";
 import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
-
+import { Modal } from "react-bootstrap";
 import { useMoralis, useWeb3Contract } from "react-moralis";
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    borderRadius: "10%",
+    transform: "translate(-50%, -50%)",
+  },
+};  
 function Sell({ activeNfts }) {
+  const [isOpen, setisOpen] = useState(false);
   const [ownersNfts, setOwnersNfts] = useState([]);
+
   const chainId = "5";
   const { account } = useMoralis();
   const { data, error, runContractFunction, isFetching, isLoading } =
@@ -26,10 +42,20 @@ function Sell({ activeNfts }) {
       };
       nftsTemp.push(nft);
     }
+
     let nftsOwned = nftsTemp.filter((nft) => nft.seller === account);
     console.log(nftsOwned);
     setOwnersNfts(nftsOwned);
   };
+  function openModal() {
+    alert('open')
+    setisOpen(true);
+  }
+
+  function closeModal() {
+    console.log("closing modal");
+    setisOpen(!isOpen);
+  }
   const setImageUris = async (tokenUris) => {
     const imageUris = await Promise.all(
       tokenUris.map(async (tokenUri) => {
@@ -70,7 +96,7 @@ function Sell({ activeNfts }) {
   useEffect(() => {
     setTokenUris();
   }, [activeNfts]);
-  const handleBuy = async (e, tokenId, price) => {
+  const handleBuy = async (tokenId, price) => {
     console.log("buying");
     const options = {
       abi: MarketplaceAbi,
@@ -87,14 +113,14 @@ function Sell({ activeNfts }) {
     });
   };
 
-  const cancelItem = async (e) => {
+  const cancelItem = async (tid) => {
     const options = {
       abi: MarketplaceAbi,
       contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
       functionName: "cancelItem",
       params: {
         nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-        tokenId: tokenId,
+        tokenId: tid,
       },
     };
 
@@ -102,25 +128,24 @@ function Sell({ activeNfts }) {
       params: options,
 
       onSuccess: (success) => {
-        alert("OK");
         console.log(success);
       },
 
       onError: (err) => {
-        alert("Error");
         console.log(err);
       },
     });
   };
 
-  const updateItem = async () => {
+  const updateItem = async (p) => {
+    console.log(p);
     const options = {
       abi: MarketplaceAbi,
       contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
       functionName: "updateItem",
       params: {
         nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
-        tokenId: tokenId,
+        tokenId: tid,
         updatedPrice: price,
       },
     };
@@ -139,20 +164,31 @@ function Sell({ activeNfts }) {
     });
   };
 
-  // useEffect(() => {
-  //   console.log("I am all nfts", nfts);
-  //   const filterNfts = nfts.filter((nft) => nft.seller === account);
-  //   setOwnersNfts(filterNfts);
-  //   console.log("hello", filterNfts);
-  // }, [account]);
   const formatAddress = (address) => {
     return address.substring(0, 6) + "..." + address.substring(38);
   };
 
   return (
     <>
+      <Modal isOpen={isOpen} style={customStyles}>
+        <h2>Update your profile pic</h2>
+        <input
+          type="file"
+          accept="image/*,.pdf"
+          onChange={(e) => setItem(e.target.files[0])}
+        />
+        <button
+          onClick={() => {
+            console.log(e.target);
+          }}
+        >
+          Update
+        </button>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
       <div className="marketplace-container ">
         <div className="marketplace-heading">
+        
           <h1 style={{ fontFamily: "gaming-font" }}>YOUR LISTED NFTS</h1>
           <span style={{ fontFamily: "gaming-font" }}>Update NFTs</span>
         </div>
@@ -184,14 +220,14 @@ function Sell({ activeNfts }) {
 
                           <div style={{ textAlign: "center" }}>
                             <button
-                              onClick={(e) => cancelItem(e)}
+                              onClick={openModal}
                               className="buyNftButton"
                               style={{ marginRight: "20px" }}
                             >
                               Update Listing
                             </button>
                             <button
-                              onClick={(e) => cancelItem(e)}
+                              onClick={(e) => cancelItem(value.tokenId)}
                               className="buyNftButton"
                             >
                               Cancel
