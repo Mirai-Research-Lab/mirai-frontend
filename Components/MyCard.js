@@ -81,44 +81,57 @@ export default function CardDetails({ nft }) {
   }
 
   // console.log("dfdsaf", formattedImageUri);
-
-  const handlebuy = (e) => {
-    approve({
-      abi: IpfsNFT,
-      contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
-      functionName: "approve",
+  const handleBuy = async (result) => {
+    console.log(result);
+    const options = {
+      abi: Marketplace,
+      contractAddress:
+        networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+      functionName: "listItem",
       params: {
         nftAddress:
           networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
         tokenId: nft.tokenId,
+        price: ethers.utils.parseUnits(price.toString(), "ether"),
       },
+    };
+
+    await listItem({
+      gasLimit: 3e7,
+      params: options,
       onSuccess: (result) => {
-        // console.log("approve result: ", result);
-        listItem({
-          abi: Marketplace,
-          contractAddress:
-            networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-          functionName: "listItem",
-          params: {
-            nftAddress:
-              networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-            tokenId: nft.tokenId,
-            price: price,
-          },
-          onSuccess: (result) => {
-            // console.log("listItem result: ", result);
-          },
-          onError: (error) => {
-            // console.log("listItem error", error);
-          },
-        });
+        console.log(result);
+        closeModaleth();
       },
-      onError: (error) => {
-        // console.log("approve error", error);
+      onError: (result) => {
+        console.log(result);
+        // closeModaleth();
       },
     });
-
-    closeModaleth();
+  };
+  const handleApprove = async () => {
+    console.log(price);
+    if (price > 0) {
+      console.log("hello");
+      const options = {
+        abi: IpfsNFT,
+        contractAddress:
+          networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
+        functionName: "approve",
+        params: {
+          to: networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+          tokenId: nft.tokenId,
+        },
+      };
+      await approve({
+        gasLimit: 3e7,
+        params: options,
+        onSuccess: (result) => handleBuy(result),
+        onError: (error) => {
+          console.log("approve error", error);
+        },
+      });
+    }
   };
   const formatAddress = (address) => {
     return address.substring(0, 4) + "..." + address.substring(38);
@@ -132,7 +145,7 @@ export default function CardDetails({ nft }) {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         ></input>
-        <button onClick={(e) => handlebuy()}>List</button>
+        <button onClick={(e) => handleApprove()}>List</button>
         <button onClick={closeModal}>Close</button>
       </Modal>
       {/* <div className="nft-cards my-cards-div"> */}
