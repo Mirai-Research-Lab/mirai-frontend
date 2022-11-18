@@ -20,7 +20,7 @@ function Index({ currentuser }) {
   });
   return (
     <div>
-      <Navbar />
+      <Navbar currentuser={currentuser}/>
       <MainPage />
       <Features />
     </div>

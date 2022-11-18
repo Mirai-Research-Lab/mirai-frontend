@@ -33,7 +33,7 @@ function Leaderboard({ currentuser }) {
   }, []);
   return (
     <div>
-      <Navbar />
+      <Navbar currentuser={currentuser}/>
       <div className={styles.leaderboard} id={styles.Lboard}>
         {players.length?<Board players={players}></Board>:(
           <div className={style.web3NotEnabled}>
