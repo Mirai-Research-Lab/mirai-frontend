@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/leaderboard.module.css";
 
-export default function profiles({ Leaderboard, players }) {
+export default function Profiles({ Leaderboard, players }) {
   return <div id={styles.profile}>{Item({ Leaderboard, players })}</div>;
 }
 

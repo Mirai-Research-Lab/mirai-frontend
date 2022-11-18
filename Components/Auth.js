@@ -1,15 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/auth.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import axios from "axios";
 import swal from "sweetalert2";
 import { TriangleDown } from "@web3uikit/icons";
+import Image from "next/image";
+import logo from '../public/logo.jpg'
 function Auth() {
+  const daysToExpire = 7;
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
-    document.addEventListener("keydown", function(e) { 
-      if (e.keyCode == 9) e.preventDefault(); 
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode == 9) e.preventDefault();
     });
 
     // clean up
@@ -95,16 +98,40 @@ function Auth() {
     } else {
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signup",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signup",
           credentials,
           {
             withCredentials: true,
           }
         );
-        // navigate('/home');
-        console.log(res);
+        const jwtToken = "jwt=" + res.data;
+        var date = new Date();
+        date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+        document.cookie =
+          jwtToken + ";expires=" + date.toUTCString() + ";path=/";
         router.push("/home");
+
+        swal.fire({
+          title: '<strong>Disclaimer</u></strong>',
+          icon: 'info',
+          html:
+            "anm fnmabnabhjabgkabgkabgkabgkBGKHABGSGS<br><br>hjvzhjavadgbag",
+          showCloseButton: true,
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> GOT IT!',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+        })
+
+
+
+
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Email already in use",
+          text: "Please enter a unique email id..",
+        });
         console.log(err);
       }
     }
@@ -131,17 +158,37 @@ function Auth() {
     } else
       try {
         const res = await axios.post(
-          "http://localhost:3001/api/auth/signin",
+          "https://mirai-backend-kappa.vercel.app/api/auth/signin",
           credentials,
           {
             withCredentials: true,
           }
         );
         if (res.status === 200) {
-          console.log(res);
+          console.log(res.data);
+          const jwtToken = "jwt=" + res.data;
+          var date = new Date();
+          date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+          document.cookie =
+            jwtToken + ";expires=" + date.toUTCString() + ";path=/";
           router.push("/home");
+
+          //comenting since disclaimer not needed everytime while loggin in
+          // swal.fire({
+          //   title: '<strong>Disclaimer</u></strong>',
+          //   icon: 'info',
+          //   html:
+          //     "anm fnmabnabhjabgkabgkabgkabgkBGKHABGSGS<br><br>hjvzhjavadgbag",
+          //   showCloseButton: true,
+          //   focusConfirm: false,
+          //   confirmButtonText:
+          //     '<i class="fa fa-thumbs-up"></i> GOT IT!',
+          //   confirmButtonAriaLabel: 'Thumbs up, great!',
+          // })
+
+
         } else {
-          const message = await res.json();
+          const message = res.data;
           console.log(message);
           swal.fire({
             icon: "error",
@@ -151,11 +198,19 @@ function Auth() {
           //   console.log(res);
         }
       } catch (err) {
+        swal.fire({
+          icon: "error",
+          title: "Invalid Credentials",
+          text: "Please enter valid details!",
+        });
         console.log(err);
       }
   };
   return (
     <div className={styles.auth}>
+      <div className={styles.about}>
+        <Image className={styles.logoimg} src={logo} height="80" width="80"/>
+      </div>
       <div className={styles.authbox}>
         <div className={styles.heading}>
           <div className={styles.formboxdiv}>

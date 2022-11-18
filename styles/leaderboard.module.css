@@ -10,13 +10,14 @@
         align-items: center;
         /* background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba(5,77,142,1) 100%); */
-        background-image: url("../assets/bg4.jpg");
+        /* background-image: url("../assets/bg4.jpg"); */
+        background-color: #252525;
         width: 100%;
         font-family: 'Poppins', sans-serif;
 }
 .board:hover{
     animation:borderanimate 0.5s linear;
-    box-shadow: 0 7px 7px 0 #5bc3e2, 0 6px 20px 0 #4c84fe;
+    box-shadow: 0 15px 15px 0 #5bc3e2, 0 6px 20px 0 #2ab0f4;
 }
 @keyframes borderanimate {
     0%{
@@ -134,7 +135,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
     font-family: Poppins;
 }
 .profiles{
-    margin-top:380px ;
+    margin-top:200px ;
     color: white;
     font-family:"poppins" ;
 
@@ -151,6 +152,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
     display: inline;
     color: white;
     font-family:"poppins" ;
+    margin-right: 30px;
 
 }
 .topthreedetails>h5{
@@ -172,4 +174,8 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,9,121,1) 84%, rgba
 }
 .info>span{
     padding-right: 50px;
+}
+.top3container{
+    position: relative;
+    left: 78px;
 }

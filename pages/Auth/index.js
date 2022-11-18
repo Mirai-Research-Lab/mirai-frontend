@@ -1,9 +1,21 @@
-import Auth from "../../components/Auth.js"
-import Navbar from '../../Components/nav.js';
-
-export default function navabr() {
-    return (
-        <div>
-<Auth></Auth></div>
-    );
+import Auth from "../../Components/Auth.js";
+import Navbar from "../../Components/nav.js";
+import { useEffect } from "react";
+import Router from "next/router";
+export default function Nav() {
+  useEffect(() => {
+    if (
+      localStorage.getItem("jwt") != null &&
+      document.cookie &&
+      document.cookie != "jwt=undefined" &&
+      document.cookie != ""
+    ) {
+      Router.push("/home");
+    }
+  });
+  return (
+    <div>
+      <Auth></Auth>
+    </div>
+  );
 }

@@ -5,11 +5,11 @@ import nft2 from "../public/nft2.jpg";
 import nft3 from "../public/nft3.jpg";
 import nft4 from "../public/nft4.webp";
 import { marketplace } from "./database";
+import nftMarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
+import nftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 
 export default function Marketplace({ activeNfts }) {
-  <button className="Sellsection" o>
-    Sell
-  </button>;
+  <button className="Sellsection">Sell</button>;
 
   const handlesell = () => {
     Router.push("/marketplace/sell");
@@ -30,15 +30,18 @@ export default function Marketplace({ activeNfts }) {
           <div className="nft-card">
             {marketplace.map((value, index) => {
               return (
-                <div>
-                  <Image src={nft} alt="nft" className="nft-image" />
-                  <div className="nft-card-info">
-                    <div className="nft-card-info-heading">
-                      <h1>Card Name</h1>
-                      <span>Card Description</span>
+                <>
+                  <div>
+                    key={index}
+                    <Image src={nft} alt="nft" className="nft-image" />
+                    <div className="nft-card-info">
+                      <div className="nft-card-info-heading">
+                        <h1>Card Name</h1>
+                        <span>Card Description</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </>
               );
             })}
           </div>
