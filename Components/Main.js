@@ -3,6 +3,11 @@ import Image from "next/image";
 import backwall from "../public/backwall.png";
 import Modal from "react-modal";
 import { useState } from "react";
+import GameContract from "../constants/frontEndAbiLocation/GameContract.json";
+import networkMapping from "../constants/networkMapping.json";
+import { AccordionButton } from "react-bootstrap";
+import { useMoralis, useWeb3Contract } from "react-moralis";
+import { ethers } from "ethers";
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.4)",
@@ -18,8 +23,11 @@ const customStyles = {
   },
 };
 function Main() {
+  const { account } = useMoralis();
+  const chainId = "5";
   const [modalIsOpen, setIsOpen] = useState(false);
   const [price, setPrice] = useState(0);
+  const { runContractFunction } = useWeb3Contract();
   function openModal() {
     setIsOpen(true);
   }
@@ -27,12 +35,30 @@ function Main() {
   function closeModal() {
     setIsOpen(!modalIsOpen);
   }
-  function closeModaleth() {
-    setIsOpen(false);
-    Router.reload();
-  }
 
-  const handleDonation = async () => {};
+  const handleDonation = async () => {
+    const decimals = 18;
+    const options = {
+      abi: GameContract,
+      contractAddress: networkMapping[chainId]["IpfsNFT"][5],
+      functionName: "fundContract",
+      params: {},
+      gasLimit: "300000000",
+      msgValue: ethers.utils.parseUnits(price.toString(), decimals),
+    };
+    await runContractFunction({
+      params: options,
+      onSuccess: (result) => {
+        alert("OK");
+        console.log(result);
+      },
+
+      onError: (err) => {
+        alert("Error");
+        console.log(err);
+      },
+    });
+  };
   return (
     <div className="img_container">
       <Modal isOpen={modalIsOpen} style={customStyles}>

@@ -8,14 +8,6 @@ export const useGameContract = () => {
   const { web3, account } = useMoralis();
   const price = "10000000000000000";
 
-  const { runContractFunction: fundContract } = useWeb3Contract({
-    abi: GameContract,
-    contractAddress:
-      networkMapping[web3.currentProvider.networkVersion]["GameContract"],
-    functionName: "fundContract",
-    params: {},
-  });
-
   const { runContractFunction: cancelItem } = useWeb3Contract({
     abi: Marketplace,
     contractAddress:
