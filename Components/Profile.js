@@ -84,7 +84,7 @@ function Profile({ email, username, funding_address, img, currentuser }) {
         },
       });
     }
-  };
+    };
   const [item, setItem] = useState("");
   async function updatePP() {
     if (!item) {
@@ -117,6 +117,33 @@ function Profile({ email, username, funding_address, img, currentuser }) {
         icon: "error",
         text: "Please input a valid file",
       });
+    }
+  }
+  const buttons =()=>{
+    if(account)
+    {
+      return <div><div className="fashion-studio-border pt-2">
+      <span className="fashion-studio">
+        <button
+          className="mint-nfts"
+          onClick={mintnfts}
+          disabled={mintCount <= 0}
+        >
+          Mint A NFT ( {mintCount} remaining )
+        </button>
+      </span>
+    </div>
+    <div className="fashion-studio-border pt-2">
+      <span className="fashion-studio">
+        <button className="mint-nfts" onClick={withdraw}>
+          Withdraw Balance
+        </button>
+      </span>
+    </div></div>
+    }
+    else
+    {
+      return <>Connect to your Wallet to see available </>
     }
   }
   const isalreadyFunding = () => {
@@ -198,24 +225,9 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           <div className="wishlist-border pt-2">
             <span className="wishlist"></span>
           </div>
-          <div className="fashion-studio-border pt-2">
-            <span className="fashion-studio">
-              <button
-                className="mint-nfts"
-                onClick={mintnfts}
-                disabled={mintCount <= 0}
-              >
-                Mint A NFT ( {mintCount} remaining )
-              </button>
-            </span>
-          </div>
-          <div className="fashion-studio-border pt-2">
-            <span className="fashion-studio">
-              <button className="mint-nfts" onClick={withdraw}>
-                Withdraw Balance
-              </button>
-            </span>
-          </div>
+          {
+            buttons()
+          }
           {isalreadyFunding()}
         </div>
       </div>
