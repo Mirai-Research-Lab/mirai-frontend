@@ -13,7 +13,7 @@ export default function Marketplace({ activeNfts }) {
   const [nfts, setNfts] = useState([]);
   const chainId = "5";
   const { runContractFunction } = useWeb3Contract();
-  const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
+  const nftAddress = networkMapping[chainId]["IpfsNFT"].slice(-1)[0];
   const { account } = useMoralis();
   const setNftsInArray = async (imageUris) => {
     const nftsTemp = [];

@@ -30,7 +30,7 @@ function Sell({ activeNfts }) {
   const { account } = useMoralis();
   const { data, error, runContractFunction, isFetching, isLoading } =
     useWeb3Contract();
-  const nftAddress = networkMapping[chainId]["IpfsNFT"][5];
+  const nftAddress = networkMapping[chainId]["IpfsNFT"].slice(-1)[0];
   const setNftsInArray = async (imageUris) => {
     const nftsTemp = [];
     for (let i = 0; i < imageUris.length; i++) {
@@ -75,7 +75,7 @@ function Sell({ activeNfts }) {
     for (let i = 0; i < activeNfts.length; i++) {
       const options = {
         abi: IpfsNftAbi,
-        contractAddress: networkMapping[chainId]["IpfsNFT"][5],
+        contractAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
         functionName: "tokenURI",
         params: {
           tokenId: activeNfts[i].tokenId,
