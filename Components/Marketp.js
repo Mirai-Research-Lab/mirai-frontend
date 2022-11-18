@@ -7,7 +7,7 @@ import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import style from "../styles/web3.module.css";
-import Swal from "sweetalert2";
+import swal from "sweetalert2";
 
 export default function Marketplace({ activeNfts }) {
   const [nfts, setNfts] = useState([]);
@@ -88,10 +88,10 @@ export default function Marketplace({ activeNfts }) {
         );
       } catch (err) {
         console.log(err);
-        Swal.fire({
+        swal.fire({
           icon: "error",
           title: "Transaction Error",
-          message: "There is some error! please refresh",
+          text: "There is some error! please refresh",
         });
       }
     }

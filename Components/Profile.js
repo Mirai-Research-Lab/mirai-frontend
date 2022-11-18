@@ -66,14 +66,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   };
   const withdraw = () => {
     withdrawEthers();
-    // withdrawAmount({
-    //   onSuccess: (txHash) => {
-    //     // console.log(txHash);
-    //   },
-    //   onError: (error) => {
-    //     // console.log(error);
-    //   },
-    // });
   };
   const mintEthersNft = async () => {
     const { ethereum } = window;

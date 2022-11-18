@@ -118,7 +118,7 @@ export default function CardDetails({ nft }) {
     if (price <= 0) {
       swal.fire({
         icon: "error",
-        title: "Listing Price cannot be 0",
+        title: "Invalid Listing Price",
         text: "Please enter appropriate amount",
       });
       return;
