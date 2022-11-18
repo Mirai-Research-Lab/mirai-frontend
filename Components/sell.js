@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Image from "next/image";
-import nft from "../public/nft.jpg";
-import { sell } from "./database";
 import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
-import { Modal } from "react-bootstrap";
+import Modal from "react-modal";
+import swal from "sweetalert2";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 const customStyles = {
   overlay: {
@@ -21,11 +20,12 @@ const customStyles = {
     borderRadius: "10%",
     transform: "translate(-50%, -50%)",
   },
-};  
+};
 function Sell({ activeNfts }) {
   const [isOpen, setisOpen] = useState(false);
   const [ownersNfts, setOwnersNfts] = useState([]);
-
+  const [price, setPrice] = useState(0);
+  const [tid, settId] = useState("");
   const chainId = "5";
   const { account } = useMoralis();
   const { data, error, runContractFunction, isFetching, isLoading } =
@@ -47,9 +47,10 @@ function Sell({ activeNfts }) {
     console.log(nftsOwned);
     setOwnersNfts(nftsOwned);
   };
-  function openModal() {
-    alert('open')
+  function openModal(tide) {
     setisOpen(true);
+    settId(tide);
+    console.log(isOpen);
   }
 
   function closeModal() {
@@ -137,8 +138,15 @@ function Sell({ activeNfts }) {
     });
   };
 
-  const updateItem = async (p) => {
-    console.log(p);
+  const updateItem = async () => {
+    if (price <= 0) {
+      swal.fire({
+        icon: "error",
+        title: "Listing Price cannot be 0",
+        text: "Please enter appropriate amount",
+      });
+      return;
+    }
     const options = {
       abi: MarketplaceAbi,
       contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
@@ -171,24 +179,17 @@ function Sell({ activeNfts }) {
   return (
     <>
       <Modal isOpen={isOpen} style={customStyles}>
-        <h2>Update your profile pic</h2>
+        <h2>Update Listing Eth Price</h2>
         <input
-          type="file"
-          accept="image/*,.pdf"
-          onChange={(e) => setItem(e.target.files[0])}
-        />
-        <button
-          onClick={() => {
-            console.log(e.target);
-          }}
-        >
-          Update
-        </button>
+          placeholder="Eth Amount"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        ></input>
+        <button onClick={(e) => updateItem()}>List</button>
         <button onClick={closeModal}>Close</button>
       </Modal>
       <div className="marketplace-container ">
         <div className="marketplace-heading">
-        
           <h1 style={{ fontFamily: "gaming-font" }}>YOUR LISTED NFTS</h1>
           <span style={{ fontFamily: "gaming-font" }}>Update NFTs</span>
         </div>
@@ -217,10 +218,9 @@ function Sell({ activeNfts }) {
                           <div style={{ fontFamily: "jetbrains" }}>
                             NFT Address: {formatAddress(nftAddress)}
                           </div>
-
                           <div style={{ textAlign: "center" }}>
                             <button
-                              onClick={openModal}
+                              onClick={(e) => openModal(value.tokenId)}
                               className="buyNftButton"
                               style={{ marginRight: "20px" }}
                             >

@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import networkMapping from "../constants/networkMapping.json";
 import IpfsNFT from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import Marketplace from "../constants/frontEndAbiLocation/Marketplace.json";
+import swal from "sweetalert2";
 import axios from "axios";
 
 const customStyles = {
@@ -140,28 +141,32 @@ export default function CardDetails({ nft }) {
   };
 
   const handleApprove = async () => {
-    console.log(price);
-    if (price > 0) {
-      console.log("hello");
-      const options = {
-        abi: IpfsNFT,
-        contractAddress:
-          networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
-        functionName: "approve",
-        params: {
-          to: networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
-          tokenId: nft.tokenId,
-        },
-      };
-      await approve({
-        gasLimit: 3e7,
-        params: options,
-        onSuccess: (result) => handleBuyEthers(result),
-        onError: (error) => {
-          console.log("approve error", error);
-        },
+    if (price <= 0) {
+      swal.fire({
+        icon: "error",
+        title: "Listing Price cannot be 0",
+        text: "Please enter appropriate amount",
       });
+      return;
     }
+    console.log(price);
+    const options = {
+      abi: IpfsNFT,
+      contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
+      functionName: "approve",
+      params: {
+        to: networkMapping[formattedChainId]["Marketplace"].slice(-1)[0],
+        tokenId: nft.tokenId,
+      },
+    };
+    await approve({
+      gasLimit: 3e7,
+      params: options,
+      onSuccess: (result) => handleBuyEthers(result),
+      onError: (error) => {
+        console.log("approve error", error);
+      },
+    });
   };
   const formatAddress = (address) => {
     return address.substring(0, 4) + "..." + address.substring(38);

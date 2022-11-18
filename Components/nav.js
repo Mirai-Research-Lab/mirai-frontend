@@ -84,7 +84,7 @@ export default function Navabr() {
       variant="dark"
     >
       <Container className="navbarimg-container">
-        <Image className="logoimg" src={logo} height="80" width="80" /></Container>
+       <Link href="/home"><Image className="logoimg" src={logo} height="80" width="80" /></Link> </Container>
       <Container className="navbar-container"></Container>
       <Container className="navbar-container">
         <div>

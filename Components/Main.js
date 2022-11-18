@@ -8,6 +8,7 @@ import networkMapping from "../constants/networkMapping.json";
 import { AccordionButton } from "react-bootstrap";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";
+import swal from "sweetalert2";
 import Router from "next/router";
 const customStyles = {
   overlay: {
@@ -37,7 +38,14 @@ function Main() {
     setIsOpen(!modalIsOpen);
   }
   const handleDontaionEthers = async () => {
-    if (price <= 0) return;
+    if (price<=0) {
+      swal.fire({
+        icon: "error",
+        title: "Amount entered cannot be 0",
+        text: "Please enter appropriate amount",
+      });
+      return;
+    }
     const { ethereum } = window;
     if (ethereum) {
       try {

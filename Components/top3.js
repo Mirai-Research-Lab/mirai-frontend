@@ -11,7 +11,7 @@ function abc(index, player) {
       </h3>
       <h5 style={{ fontFamily: "jetbrains" }}>position {index + 1}</h5>
       <span style={{ fontFamily: "jetbrains" }}>
-        Highest score : {player.high_score || 999}
+        Highest score : {player.highest_score.toFixed(3)}
       </span>
     </div>
   );

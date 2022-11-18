@@ -87,6 +87,13 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   };
   const [item, setItem] = useState("");
   async function updatePP() {
+    if (!item) {
+      swal.fire({
+        icon: "error",
+        title: "Please select a file first",
+      });
+      return;
+    }
     const formdata = new FormData();
     // console.log(item);
     formdata.append("image", item);

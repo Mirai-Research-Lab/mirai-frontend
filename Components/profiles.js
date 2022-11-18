@@ -29,7 +29,7 @@ function Item({ players }) {
             </div>
           </div>
           <div className={styles.item}>
-            <span>{player.highest_score}</span>
+            <span>{player.highest_score.toFixed(3)||0}</span>
           </div>
         </div>
       ))}
