@@ -13,8 +13,22 @@ export default function Board({ players }) {
 
   return (
     <div className={styles.board}>
+<<<<<<< HEAD
       <h1 className={styles.leaderboard}>Leaderboard</h1><container className={styles.top3container}>
       <TOP3 Leaderboard={between(Leaderboard, period)} players={players} /></container>
+=======
+      <h1 className={styles.leaderboard}>Leaderboard</h1>
+
+      <div className={styles.duration}>
+        <button onClick={handleClick} data-id="0">
+          Today
+        </button>
+        <button onClick={handleClick} data-id="30">
+          All Time
+        </button>
+      </div>
+      <TOP3 Leaderboard={between(Leaderboard, period)} players={players} />
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
       <Profiles
         Leaderboard={between(Leaderboard, period)}
         players={players}

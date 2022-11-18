@@ -5,6 +5,7 @@
 
 @font-face {
   font-family: gaming-font;
+<<<<<<< HEAD
   src: url("/fonts/pdark.ttf");
 }
 @font-face {
@@ -19,6 +20,30 @@
 * {
   font-family: gaming-font;
 }
+=======
+  src: url("/fonts/pdark.ttf") format("truetype");
+}
+@font-face {
+  font-family: modern;
+  src: url("/fonts/sportypo-font/SportypoReguler-OVGwe.ttf") format("truetype");
+}
+@font-face {
+  font-family: jetbrains;
+  src: url("/fonts/JetBrainsMono-2.242/fonts/ttf/JetBrainsMono-Regular.ttf")
+    format("truetype");
+}
+
+html {
+  background-color: #252525;
+}
+* {
+  font-family: gaming-font;
+}
+body {
+  overflow-x: hidden;
+  background-color: #252525;
+}
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -48,6 +73,7 @@
   font-size: 1.2rem;
 }
 
+<<<<<<< HEAD
 .nav-link{
   /* margin-top:20px; */
   padding-right:20px;
@@ -58,11 +84,24 @@
   background: linear-gradient(45deg, transparent 5%, #0097c1 5%);
 }
 .me-auto{
+=======
+.nav-link {
+  /* margin-top:20px; */
+  padding-right: 20px;
+  text-decoration: none;
+}
+.link:hover {
+  color: white;
+  background: linear-gradient(45deg, transparent 5%, #0097c1 5%);
+}
+.me-auto {
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
+<<<<<<< HEAD
 .me-auto>a{
   font-size: 1.2rem;
   text-decoration: none;
@@ -71,19 +110,34 @@
 }
 .me-auto>a:hover{
   color:white;
+=======
+.me-auto > a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: rgb(155, 155, 155);
+  margin: 20px;
+}
+.me-auto > a:hover {
+  color: white;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   /* padding:10px 20px 10px 20px; */
   background: linear-gradient(45deg, transparent 5%, #0393c3 5%);
 }
 .img_container{
   position:fixed;
   /* overflow-y: hidden; */
+<<<<<<< HEAD
   padding-top: 46px;
   width:100%;
   height:100vh;
   width: 100vw;
+=======
+  padding-top: 80px;
+  width: 100%;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 }
 .homeImg {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -122,7 +176,11 @@
 }
 .buy{
   position: absolute;
+<<<<<<< HEAD
   bottom: 30px;
+=======
+  bottom: 80px;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   right:30px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   border:none;
@@ -204,7 +262,10 @@ a:hover span:nth-child(2):after {
   background: #252525;
   height: auto;
   top: 0;
+<<<<<<< HEAD
   padding-top: 117px;
+=======
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
@@ -238,6 +299,7 @@ a:hover span:nth-child(2):after {
   color: white;
   /* width:80vw; */
 }
+<<<<<<< HEAD
 .logoimg{
   border-radius: 50%;
   position: absolute;
@@ -247,6 +309,13 @@ a:hover span:nth-child(2):after {
   /* text-align: center; */
   text-align: center;
 }
+=======
+.my-cards-div {
+  padding-left: 100px;
+  /* text-align: center; */
+  text-align: center;
+}
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 .nft-card {
   margin: 10px;
   border-radius: 20px;
@@ -257,10 +326,13 @@ a:hover span:nth-child(2):after {
     rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
   margin-top: 50px;
 }
+<<<<<<< HEAD
 
 .navbar-container{
   margin-left: 350px;
 }
+=======
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 .nft-image {
   border-radius: 20px;
   width: 20rem;
@@ -273,9 +345,15 @@ nft-card-info {
   display: flex;
   flex-direction: column;
 }
+<<<<<<< HEAD
 .nft-card-info-heading{
   margin:20px;
   color:white;
+=======
+.nft-card-info-heading {
+  margin: 20px;
+  color: white;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 }
 .nft-card-info-heading > span,
 .nft-card-info-heading > h1,
@@ -326,9 +404,14 @@ nft-card-info > button {
   background-color: #252525;
   height: 100%;
   color: white;
+<<<<<<< HEAD
   position: fixed;
   width: 30%;
   margin-top: 80px;
+=======
+  width: 30%;
+  /* margin-top: 300px; */
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 }
 .profile-name {
   font-family: Poppins;
@@ -340,11 +423,16 @@ nft-card-info > button {
   color: white;
 }
 .card {
+<<<<<<< HEAD
   background-color: #252525;
+=======
+  background-color: #252525 !important;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   width: 280px;
   border-radius: 33px;
   box-shadow: rgba(240, 240, 240, 0.243) 0px 7px 29px 0px;
   padding: 2rem !important;
+<<<<<<< HEAD
   margin-top:  -5vh;
 }
 .top-container{
@@ -366,11 +454,40 @@ nft-card-info > button {
 .pencil-img{
   transform: translate(0px, -20px);
   cursor:pointer;
+=======
+  margin-top: -5vh;
+}
+.top-container {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+}
+.profile-image {
+  border-radius: 10px;
+  border: 2px solid #5957f9;
+  position: absolute;
+  transform: translate(-32px,-120px);
+  width: 280px;
+}
+.pencilIcon {
+  /* position: absolute; */
+  background-color: white;
+  border-radius: 50%;
+  object-fit: fill;
+}
+.pencil-img {
+  transform: translate(0px, -20px);
+  cursor: pointer;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   background: none;
+<<<<<<< HEAD
   border:none;
+=======
+  border: none;
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 }
 .name {
   font-size: 15px;
@@ -381,6 +498,14 @@ nft-card-info > button {
   top: 8px;
   margin-left: 7px;
 }
+<<<<<<< HEAD
+=======
+.profile-flex {
+  display: flex;
+  background-color: #252525;
+  flex-direction: row;
+}
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 .mail {
   font-size: 14px;
   color: grey;
@@ -458,6 +583,7 @@ nft-card-info > button {
 }
 .fashion-studio {
   font-family: Poppins;
+  background-color: #252525;
 }
 
 

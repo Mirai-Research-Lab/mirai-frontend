@@ -9,14 +9,20 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
+<<<<<<< HEAD
 import Image from "next/image";
 import logo from '../public/logo.jpg'
 export default function Navabr() {
   const swal = Swal;
   const { account } = useMoralis();
+=======
+export default function Navabr() {
+  const swal = Swal;
+  const { account, isWeb3Enabled } = useMoralis();
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
   useEffect(() => {
     if (account) {
-      const body = { address: account };
+     const body = { address: account.toLowerCase() };
       checkWalletAddress(body);
     }
   });
@@ -28,6 +34,9 @@ export default function Navabr() {
         body,
         {
           withCredentials: true,
+          headers: {
+            cookies: document.cookie,
+          },
         }
       );
       if (check.status == 201) {
@@ -39,6 +48,9 @@ export default function Navabr() {
             body,
             {
               withCredentials: true,
+              headers: {
+                cookies: document.cookie,
+              },
             }
           );
           const setWallet = await axios.put(
@@ -46,6 +58,12 @@ export default function Navabr() {
             body,
             {
               withCredentials: true,
+<<<<<<< HEAD
+=======
+              headers: {
+                cookies: document.cookie,
+              },
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
             }
           );
           console.log("setWallet.status is ", setWallet.status);
@@ -116,7 +134,16 @@ export default function Navabr() {
                     const res = await axios.post(
                       "https://mirai-backend-kappa.vercel.app/api/auth/signout",
                       {},
+<<<<<<< HEAD
                       { withCredentials: true }
+=======
+                      {
+                        withCredentials: true,
+                        headers: {
+                          cookies: document.cookie,
+                        },
+                      }
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
                     );
                     console.log(res);
                     Router.push("/Auth");

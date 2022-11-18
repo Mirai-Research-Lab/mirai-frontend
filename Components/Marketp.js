@@ -1,18 +1,47 @@
 import Router from "next/router";
 import Image from "next/image";
 import nft from "../public/nft.jpg";
-import nft2 from "../public/nft2.jpg";
-import nft3 from "../public/nft3.jpg";
-import nft4 from "../public/nft4.webp";
 import { marketplace } from "./database";
 import nftMarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
 import nftAbi from "../constants/frontEndAbiLocation/IpfsNFT.json";
 
+<<<<<<< HEAD
 export default function Marketplace({ activeNfts }) {
   <button className="Sellsection">Sell</button>;
+=======
+import { useWeb3Contract } from "react-moralis";
+import MarketplaceAbi from "../constants/frontEndAbiLocation/Marketplace.json";
+import networkMapping from "../constants/networkMapping.json";
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
 
+export default function Marketplace({ activeNfts }) {
+  const chainId = "5";
+  const { runContractFunction: buyItem } = useWeb3Contract({
+    abi: MarketplaceAbi,
+    contractAddress: networkMapping[chainId]["Marketplace"],
+    functionName: "buyItem",
+    params: {
+      nftAddress: networkMapping[chainId]["IpfsNFT"],
+    },
+  });
   const handlesell = () => {
     Router.push("/marketplace/sell");
+  };
+
+  const handleBuy = (e, tokenId) => {
+    buyItem({
+      params: {
+        tokenId: tokenId,
+      },
+
+      onSuccess: (e) => {
+        console.log("success");
+      },
+
+      onError: (e) => {
+        console.log("error");
+      },
+    });
   };
 
   return (
@@ -28,11 +57,17 @@ export default function Marketplace({ activeNfts }) {
 
         <div className="nft-cards">
           <div className="nft-card">
+            {/* todo: activeNfts.map */}
             {marketplace.map((value, index) => {
               return (
                 <>
+<<<<<<< HEAD
                   <div>
                     key={index}
+=======
+                  key = {index};
+                  <div onClick={(e) => handleBuy(e, value.tokenId)}>
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
                     <Image src={nft} alt="nft" className="nft-image" />
                     <div className="nft-card-info">
                       <div className="nft-card-info-heading">

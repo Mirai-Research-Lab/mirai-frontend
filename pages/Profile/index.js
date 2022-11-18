@@ -32,6 +32,7 @@ function Index({ currentuser }) {
   return (
     <div>
       <Navbar />
+<<<<<<< HEAD
       <Profile
         email={email}
         username={username}
@@ -47,6 +48,26 @@ function Index({ currentuser }) {
           Please Connect Your Wallet To See The NFTs You Own
         </div>
       )}
+=======
+      <div className="profile-flex">
+        <Profile
+          email={email}
+          username={username}
+          funding_address={funding_address}
+          img={image}
+          currentuser={currentuser}
+        />
+        {isWeb3Enabled ? (
+          <>
+            <MyCards />
+          </>
+        ) : (
+          <div className={style.web3NotEnabled}>
+            Please Connect Your Wallet To See The NFTs You Own
+          </div>
+        )}
+      </div>
+>>>>>>> a45894cc3638507b374a4cddebc0bd3b99b9aee9
     </div>
   );
 }
