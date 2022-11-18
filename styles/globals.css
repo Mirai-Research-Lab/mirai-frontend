@@ -47,6 +47,22 @@ body {
   transition: 0.5s;
   margin-top: 10px;
 }
+
+.seelistednftsRight {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.seelistednftsRight:hover {
+  background-color: #2c9ec1;
+  color: white;
+}
 .clipartButton:hover {
   background-color: #2c9ec1;
   transform: scale(1.02);
@@ -564,11 +580,11 @@ nft-card-info > button {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }
-.navbarimg-container{
+.navbarimg-container {
   margin-left: 10px;
   margin-top: 3px;
   width: 250px;
 }
-.logoimg{
+.logoimg {
   border-radius: 50%;
 }

@@ -102,6 +102,12 @@ function Index({ currentuser }) {
   }, [userBoughtNfts, userOwnedNfts, cancelledNfts, activeNfts]);
   return (
     <div>
+      <button
+        className="seelistednftsRight"
+        onClick={() => Router.push("/marketplace/sell")}
+      >
+        See Your Listed NFTs
+      </button>
       <Navbar />
       <div className="profile-flex">
         <Profile
