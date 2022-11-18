@@ -8,7 +8,8 @@ import { TriangleDown } from "@web3uikit/icons";
 import Image from "next/image";
 import logo from "../public/logo.jpg";
 function Auth() {
-  const daysToExpire = 7;
+  const [showSignInPassword, setShowSignInPassword] = useState(false);
+  const [showSignUpPassword, setShowSignUpPassword] = useState(false);
   useEffect(() => {
     const keyDownHandler = (e) => console.log(`You pressed ${e.code}.`);
     document.addEventListener("keydown", function (e) {
@@ -103,7 +104,7 @@ function Auth() {
             headers: {
               cookies: document.cookie,
             },
-          },
+          }
         );
         const jwtToken = "jwt=" + res.data;
         var date = new Date();
@@ -209,13 +210,27 @@ function Auth() {
                   required
                 />
                 <input
-                  type="password"
+                  type={showSignInPassword ? "text" : "password"}
                   className={styles.inputfield}
                   placeholder=" Enter Password"
                   id={styles.loginpass}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={(e) => setShowSignInPassword(!showSignInPassword)}
+                  style={{
+                    width: "100px",
+                    fontSize: "0.5rem",
+                    position: "relative",
+                    left: "60%",
+                    color: "white",
+                    backgroundColor: "rgba(0,0,0,0)",
+                  }}
+                >
+                  show password
+                </button>
                 <div>
                   <br />
                 </div>
@@ -247,28 +262,34 @@ function Auth() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {/* <textarea
-                                    name="about"
-                                    cols="35"
-                                    rows="4"
-                                    placeholder="Write about your interests..."
-                                    id={styles.registerdesc}
-                                ></textarea> */}
-
-                {/* <p className={styles.filechoose}>Choose your profile pic</p> */}
-                {/* <input type="file" name="item" id={styles.registerimg} /> */}
                 <input
                   className={styles.inputfield}
                   placeholder=" Enter Password"
                   name="password"
+                  type={showSignUpPassword ? "text" : "password"}
                   id={styles.registerpass}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <button
+                  onClick={(e) => setShowSignUpPassword(!showSignUpPassword)}
+                  style={{
+                    width: "100px",
+                    fontSize: "0.5rem",
+                    position: "relative",
+                    left: "60%",
+                    color: "white",
+                    backgroundColor: "rgba(0,0,0,0)",
+                  }}
+                  type="button"
+                >
+                  show password
+                </button>
                 <input
                   className={styles.inputfield}
                   placeholder="Confirm Password"
                   name="password"
+                  type="password"
                   id={styles.registerpass}
                   onChange={(e) => setRePassword(e.target.value)}
                   required
