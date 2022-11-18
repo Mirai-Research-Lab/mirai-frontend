@@ -128,7 +128,7 @@ export default function CardDetails({ nft }) {
           nft.tokenId,
           ethers.utils.parseUnits(price.toString(), "ether"),
           {
-            gasLimit: 3e7,
+            gasLimit: 500000,
           }
         );
         console.log(listingTx);
