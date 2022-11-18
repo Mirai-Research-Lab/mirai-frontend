@@ -35,7 +35,6 @@ export default function CardDetails({ nft }) {
   const { runContractFunction } = useWeb3Contract();
   const { runContractFunction: approve } = useWeb3Contract();
   const nftAddress = networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0];
-  // console.log(nft);
 
   const processURIs = async () => {
     const options = {
@@ -53,14 +52,12 @@ export default function CardDetails({ nft }) {
       "https://ipfs.io/ipfs/"
     );
     const response = await axios.get(formattedTokenUri);
-    // console.log(response.data);
     const formattedImageUri = response.data.image.replace(
       "ipfs://",
       "https://ipfs.io/ipfs/"
     );
     setFormattedImageAddress(formattedImageUri);
 
-    console.log("helllo", formattedImageUri);
   };
   useEffect(() => {
     if (nft && nft.minter == account) {
@@ -81,8 +78,6 @@ export default function CardDetails({ nft }) {
   }
 
   const handleBuyEthers = async (result) => {
-    console.log(result);
-    console.log("hello");
     const { ethereum } = window;
     if (ethereum) {
       try {
@@ -101,10 +96,8 @@ export default function CardDetails({ nft }) {
             gasLimit: 500000,
           }
         );
-        console.log(listingTx);
         closeModaleth();
       } catch (err) {
-        console.log(err);
         swal.fire({
           icon: "error",
           title: "Transaction Error",
@@ -123,7 +116,6 @@ export default function CardDetails({ nft }) {
       });
       return;
     }
-    console.log(price);
     const options = {
       abi: IpfsNFT,
       contractAddress: networkMapping[formattedChainId]["IpfsNFT"].slice(-1)[0],
@@ -138,7 +130,6 @@ export default function CardDetails({ nft }) {
       params: options,
       onSuccess: (result) => handleBuyEthers(result),
       onError: (error) => {
-        console.log("approve error", error);
       },
     });
   };

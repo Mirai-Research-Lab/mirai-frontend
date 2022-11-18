@@ -44,17 +44,14 @@ function Sell({ activeNfts }) {
     }
 
     let nftsOwned = nftsTemp.filter((nft) => nft.seller === account);
-    console.log(nftsOwned);
     setOwnersNfts(nftsOwned);
   };
   function openModal(tide) {
     setisOpen(true);
     settId(tide);
-    console.log(isOpen);
   }
 
   function closeModal() {
-    console.log("closing modal");
     setisOpen(!isOpen);
   }
   const setImageUris = async (tokenUris) => {
@@ -85,11 +82,9 @@ function Sell({ activeNfts }) {
         },
       };
       let tokenUri = await runContractFunction({ params: options });
-      console.log(tokenUri.toString());
       let formattedTokenUri = tokenUri
         .toString()
         .replace("ipfs://", "https://ipfs.io/ipfs/");
-      console.log(formattedTokenUri);
       tokenUris.push(formattedTokenUri.toString());
     }
     setImageUris(tokenUris);
@@ -116,7 +111,6 @@ function Sell({ activeNfts }) {
             gasLimit: 500000,
           }
         );
-        console.log(cancelTx);
       } catch (err) {
         console.log(err);
       }
@@ -145,7 +139,6 @@ function Sell({ activeNfts }) {
             gasLimit: 500000,
           }
         );
-        console.log(updatingTx);
       } catch (err) {
         console.log(err);
         swal.fire({

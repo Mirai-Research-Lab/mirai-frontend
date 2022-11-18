@@ -17,7 +17,6 @@ export default function Navabr({ currentuser }) {
   useEffect(
     (currentuser) => {
       if (account) {
-        console.log("hello");
         const body = { address: account.toLowerCase() };
         checkWalletAddress(body);
       }
@@ -25,7 +24,6 @@ export default function Navabr({ currentuser }) {
     [account, currentuser]
   );
   const checkWalletAddress = async (body) => {
-    console.log("checking wallet address");
     try {
       const check = await axios.post(
         "https://mirai-backend-kappa.vercel.app/api/wallet/checkWalletAddress",
@@ -61,10 +59,8 @@ export default function Navabr({ currentuser }) {
               },
             }
           );
-          console.log("setWallet.status is ", setWallet.status);
         }
       }
-      console.log(check.status);
     } catch (e) {
       swal
         .fire({
@@ -124,7 +120,6 @@ export default function Navabr({ currentuser }) {
                 <NavDropdown.Divider />
                 <NavDropdown.Item
                   onClick={async () => {
-                    console.log("cccc");
                     localStorage.clear();
                     sessionStorage.clear();
                     document.cookie = "jwt=undefined";
@@ -138,7 +133,6 @@ export default function Navabr({ currentuser }) {
                         },
                       }
                     );
-                    console.log(res);
                     Router.push("/Auth");
                   }}
                 >

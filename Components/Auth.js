@@ -63,9 +63,7 @@ function Auth() {
   const [repassword, setRePassword] = useState("");
 
   const handleClickSignUp = async (e) => {
-    console.log("clicked");
     e.preventDefault();
-    console.log(e);
     const credentials = {
       username: username,
       email: email.toLowerCase(),
@@ -119,12 +117,10 @@ function Auth() {
           title: "Email already in use",
           text: "Please enter a unique email id..",
         });
-        console.log(err);
       }
     }
   };
   const handleClickLogIn = async (e) => {
-    console.log("clicked");
     e.preventDefault();
     const credentials = {
       email: email.toLowerCase(),
@@ -155,7 +151,6 @@ function Auth() {
           }
         );
         if (res.status === 200) {
-          console.log(res.data);
           const jwtToken = "jwt=" + res.data;
           var date = new Date();
           date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
@@ -164,13 +159,11 @@ function Auth() {
           router.push("/home");
         } else {
           const message = res.data;
-          console.log(message);
           swal.fire({
             icon: "error",
             title: message.message,
             text: "Please enter valid details!",
           });
-          //   console.log(res);
         }
       } catch (err) {
         swal.fire({
@@ -178,7 +171,6 @@ function Auth() {
           title: "Invalid Credentials",
           text: "Please enter valid details!",
         });
-        console.log(err);
       }
   };
   return (

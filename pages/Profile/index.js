@@ -97,7 +97,6 @@ function Index({ currentuser }) {
         }
       }
     }
-    console.log(total);
     setTotalNfts(total);
   }, [userBoughtNfts, userOwnedNfts, cancelledNfts, activeNfts]);
   return (

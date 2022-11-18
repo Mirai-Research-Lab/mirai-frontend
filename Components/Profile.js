@@ -58,7 +58,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
         let withdrawTx = await marketPlaceContract.withdrawAmount({
           gasLimit: 500000,
         });
-        console.log(withdrawTx);
       } catch (err) {
         console.log(err);
       }
@@ -81,7 +80,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
         let listingTx = await ipfsNftContract.staticMint({
           gasLimit: 500000,
         });
-        console.log(listingTx);
         setMintCount(mintCount - 1);
         const decrementResult = await axios.post(
           "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
@@ -116,10 +114,8 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       return;
     }
     const formdata = new FormData();
-    // console.log(item);
     formdata.append("image", item);
     formdata.append("address", "");
-    // console.log(formdata.image);
     try {
       const res = await axios.post(
         "https://mirai-backend-kappa.vercel.app/api/player/updateuser",
@@ -131,7 +127,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           },
         }
       );
-      // console.log(res);
       Router.reload();
     } catch (e) {
       swal.fire({
@@ -205,7 +200,6 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   }
 
   function closeModal() {
-    console.log("closing modal");
     setisOpen(!isOpen);
   }
   return (

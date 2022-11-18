@@ -4,7 +4,6 @@ import Modal from "react-modal";
 import { useState } from "react";
 import GameContract from "../constants/frontEndAbiLocation/GameContract.json";
 import networkMapping from "../constants/networkMapping.json";
-import { useMoralis, useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";
 import swal from "sweetalert2";
 import Router from "next/router";
@@ -37,8 +36,8 @@ function Main() {
     if (price <= 0) {
       swal.fire({
         icon: "error",
-        title: "Amount entered cannot be 0",
-        text: "Please enter appropriate amount",
+        title: "Amount entered is Invalid",
+        text: "Please enter appropriate amount (>0) ",
       });
       return;
     }
@@ -56,13 +55,11 @@ function Main() {
           value: ethers.utils.parseUnits(price.toString(), "ether"),
           gasLimit: 500000,
         });
-        console.log(listingTx);
         setPrice(0);
         closeModal();
         Router.reload();
       } catch (err) {
-        console.log(err);
-        Swal.fire({
+        swal.fire({
           icon: "error",
           title: "Transaction Error",
           message: "There is some error! please refresh",
@@ -90,24 +87,27 @@ function Main() {
           <br />
           Let's <span>SHOOT</span>!
         </div>
-        <div className="play-btn" onClick={()=>{
-        swal.fire({
-          title: '<strong>Disclaimer</u></strong>',
-          icon: 'info',
-          html:
-            "anm fnmabnabhjabgkabgkabgkabgkBGKHABGSGS<br><br>hjvzhjavadgbag",
-          showCloseButton: true,
-          focusConfirm: false,
-          confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> GOT IT!',
-          confirmButtonAriaLabel: 'Thumbs up, great!',
-        })
-        }}>
-          <a href="https://azulul.itch.io/mirai-shooter" target="_blank">
+        <div
+          className="play-btn"
+          onClick={() => {
+            swal.fire({
+              title: "<strong>Terms and Conditions</u></strong>",
+              icon: "info",
+              html: '<p style="font-family:Aries; text-align:left;">i.While playing the game, the user is expected to have a stable internet connection.<br/>ii. Incase of any abrupt interuptions from the user\'s end, the tokens lost will not be reverted.<br/>iii. The user should ensure that he/she does not leave the game at any point</p> ',
+              showCloseButton: true,
+              focusConfirm: false,
+              confirmButtonText: '<i class="fa fa-thumbs-up"></i> GOT IT!',
+              confirmButtonAriaLabel: "Thumbs up, great!",
+            }).then(() => {
+              window.open( 'https://azulul.itch.io/mirai-shooter');
+        });
+          }}
+        >
+            <a>
             <span data-attr="Play">Play</span>
             <span data-attr="Now">Now</span>
-          </a>
-        </div>
+            </a>
+         </div>
       </div>
       <button className="buy" onClick={() => openModal()}>
         Buy us a coffee
