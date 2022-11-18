@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Profiles from "./profiles";
-import { Leaderboard } from "./database";
 import styles from "../styles/leaderboard.module.css";
 import TOP3 from "./top3.js";
 
