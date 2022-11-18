@@ -28,6 +28,7 @@ const customStyles = {
 function Profile({ email, username, funding_address, img, currentuser }) {
   const { web3, account } = useMoralis();
   const chainId = "5";
+  const [mintCount, setMintCount] = useState(currentuser.mintCount || 0);
 
   const { runContractFunction: withdrawAmount } = useWeb3Contract({
     abi: Marketplace,
@@ -55,25 +56,31 @@ function Profile({ email, username, funding_address, img, currentuser }) {
   };
 
   const mintnfts = async () => {
-    if (currentuser.mintCount > 0) {
+    if (mintCount > 0) {
       const tokenId = staticMint({
         onSuccess: async (result) => {
           // console.log(result);
-          await axios.post(
-            "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
-            {
-              withCredentials: true,
-              body: {
-                username: currentuser.username,
-              },
-              headers: {
-                cookies: document.cookie,
-              },
-            }
-          );
+          setMintCount(mintCount - 1);
+
+          try {
+            const decrementResult = await axios.post(
+              "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
+              {
+                withCredentials: true,
+                body: {
+                  username: currentuser.username,
+                },
+                headers: {
+                  cookies: document.cookie,
+                },
+              }
+            );
+          } catch (err) {
+            console.log(err);
+          }
         },
         onError: (error) => {
-          // console.log(error);
+          console.log(error);
         },
       });
     }
