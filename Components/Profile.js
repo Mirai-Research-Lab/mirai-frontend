@@ -6,7 +6,7 @@ import Modal from "react-modal";
 import axios from "axios";
 import Router from "next/router";
 import swal from "sweetalert2";
-
+import { ethers } from "ethers";
 import Marketplace from "../constants/frontEndAbiLocation/Marketplace.json";
 import IpfsNFT from "../constants/frontEndAbiLocation/IpfsNFT.json";
 import networkMapping from "../constants/networkMapping.json";
@@ -44,47 +44,101 @@ function Profile({ email, username, funding_address, img, currentuser }) {
     params: {},
   });
 
-  const withdraw = async () => {
-    withdrawAmount({
-      onSuccess: (txHash) => {
-        // console.log(txHash);
-      },
-      onError: (error) => {
-        // console.log(error);
-      },
-    });
+  const withdrawEthers = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const marketPlaceContract = new ethers.Contract(
+          networkMapping[chainId]["Marketplace"].slice(-1)[0],
+          Marketplace,
+          signer
+        );
+        let withdrawTx = await marketPlaceContract.withdrawAmount({
+          gasLimit: 500000,
+        });
+        console.log(withdrawTx);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
-
+  const withdraw = () => {
+    withdrawEthers();
+    // withdrawAmount({
+    //   onSuccess: (txHash) => {
+    //     // console.log(txHash);
+    //   },
+    //   onError: (error) => {
+    //     // console.log(error);
+    //   },
+    // });
+  };
+  const mintEthersNft = async () => {
+    const { ethereum } = window;
+    if (ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const ipfsNftContract = new ethers.Contract(
+          networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+          IpfsNFT,
+          signer
+        );
+        let listingTx = await ipfsNftContract.staticMint({
+          gasLimit: 500000,
+        });
+        console.log(listingTx);
+        setMintCount(mintCount - 1);
+        const decrementResult = await axios.post(
+          "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
+          {
+            username: currentuser.username,
+          },
+          {
+            withCredentials: true,
+            headers: {
+              cookies: document.cookie,
+            },
+          }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
   const mintnfts = async () => {
     if (mintCount > 0) {
-      const tokenId = staticMint({
-        onSuccess: async (result) => {
-          // console.log(result);
-          setMintCount(mintCount - 1);
+      mintEthersNft();
+      // const tokenId = staticMint({
+      //   onSuccess: async (result) => {
+      //     // console.log(result);
+      //     setMintCount(mintCount - 1);
 
-          try {
-            const decrementResult = await axios.post(
-              "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
-                {
-                  username: currentuser.username,
-                },
-                {
-                  withCredentials: true,
-                  headers: {
-                    cookies: document.cookie,
-                  },
-                },
-            );
-          } catch (err) {
-            console.log(err);
-          }
-        },
-        onError: (error) => {
-          console.log(error);
-        },
-      });
+      //     try {
+      //       const decrementResult = await axios.post(
+      //         "https://mirai-backend-kappa.vercel.app/api/player/decrementmintcount",
+      //         {
+      //           username: currentuser.username,
+      //         },
+      //         {
+      //           withCredentials: true,
+      //           headers: {
+      //             cookies: document.cookie,
+      //           },
+      //         }
+      //       );
+      //     } catch (err) {
+      //       console.log(err);
+      //     }
+      //   },
+      //   onError: (error) => {
+      //     console.log(error);
+      //   },
+      // });
     }
-    };
+  };
   const [item, setItem] = useState("");
   async function updatePP() {
     if (!item) {
@@ -119,33 +173,34 @@ function Profile({ email, username, funding_address, img, currentuser }) {
       });
     }
   }
-  const buttons =()=>{
-    if(account)
-    {
-      return <div><div className="fashion-studio-border pt-2">
-      <span className="fashion-studio">
-        <button
-          className="mint-nfts"
-          onClick={mintnfts}
-          disabled={mintCount <= 0}
-        >
-          Mint A NFT ( {mintCount} remaining )
-        </button>
-      </span>
-    </div>
-    <div className="fashion-studio-border pt-2">
-      <span className="fashion-studio">
-        <button className="mint-nfts" onClick={withdraw}>
-          Withdraw Balance
-        </button>
-      </span>
-    </div></div>
+  const buttons = () => {
+    if (account) {
+      return (
+        <div>
+          <div className="fashion-studio-border pt-2">
+            <span className="fashion-studio">
+              <button
+                className="mint-nfts"
+                onClick={mintnfts}
+                disabled={mintCount <= 0}
+              >
+                Mint A NFT ( {mintCount} remaining )
+              </button>
+            </span>
+          </div>
+          <div className="fashion-studio-border pt-2">
+            <span className="fashion-studio">
+              <button className="mint-nfts" onClick={withdraw}>
+                Withdraw Balance
+              </button>
+            </span>
+          </div>
+        </div>
+      );
+    } else {
+      return <>Connect to your Wallet to see available options</>;
     }
-    else
-    {
-      return <>Connect to your Wallet to see available </>
-    }
-  }
+  };
   const isalreadyFunding = () => {
     if (account && funding_address != account)
       return (
@@ -225,9 +280,7 @@ function Profile({ email, username, funding_address, img, currentuser }) {
           <div className="wishlist-border pt-2">
             <span className="wishlist"></span>
           </div>
-          {
-            buttons()
-          }
+          {buttons()}
           {isalreadyFunding()}
         </div>
       </div>
