@@ -88,6 +88,58 @@ function Sell({ activeNfts }) {
     });
   };
 
+  const cancelItem = async (e) => {
+    const options = {
+      abi: MarketplaceAbi,
+      contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
+      functionName: "cancelItem",
+      params: {
+        nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+        tokenId: tokenId,
+      },
+    };
+
+    await runContractFunction({
+      params: options,
+
+      onSuccess: (success) => {
+        alert("OK");
+        console.log(success);
+      },
+
+      onError: (err) => {
+        alert("Error");
+        console.log(err);
+      },
+    });
+  };
+
+  const updateItem = async () => {
+    const options = {
+      abi: MarketplaceAbi,
+      contractAddress: networkMapping[chainId]["Marketplace"].slice(-1)[0],
+      functionName: "updateItem",
+      params: {
+        nftAddress: networkMapping[chainId]["IpfsNFT"].slice(-1)[0],
+        tokenId: tokenId,
+        updatedPrice: price,
+      },
+    };
+
+    await runContractFunction({
+      params: options,
+
+      onSuccess: () => {
+        alert("OK");
+      },
+
+      onError: (err) => {
+        alert("Error");
+        console.log(err);
+      },
+    });
+  };
+
   useEffect(() => {
     const filterNfts = nfts.filter((nft) => nft.seller === account);
     setOwnersNfts(filterNfts);
@@ -120,6 +172,15 @@ function Sell({ activeNfts }) {
                           <h1>Current Listed Price : {value.price}</h1>
                           <span>Card Token Id: {value.tokenId}</span>
                           <span>NFT Address: {formatAddress(nftAddress)}</span>
+
+                          <div style={{ textAlign: "center" }}>
+                            <button
+                              onClick={(e) => cancelItem(e)}
+                              className="buyNftButton"
+                            >
+                              Cancel
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
