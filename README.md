@@ -6,30 +6,34 @@
 
 ### FEATURES
 
+##### Overview and User Info
 - First and foremost, the user needs to make an account and sign up with his/her details.
-- The users will need to connect a wallet a
+- It is necessary for the user to create an account in order to play the game.
+- The link to download the deployed game is provided in the home page.
 - The users can connect different wallets to their account (provided that they are not already associated with any other email) .
 - The users can set any connected wallet as their default funding address (The default funding address is that wallet address where all transactions regarding the game i.e. NFT's take place. All NFT's won by the user are transacted )
-- The site has a leaderboard section showcasing the day's top performer's (based on their daily highscore). At the end of each day , the top 3 performers are awarded.with eth (GoEth) as well as an NFT (All NFT's are our very own creation !)
-- All NFT's associated .
-- In order to ensure maximum transparency and fairness, we have performed several checks. These include:-
+- The site has a leaderboard section showcasing the day's top performer's (based on their daily highscore). At the end of each day , the top 3 performers are awarded with Eth (GoEth) as well as an NFT (All NFT's are our very own creation !)
+- The NFT's can be minted into any wallet address of the user's choice (The user needs to first connect to that wallet).
+- The user can also update their profile pictures.
 
-  - 1 wallet can only be associated with a single email account.If an attempt is made to connect to an already associated wallet, the user is prompted and the wallet is disconnected.
+#### Security 
+- In order to ensure maximum transparency and fairness, we have performed several checks. These include:-
+ - 1 wallet can only be associated with a single email account.If an attempt is made to connect to an already associated wallet, the user is prompted and the wallet is disconnected.
+
   - Initially, the first connected wallet is set as the funding address. The users can connect to a different account and set it as their default account.
+
   - The mint NFT & withdraw balance buttons will work only if the users have won any NFT via the game.
 
-- Our marketplace is a closed one , i.e. only the NFT's generated from the game can be traded here, the reason being to withhold relevancy of the marketplace with respect to our game.
+#### Marketplace
+- Our marketplace is a closed one , i.e. only the NFT's generated from the game can be traded here, the reason being to withhold relevancy of the marketplace with respect to our game. 
+
+- All NFT's gained by the user can be put up for sale in any other marketplace.
 
 - 36 unique NFT's have been curated using an open AI model.
 
 - The users can list their minted NFT's for sale by setting a price. Moreover, they can update price and also cancel their listings.
 
 - NFT's listed by other user's (wallet addresses) will be available in the NFT marketplace section and users can buy them at the specified prices.
-
-- It is necessary for the user to create an account in order to play the game.
-- The user can also update their profile pictures.
-- The link to download the deployed game is provided in the home page.
-
 ---
 
 ### To run the server in local environment, follow these steps:
